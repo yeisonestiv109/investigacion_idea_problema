@@ -1,0 +1,289 @@
+<title>Automatización para Creadores CO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: dos hojas tamaño carta (8.5×11 in) sobre una mesa gris; hoja 1 = resumen ejecutivo, hoja 2 = tabla de señales + fuentes. En móvil, las hojas se vuelven fluidas. */
+:root{
+  --desk:#e3e6ea; --paper:#ffffff; --ink:#18212b; --muted:#5a6672; --rule:#d5dbe1;
+  --accent:#1d4e89; --accent-soft:#e8eff8; --mark:#ffd84d; --mark-ink:#3b3000;
+  --t-hecho:#1f6f4a; --t-hecho-bg:#e3f3ea; --t-est:#7a5a00; --t-est-bg:#fbf1d2;
+  --t-op:#6a3d8f; --t-op-bg:#f1e9f8; --t-nv:#9a2f2f; --t-nv-bg:#f8e6e6;
+  --f-display:"IBM Plex Sans Condensed","Arial Narrow",Arial,sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  --shadow:0 1px 2px rgba(20,30,40,.08),0 8px 28px rgba(20,30,40,.10);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --desk:#0e1216; --paper:#171c22; --ink:#e4e9ee; --muted:#9aa6b2; --rule:#2c343d;
+  --accent:#8cb6ea; --accent-soft:#1e2a38; --mark:#e9c53a; --mark-ink:#1c1600;
+  --t-hecho:#7fd4a6; --t-hecho-bg:#173126; --t-est:#e8c46a; --t-est-bg:#332a12;
+  --t-op:#c9a6ea; --t-op-bg:#2a2036; --t-nv:#f0a0a0; --t-nv-bg:#3a1f1f;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.35); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --desk:#0e1216; --paper:#171c22; --ink:#e4e9ee; --muted:#9aa6b2; --rule:#2c343d;
+  --accent:#8cb6ea; --accent-soft:#1e2a38; --mark:#e9c53a; --mark-ink:#1c1600;
+  --t-hecho:#7fd4a6; --t-hecho-bg:#173126; --t-est:#e8c46a; --t-est-bg:#332a12;
+  --t-op:#c9a6ea; --t-op-bg:#2a2036; --t-nv:#f0a0a0; --t-nv-bg:#3a1f1f;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.35); color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--desk);color:var(--ink);font-family:var(--f-body);font-size:10.5px;line-height:1.42;
+  padding-inline:16px;padding-block:28px 40px;-webkit-font-smoothing:antialiased}
+.desk{display:flex;flex-direction:column;align-items:center;gap:28px}
+.sheet{background:var(--paper);width:816px;max-width:100%;min-height:1056px;padding:40px 52px;box-shadow:var(--shadow);
+  display:flex;flex-direction:column;gap:14px;position:relative}
+.sheet-label{position:absolute;top:-18px;left:0;font:500 10px/1 var(--f-mono);color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+a{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0}
+p{margin:0}
+ul{margin:0;padding-left:14px;display:flex;flex-direction:column;gap:4px}
+li::marker{color:var(--accent)}
+sup{font:500 8px/0 var(--f-mono);color:var(--accent);margin-left:1px}
+
+/* Encabezado */
+.head{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:18px;align-items:end;border-bottom:2px solid var(--ink);padding-bottom:10px}
+.eyebrow{font:500 9.5px/1.3 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font-size:30px;line-height:1.02;font-weight:700;letter-spacing:-.01em;margin-top:4px}
+.def{color:var(--muted);margin-top:5px;max-width:62ch}
+.verdict{min-width:250px;display:flex;flex-direction:column;gap:6px}
+.verdict-title{font:600 13px/1.15 var(--f-display)}
+.verdict-title mark{background:var(--mark);color:var(--mark-ink);padding:0 3px}
+.gauge{position:relative;height:8px;border-radius:4px;background:linear-gradient(90deg,var(--accent-soft),var(--accent))}
+.gauge i{position:absolute;top:-4px;left:41%;width:3px;height:16px;background:var(--ink);border-radius:2px}
+.gauge-scale{display:flex;justify-content:space-between;font:500 8.5px/1 var(--f-mono);color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+
+/* Columnas */
+.cols{display:grid;grid-template-columns:1.12fr 1fr;gap:22px;flex:1}
+.col{display:flex;flex-direction:column;gap:13px;min-width:0}
+section h2{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--accent);
+  display:flex;gap:6px;align-items:baseline;border-bottom:1px solid var(--rule);padding-bottom:3px;margin-bottom:6px}
+section h2 span{font-family:var(--f-mono);font-weight:500;font-size:10px;color:var(--muted)}
+
+/* Etiquetas de evidencia */
+.tag{display:inline-block;font:500 8px/1 var(--f-mono);letter-spacing:.04em;padding:2px 4px 2px;border-radius:2px;vertical-align:1px;margin-right:3px;white-space:nowrap}
+.H{color:var(--t-hecho);background:var(--t-hecho-bg)}
+.E{color:var(--t-est);background:var(--t-est-bg)}
+.O{color:var(--t-op);background:var(--t-op-bg)}
+.NV{color:var(--t-nv);background:var(--t-nv-bg)}
+
+.players{display:grid;grid-template-columns:auto 1fr;gap:4px 8px}
+.players dt{font:600 9px/1.5 var(--f-mono);text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+.players dd{margin:0}
+.vocab{display:flex;flex-wrap:wrap;gap:4px}
+.vocab span{border:1px solid var(--rule);padding:1px 6px;border-radius:10px;font-size:9.8px;white-space:nowrap}
+.vocab span b{font-weight:600}
+.note{font-size:9.6px;color:var(--muted)}
+.foot{border-top:1px solid var(--rule);padding-top:7px;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;font-size:9.4px;color:var(--muted)}
+.foot strong{color:var(--ink);font-weight:600}
+
+/* Hoja 2: tabla */
+.h2big{font-size:22px;font-weight:700}
+.sub{color:var(--muted);max-width:80ch}
+.tablewrap{overflow-x:auto;min-width:0}
+table{border-collapse:collapse;width:100%;font-size:10px;min-width:640px}
+th{font:600 9px/1.2 var(--f-mono);text-transform:uppercase;letter-spacing:.05em;color:var(--muted);text-align:left;padding:6px 6px;border-bottom:2px solid var(--ink)}
+td{padding:4.5px 6px;border-bottom:1px solid var(--rule);vertical-align:top}
+td:first-child{font-weight:600;width:19%}
+td.read{width:13%}
+td.src{width:7%;font:500 9px/1.4 var(--f-mono);color:var(--muted);white-space:nowrap}
+.stage{display:inline-flex;align-items:center;gap:5px;font:600 9.5px/1.2 var(--f-display);text-transform:uppercase;letter-spacing:.03em}
+.dots{display:inline-flex;gap:2px}
+.dots b{width:7px;height:7px;border-radius:50%;border:1px solid var(--accent)}
+.dots b.on{background:var(--accent)}
+.tally{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.tally div{border:1px solid var(--rule);padding:8px 10px;display:flex;flex-direction:column;gap:2px}
+.tally strong{font:700 20px/1 var(--f-display);font-variant-numeric:tabular-nums}
+.tally span{font-size:9.6px;color:var(--muted)}
+.sources{columns:2;column-gap:22px;font-size:9px;line-height:1.38;color:var(--muted);margin:0;padding-left:18px}
+.sources li{break-inside:avoid;margin-bottom:2px}
+.sources a{word-break:break-word}
+.gaps{background:var(--accent-soft);padding:9px 12px;display:flex;flex-direction:column;gap:4px}
+.gaps h3{font-size:11.5px;text-transform:uppercase;letter-spacing:.04em}
+
+@media (max-width:760px){
+  body{font-size:12.5px}
+  .sheet{min-height:0;padding:26px 18px}
+  .head,.cols{grid-template-columns:1fr}
+  .verdict{min-width:0}
+  h1{font-size:26px}
+  .sources{columns:1}
+  .tally{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<div class="desk">
+
+<!-- ===================== HOJA 1 ===================== -->
+<article class="sheet" aria-label="Resumen ejecutivo">
+  <span class="sheet-label">Hoja 1 / 2 · Resumen ejecutivo</span>
+
+  <header class="head">
+    <div>
+      <p class="eyebrow">Brief de mercado · Colombia → Latam · corte 8 oct 2026</p>
+      <h1>Automatización para creadores</h1>
+      <p class="def">Herramientas y servicios que automatizan la operación del creador: captar (comentario→DM), conversar y vender por Instagram/WhatsApp, cobrar, entregar infoproductos, publicar y reciclar contenido con IA. No incluye la producción creativa en sí.</p>
+    </div>
+    <div class="verdict" aria-label="Veredicto de madurez">
+      <p class="eyebrow">Veredicto de madurez</p>
+      <p class="verdict-title"><mark>En crecimiento temprano</mark> en Colombia; capa global de chatbots, cerca de saturarse.</p>
+      <div class="gauge" role="img" aria-label="Indicador en 41% entre naciente y saturado"><i></i></div>
+      <div class="gauge-scale"><span>Naciente</span><span>Crecimiento</span><span>Saturado</span></div>
+    </div>
+  </header>
+
+  <div class="cols">
+    <div class="col">
+      <section>
+        <h2><span>1</span>Qué pasa ahora</h2>
+        <ul>
+          <li><span class="tag H">HECHO</span>Las marcas invirtieron <b>$227.360 M COP</b> en marketing de influencia en 2025, <b>+23,1%</b> anual (IAB Colombia). En 2023 fueron $117.563 M.<sup>2,3</sup></li>
+          <li><span class="tag E">ESTIM.</span>Hay <b>~650.000 creadores</b> en Colombia (IAB vía Forbes). El proyecto de ley de 2026 habla de 465.000, así que el dato no es firme.<sup>1,16</sup> El gremio CREACODI tiene 35.000 afiliados.<sup>21</sup></li>
+          <li><span class="tag H">HECHO</span>Hotmart presentó en Medellín (jun 2026) <b>agentes de IA de ventas y de cobro</b> por WhatsApp y email, y lanzó <b>Launchpad</b> en Colombia (sep 2026). Según la empresa, 5.000 productores usan el agente de ventas y 2.000 el de cobro (cifras autorreportadas).<sup>6,7</sup></li>
+          <li><span class="tag H">HECHO</span>Hay mucho capital en la infraestructura: <b>ManyChat</b> levantó US$140 M (abr 2025) para IA agéntica, y <b>n8n</b> pasó de US$2.500 M (oct 2025) a US$5.200 M de valoración con SAP (may 2026).<sup>8,9,10</sup></li>
+          <li><span class="tag H">HECHO</span>WhatsApp API cobra por mensaje desde jul 2025. Desde el <b>1 oct 2026</b> también cobra las respuestas de servicio, incluidas las de bots e IA. Colombia tiene de las tarifas más bajas de la región (~US$0,0008 por mensaje de utilidad).<sup>11,12</sup></li>
+          <li><span class="tag H">HECHO</span>Aún <b>no hay ley</b> para creadores. Están en trámite el PL 394/2025 y un nuevo proyecto de sep 2026 (publicidad pagada vigilada por la SIC), y la Corte Constitucional pidió regular el tema en la Sentencia T-241/2026.<sup>14,15,16</sup></li>
+        </ul>
+      </section>
+
+      <section>
+        <h2><span>2</span>Hacia dónde va (12–24 meses)</h2>
+        <ul>
+          <li><span class="tag O">PROYECCIÓN</span>Se pasa de <b>flujos por palabra clave</b> a <b>agentes de IA que venden, cobran y hacen soporte</b> dentro del chat. Ya lo están haciendo Hotmart, ManyChat AI y Meta (bots “Creator AI” en prueba en EE. UU.).<sup>6,8,13</sup></li>
+          <li><span class="tag O">PROYECCIÓN</span><b>WhatsApp se vuelve el canal donde se cierra la venta.</b> Como ahora cada respuesta cuesta, se medirá el costo por conversación y por venta recuperada, no el volumen de mensajes.<sup>12</sup></li>
+          <li><span class="tag O">PROYECCIÓN</span><b>Las plataformas de monetización absorben la automatización</b> (Hotmart, Stan con “Stanley”), lo que presiona a las herramientas que hacen una sola cosa. El espacio que queda está en servicios “hecho por ti” y en integraciones locales.<sup>7,20</sup></li>
+          <li><span class="tag O">PROYECCIÓN</span>Viene <b>cumplimiento</b>: los bots tendrán que identificarse como IA y la pauta tendrá que declararse. Un proyecto a favor de la SIC haría más valiosas las automatizaciones que ya cumplen.<sup>13,16</sup></li>
+          <li><span class="tag O">RIESGO</span>Dependencia de las API de Meta y caída de la confianza en la IA. Las marcas ya priorizan confianza sobre alcance.<sup>23,24</sup></li>
+        </ul>
+      </section>
+    </div>
+
+    <div class="col">
+      <section>
+        <h2><span>3</span>Qué tan madura está</h2>
+        <p><b>En crecimiento temprano.</b> La demanda (gasto de marcas, base de creadores) y la tecnología (capital, IA nativa) crecen rápido. Pero no hay un líder colombiano especializado en creadores, faltan datos locales de adopción, la formación en español apenas se formaliza (primer curso oficial de n8n en español, sep 2026<sup>17</sup>) y la regulación sigue abierta. La capa genérica de “comentario→DM” sí está saturada: hay 8 o más alternativas a ManyChat.<sup>18</sup> Ver la tabla en la hoja 2.</p>
+      </section>
+
+      <section>
+        <h2><span>4</span>Players y referentes</h2>
+        <dl class="players">
+          <dt>DM / chat</dt><dd><b>ManyChat</b> (líder, socio de Meta, agencias certificadas en Colombia<sup>22</sup>), Kommo, Leadsales (MX), Mercately, Cliengo (AR), BotConversa (BR), Chatfuel, Landbot.</dd>
+          <dt>Orquestación</dt><dd><b>n8n</b> (el que más crece), Make, Zapier.</dd>
+          <dt>Monetización</dt><dd><b>Hotmart</b> (líder regional, agentes de IA), Kiwify y Eduzz (BR), Stan, Beacons, Whop.</dd>
+          <dt>Plataforma</dt><dd><b>Meta</b>: AI Studio / Creator AI y Business Agent. Compite con todos los anteriores.</dd>
+          <dt>Local CO</dt><dd>Treble.ai (WhatsApp B2B, YC, Serie A de US$15 M en 2022<sup>19</sup>). Referentes del ecosistema: Platzi, CREACODI, IAB Colombia y Hotmart FIRE.</dd>
+        </dl>
+      </section>
+
+      <section>
+        <h2><span>5</span>Vocabulario del mercado</h2>
+        <div class="vocab">
+          <span><b>Comentario→DM</b> / palabra clave</span><span>Auto-DM</span><span>Flujo (flow)</span><span>Embudo / funnel</span>
+          <span>Lead magnet</span><span>Link en bio</span><span>Agente de IA</span><span>IA agéntica</span><span>Comercio agéntico</span>
+          <span>Chatbot</span><span>WhatsApp API</span><span>Plantilla (marketing / utilidad)</span><span>Mensaje de servicio</span>
+          <span>Ventana de 24 h</span><span>CRM</span><span>Infoproducto</span><span>Productor</span><span>Afiliado</span>
+          <span>Lanzamiento</span><span>Recuperación de carrito / cobranza</span><span>No-code / low-code</span><span>Workflow / nodo</span>
+          <span>Reciclaje de contenido</span><span>UGC</span><span>Contenido patrocinado</span><span>Creador vs. influenciador</span>
+        </div>
+      </section>
+
+      <p class="note"><b>No verificable:</b> no existe una encuesta de uso de automatización o IA entre creadores colombianos. Tampoco hay una cifra confiable del tamaño de la categoría en Colombia ni confirmación oficial de TikTok Shop en el país.<sup>25</sup></p>
+    </div>
+  </div>
+
+  <footer class="foot">
+    <strong>Leyenda:</strong>
+    <span><span class="tag H">HECHO</span>publicado y fechado por una fuente</span>
+    <span><span class="tag E">ESTIM.</span>estimación de terceros</span>
+    <span><span class="tag O">PROYECCIÓN</span>opinión del analista</span>
+    <span><span class="tag NV">NO VERIF.</span>sin evidencia</span>
+    <span>Superíndices = fuentes en la hoja 2.</span>
+  </footer>
+</article>
+
+<!-- ===================== HOJA 2 ===================== -->
+<article class="sheet" aria-label="Señales de madurez">
+  <span class="sheet-label">Hoja 2 / 2 · Anexo</span>
+  <div>
+    <p class="eyebrow">Anexo · Evidencia del veredicto</p>
+    <h2 class="h2big">Señales de madurez</h2>
+    <p class="sub">Cada fila es una señal observable. La lectura ubica la señal en la escala naciente (●○○), crecimiento (●●○) o saturado (●●●). El tipo dice qué tan firme es el dato.</p>
+  </div>
+
+  <div class="tally" aria-label="Conteo de señales">
+    <div><strong>4</strong><span>señales de categoría <b>naciente</b> (regulación, players locales, datos, comercio social)</span></div>
+    <div><strong>7</strong><span>señales de <b>crecimiento</b> (gasto, capital, IA nativa, formación, gremio, canal, base)</span></div>
+    <div><strong>1</strong><span>señal de <b>saturación</b> (capa genérica comentario→DM)</span></div>
+  </div>
+
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>Señal</th><th>Dato observado</th><th>Lectura</th><th>Tipo</th><th>Fuente</th></tr></thead>
+    <tbody>
+      <tr><td>Gasto de marcas en creadores</td><td>$227.360 M COP en 2025, +23,1%; ~30% de la pauta digital va a redes ($911.734 M de $3,04 billones).</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b></b></span>Crecimiento</span></td><td><span class="tag H">HECHO</span></td><td class="src">2, 3</td></tr>
+      <tr><td>Tamaño de la base de creadores</td><td>~650.000 (IAB/Forbes) frente a 465.000 (proyecto de ley 2026). Fluvip estima que la industria factura ~US$150 M al año.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b></b></span>Crecimiento</span></td><td><span class="tag E">ESTIM.</span></td><td class="src">1, 4, 16</td></tr>
+      <tr><td>Capital en infraestructura de automatización</td><td>ManyChat: US$140 M (2025). n8n: US$2.500 M → US$5.200 M en 7 meses. Treble.ai (CO): US$15 M (2022).</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b></b></span>Crecimiento</span></td><td><span class="tag H">HECHO</span></td><td class="src">8, 9, 10, 19</td></tr>
+      <tr><td>IA integrada en plataformas de monetización</td><td>Agentes de venta y cobro de Hotmart (jun 2026), Launchpad en Colombia (sep 2026), “Stanley” de Stan. Las cifras de uso son autorreportadas.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b></b></span>Crecimiento</span></td><td><span class="tag H">HECHO</span></td><td class="src">6, 7, 20</td></tr>
+      <tr><td>Oferta de herramientas comentario→DM</td><td>Comparativas de 2026 listan 8 o 9 alternativas a ManyChat con funciones casi iguales. Compiten por precio fijo frente a precio por contacto.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b class="on"></b></span>Saturado</span></td><td><span class="tag H">HECHO</span></td><td class="src">18</td></tr>
+      <tr><td>Players locales enfocados en creadores</td><td>No encontré startups colombianas financiadas que automaticen específicamente para creadores. Lo local es B2B (Treble.ai) o de agencias.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b></b><b></b></span>Naciente</span></td><td><span class="tag NV">NO VERIF.</span></td><td class="src">19, 22</td></tr>
+      <tr><td>Formación y talento en español</td><td>Primer curso oficial de n8n en español de Platzi (30 sep 2026). Agencias certificadas por ManyChat en Colombia. En Brasil, una comunidad tiene 14.000 alumnos.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b></b></span>Crecimiento</span></td><td><span class="tag H">HECHO</span></td><td class="src">17, 22</td></tr>
+      <tr><td>Reglas y costos del canal (WhatsApp)</td><td>Cobro por mensaje desde jul 2025 y respuestas de servicio pagas desde oct 2026. Las reglas son claras y estables, y Colombia es de los mercados más baratos.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b></b></span>Crecimiento</span></td><td><span class="tag H">HECHO</span></td><td class="src">11, 12</td></tr>
+      <tr><td>Organización gremial</td><td>CREACODI tiene 35.000 creadores afiliados en 33 seccionales.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b></b></span>Crecimiento</span></td><td><span class="tag E">ESTIM.</span></td><td class="src">21</td></tr>
+      <tr><td>Marco regulatorio</td><td>No hay ley. Están el PL 394/2025 (primer debate, según la prensa), la Sentencia T-241/2026 y un nuevo PL de sep 2026 orientado a la SIC.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b></b><b></b></span>Naciente</span></td><td><span class="tag H">HECHO</span></td><td class="src">14, 15, 16</td></tr>
+      <tr><td>Medición del mercado</td><td>No hay encuestas locales de adopción de IA o automatización entre creadores. Las cifras disponibles son de EE. UU. o globales.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b></b><b></b></span>Naciente</span></td><td><span class="tag NV">NO VERIF.</span></td><td class="src">—</td></tr>
+      <tr><td>Comercio social nativo</td><td>TikTok Shop no ha llegado oficialmente a Colombia (a jul 2026). Por eso la venta se automatiza fuera de la red, por DM, WhatsApp o checkout externo.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b></b><b></b></span>Naciente</span></td><td><span class="tag NV">NO VERIF.</span></td><td class="src">25</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="gaps">
+    <h3>Límites de este análisis</h3>
+    <p>Las cifras salen de prensa que cita los informes originales (IAB Colombia, Hotmart). No pude abrir esos informes directamente. Las cifras de adopción de Hotmart, ManyChat y n8n son de las propias empresas. Las proyecciones son juicio del analista, no pronósticos de una fuente.</p>
+  </div>
+
+  <section>
+    <h2><span>§</span>Fuentes</h2>
+    <ol class="sources">
+      <li><a href="https://forbes.co/2025/12/10/editors-picks/forbes-presenta-los-top-creators-de-colombia-2025">Forbes Colombia, Top Creators 2025 (dic 2025)</a></li>
+      <li><a href="https://www.elcolombiano.com/tendencias/como-esta-mercado-influencers-colombia-inversion-crecio-publicidad-IB41265397">El Colombiano, inversión en influencers +23% (IAB)</a></li>
+      <li><a href="https://ecosistemastartup.com/iab-colombia-304-billones-en-publicidad-digital-en-2025/">Ecosistema Startup, IAB: $3,04 billones en publicidad digital 2025</a></li>
+      <li><a href="https://www.valoraanalitik.com/marketing-de-influenciadores-en-colombia-ya-mueve-mas-de-medio-billon-de-pesos-estos-son-los-hitos/">Valora Analitik, marketing de influenciadores (Fluvip)</a></li>
+      <li><a href="https://marketing4ecommerce.co/colombia-economia-creadores-de-contenido/">Marketing4Ecommerce, Colombia lidera la economía de creadores (Hotmart)</a></li>
+      <li><a href="https://dplnews.com/agentes-ia-automatizan-ventas-cobranza-economia-creadores/">DPL News, agentes de IA de Hotmart para ventas y cobranza (2026)</a></li>
+      <li><a href="https://www.technocio.com/hotmart-trae-launchpad-a-colombia-para-crear-y-vender-productos-digitales-con-ia/">Technocio, Hotmart trae Launchpad a Colombia (sep 2026)</a></li>
+      <li><a href="https://www.summitpartners.com/news/manychat-raises-140m-to-fuel-the-future-of-ai-driven-customer-engagement-on-social-and-messaging-platforms">Summit Partners, ManyChat levanta US$140 M (abr 2025)</a></li>
+      <li><a href="https://sifted.eu/articles/n8n-hits-2-5bn-valuation">Sifted, n8n alcanza US$2.500 M (oct 2025)</a></li>
+      <li><a href="https://www.bolsamania.com/nota-de-prensa_email/mercados/n8n-valuation-doubles-to-52bn-as-sap-makes-strategic-investment-and-plans-to-embed-the-ai-platform-into-joule-studio--22470787.html">Nota de prensa, n8n a US$5.200 M con SAP (may 2026)</a></li>
+      <li><a href="https://help.manychat.com/hc/en-us/articles/14281380243740-WhatsApp-pricing-guide">ManyChat Help, tarifas de WhatsApp por país</a></li>
+      <li><a href="https://blog.mercately.com/?p=30248">Mercately, cobro de mensajes de servicio desde 1 oct 2026</a></li>
+      <li><a href="https://www.xataka.com/robotica-e-ia/creadores-instagram-podran-chatear-todos-sus-seguidores-no-haran-ellos-sino-sus-bots">Xataka, Instagram y bots de IA para creadores</a></li>
+      <li><a href="https://www.senado.gov.co/index.php/el-senado/noticias/6278-radican-proyecto-de-ley-en-senado-para-regular-creadores-de-contenido-o-influencers">Senado, PL para regular creadores (2025)</a></li>
+      <li><a href="https://www.eltiempo.com/amp/tecnosfera/corte-constitucional-ordena-al-gobierno-y-al-congreso-regular-a-los-influencers-y-creadores-de-contenido-en-colombia-por-que-3580173">El Tiempo, la Corte ordena regular a los creadores</a></li>
+      <li><a href="https://www.infobae.com/colombia/2026/09/08/el-congreso-de-colombia-insiste-en-regular-la-labor-de-los-influencers-autor-de-la-iniciativa-explico-en-que-consiste/">Infobae, nuevo PL de influenciadores (sep 2026)</a></li>
+      <li><a href="https://www.descubre.vc/noticia/platzi-lanza-el-primer-curso-oficial-de-n8n-en-espa-ol-para-democratizar-la-automatizaci-n-2026-09-30">Descubre.vc, Platzi y el curso oficial de n8n (sep 2026)</a></li>
+      <li><a href="https://massively.ai/general/manychat-alternatives-2026-8-instagram-dm-tools-compared-massively/">Massively, 8 alternativas a ManyChat (2026)</a></li>
+      <li><a href="https://latamlist.com/colombian-startup-treble-ai-closes-15m-series-a-round/">LatamList, Treble.ai cierra Serie A de US$15 M</a></li>
+      <li><a href="https://sacra.com/research/stans-shopify-vs-whops-amazon/">Sacra, Stan vs. Whop (estimaciones)</a></li>
+      <li><a href="https://www.noticiasrcn.com/economia/economia-digital-colombia-juan-sebastian-giraldo-creadores-1065977">Noticias RCN, CREACODI y la economía digital</a></li>
+      <li><a href="https://manychat.com/agency/listing">ManyChat, directorio de agencias partner</a></li>
+      <li><a href="https://www.itsitio.com/informes/visa-lo-confirma-la-ia-ya-decide-como-compran-los-latinoamericanos/">ITSitio, Visa: IA en las compras en Latam</a></li>
+      <li><a href="https://fastcompany.mx/2026/09/27/creadores-confianza-marketing-influencers-marcas/">Fast Company MX, confianza en el marketing de creadores (sep 2026)</a></li>
+      <li><a href="https://www.tiktok.com/discover/tiktok-shop-cuando-llega-a-colombia">TikTok Discover, estado de TikTok Shop en Colombia (fuente débil)</a></li>
+    </ol>
+  </section>
+</article>
+</div>

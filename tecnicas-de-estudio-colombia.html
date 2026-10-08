@@ -1,0 +1,301 @@
+<title>Técnicas de Estudio CO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: dos hojas tamaño carta (8.5×11 in) sobre una mesa gris; hoja 1 = resumen ejecutivo, hoja 2 = tabla de señales + fuentes. En móvil, las hojas se vuelven fluidas. */
+:root{
+  --desk:#e3e6ea; --paper:#ffffff; --ink:#18212b; --muted:#5a6672; --rule:#d5dbe1;
+  --accent:#1d4e89; --accent-soft:#e8eff8; --mark:#ffd84d; --mark-ink:#3b3000;
+  --t-hecho:#1f6f4a; --t-hecho-bg:#e3f3ea; --t-est:#7a5a00; --t-est-bg:#fbf1d2;
+  --t-op:#6a3d8f; --t-op-bg:#f1e9f8; --t-nv:#9a2f2f; --t-nv-bg:#f8e6e6;
+  --f-display:"IBM Plex Sans Condensed","Arial Narrow",Arial,sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  --shadow:0 1px 2px rgba(20,30,40,.08),0 8px 28px rgba(20,30,40,.10);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --desk:#0e1216; --paper:#171c22; --ink:#e4e9ee; --muted:#9aa6b2; --rule:#2c343d;
+  --accent:#8cb6ea; --accent-soft:#1e2a38; --mark:#e9c53a; --mark-ink:#1c1600;
+  --t-hecho:#7fd4a6; --t-hecho-bg:#173126; --t-est:#e8c46a; --t-est-bg:#332a12;
+  --t-op:#c9a6ea; --t-op-bg:#2a2036; --t-nv:#f0a0a0; --t-nv-bg:#3a1f1f;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.35); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --desk:#0e1216; --paper:#171c22; --ink:#e4e9ee; --muted:#9aa6b2; --rule:#2c343d;
+  --accent:#8cb6ea; --accent-soft:#1e2a38; --mark:#e9c53a; --mark-ink:#1c1600;
+  --t-hecho:#7fd4a6; --t-hecho-bg:#173126; --t-est:#e8c46a; --t-est-bg:#332a12;
+  --t-op:#c9a6ea; --t-op-bg:#2a2036; --t-nv:#f0a0a0; --t-nv-bg:#3a1f1f;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.35); color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--desk);color:var(--ink);font-family:var(--f-body);font-size:10.5px;line-height:1.42;
+  padding-inline:16px;padding-block:28px 40px;-webkit-font-smoothing:antialiased}
+.desk{display:flex;flex-direction:column;align-items:center;gap:28px}
+.sheet{background:var(--paper);width:816px;max-width:100%;min-height:1056px;padding:40px 52px;box-shadow:var(--shadow);
+  display:flex;flex-direction:column;gap:14px;position:relative}
+.sheet-label{position:absolute;top:-18px;left:0;font:500 10px/1 var(--f-mono);color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+a{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0}
+p{margin:0}
+ul{margin:0;padding-left:14px;display:flex;flex-direction:column;gap:4px}
+li::marker{color:var(--accent)}
+sup{font:500 8px/0 var(--f-mono);color:var(--accent);margin-left:1px}
+
+/* Encabezado */
+.head{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:18px;align-items:end;border-bottom:2px solid var(--ink);padding-bottom:10px}
+.eyebrow{font:500 9.5px/1.3 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font-size:30px;line-height:1.02;font-weight:700;letter-spacing:-.01em;margin-top:4px}
+.def{color:var(--muted);margin-top:5px;max-width:62ch}
+.verdict{min-width:250px;display:flex;flex-direction:column;gap:6px}
+.verdict-title{font:600 13px/1.15 var(--f-display)}
+.verdict-title mark{background:var(--mark);color:var(--mark-ink);padding:0 3px}
+.gauge{position:relative;height:8px;border-radius:4px;background:linear-gradient(90deg,var(--accent-soft),var(--accent))}
+.gauge i{position:absolute;top:-4px;width:3px;height:16px;background:var(--ink);border-radius:2px}
+.gauge i.alt{background:var(--accent);width:9px;height:9px;top:-0.5px;border-radius:50%;border:2px solid var(--paper);box-shadow:0 0 0 1px var(--ink);margin-left:-3px}
+.gauge-keys{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:9.4px;color:var(--muted)}
+.gauge-keys span{display:inline-flex;align-items:center;gap:5px}
+.gauge-keys i{display:inline-block;width:3px;height:11px;background:var(--ink);border-radius:2px}
+.gauge-keys i.alt{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 1px var(--ink)}
+.gauge-scale{display:flex;justify-content:space-between;font:500 8.5px/1 var(--f-mono);color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+
+/* Columnas */
+.cols{display:grid;grid-template-columns:1.12fr 1fr;gap:22px;flex:1}
+.col{display:flex;flex-direction:column;gap:13px;min-width:0}
+section h2{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--accent);
+  display:flex;gap:6px;align-items:baseline;border-bottom:1px solid var(--rule);padding-bottom:3px;margin-bottom:6px}
+section h2 span{font-family:var(--f-mono);font-weight:500;font-size:10px;color:var(--muted)}
+
+/* Etiquetas de evidencia */
+.tag{display:inline-block;font:500 8px/1 var(--f-mono);letter-spacing:.04em;padding:2px 4px 2px;border-radius:2px;vertical-align:1px;margin-right:3px;white-space:nowrap}
+.H{color:var(--t-hecho);background:var(--t-hecho-bg)}
+.E{color:var(--t-est);background:var(--t-est-bg)}
+.O{color:var(--t-op);background:var(--t-op-bg)}
+.NV{color:var(--t-nv);background:var(--t-nv-bg)}
+
+.players{display:grid;grid-template-columns:auto 1fr;gap:4px 8px}
+.players dt{font:600 9px/1.5 var(--f-mono);text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+.players dd{margin:0}
+.vocab{display:flex;flex-wrap:wrap;gap:4px}
+.vocab span{border:1px solid var(--rule);padding:1px 6px;border-radius:10px;font-size:9.8px;white-space:nowrap}
+.vocab span b{font-weight:600}
+.note{font-size:9.6px;color:var(--muted)}
+.foot{border-top:1px solid var(--rule);padding-top:7px;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;font-size:9.4px;color:var(--muted)}
+.foot strong{color:var(--ink);font-weight:600}
+
+/* Hoja 2: tabla */
+.h2big{font-size:22px;font-weight:700}
+.sub{color:var(--muted);max-width:80ch}
+.tablewrap{overflow-x:auto;min-width:0}
+table{border-collapse:collapse;width:100%;font-size:10px;min-width:640px}
+th{font:600 9px/1.2 var(--f-mono);text-transform:uppercase;letter-spacing:.05em;color:var(--muted);text-align:left;padding:6px 6px;border-bottom:2px solid var(--ink)}
+td{padding:4.5px 6px;border-bottom:1px solid var(--rule);vertical-align:top}
+td:first-child{font-weight:600;width:19%}
+td.read{width:13%}
+td.src{width:7%;font:500 9px/1.4 var(--f-mono);color:var(--muted);white-space:nowrap}
+.stage{display:inline-flex;align-items:center;gap:5px;font:600 9.5px/1.2 var(--f-display);text-transform:uppercase;letter-spacing:.03em}
+.dots{display:inline-flex;gap:2px}
+.dots b{width:7px;height:7px;border-radius:50%;border:1px solid var(--accent)}
+.dots b.on{background:var(--accent)}
+.tally{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.tally div{border:1px solid var(--rule);padding:8px 10px;display:flex;flex-direction:column;gap:2px}
+.tally strong{font:700 20px/1 var(--f-display);font-variant-numeric:tabular-nums}
+.tally span{font-size:9.6px;color:var(--muted)}
+.sources{columns:2;column-gap:22px;font-size:9px;line-height:1.38;color:var(--muted);margin:0;padding-left:18px}
+.sources li{break-inside:avoid;margin-bottom:2px}
+.sources a{word-break:break-word}
+.gaps{background:var(--accent-soft);padding:9px 12px;display:flex;flex-direction:column;gap:4px}
+.gaps h3{font-size:11.5px;text-transform:uppercase;letter-spacing:.04em}
+
+@media (max-width:760px){
+  body{font-size:12.5px}
+  .sheet{min-height:0;padding:26px 18px}
+  .head,.cols{grid-template-columns:1fr}
+  .verdict{min-width:0}
+  h1{font-size:26px}
+  .sources{columns:1}
+  .tally{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<div class="desk">
+
+<!-- ===================== HOJA 1 ===================== -->
+<article class="sheet" aria-label="Resumen ejecutivo">
+  <span class="sheet-label">Hoja 1 / 2 · Resumen ejecutivo</span>
+
+  <header class="head">
+    <div>
+      <p class="eyebrow">Brief de mercado · Colombia → Latam · corte 8 oct 2026</p>
+      <h1>Técnicas de estudio</h1>
+      <p class="def">Métodos, herramientas y servicios que ayudan a estudiantes de colegio y universidad a aprender y rendir más: técnicas (recuperación activa, repetición espaciada, Pomodoro, Cornell), apps de tarjetas y quices, tutores con IA, contenido en redes y preparación de exámenes (preicfes). No incluye la educación formal en sí.</p>
+    </div>
+    <div class="verdict" aria-label="Veredicto de madurez">
+      <p class="eyebrow">Veredicto de madurez</p>
+      <p class="verdict-title"><mark>Mercado de dos velocidades</mark>: técnicas y contenido saturados; estudio con IA en crecimiento acelerado.</p>
+      <div class="gauge" role="img" aria-label="Estudio con IA en Colombia en 40%; técnicas y contenido en 88%, entre naciente y saturado"><i style="left:40%"></i><i class="alt" style="left:88%"></i></div>
+      <div class="gauge-scale"><span>Naciente</span><span>Crecimiento</span><span>Saturado</span></div>
+      <div class="gauge-keys"><span><i></i>Estudio con IA (CO)</span><span><i class="alt"></i>Técnicas y contenido</span></div>
+    </div>
+  </header>
+
+  <div class="cols">
+    <div class="col">
+      <section>
+        <h2><span>1</span>Qué pasa ahora</h2>
+        <ul>
+          <li><span class="tag H">HECHO</span>El <b>84%</b> de los universitarios colombianos usa IA generativa con frecuencia y el 91% la usa de algún modo, pero el <b>61% no ha recibido formación</b> (encuesta GAD3 para Planeta Formación, nov 2024).<sup>1,2</sup></li>
+          <li><span class="tag H">HECHO</span>Las grandes tecnológicas convirtieron las técnicas de estudio en <b>funciones gratuitas</b>: Learning mode de Claude (abr 2025), <b>modo estudio de ChatGPT</b> (jul 2025) y Guided Learning de Gemini (ago 2025). NotebookLM pasó a llamarse <b>Gemini Notebook</b> (16 jul 2026). Google dice que lo usan más de 30 M de personas, y genera tarjetas, quices y mapas mentales.<sup>3,4,5,6</sup></li>
+          <li><span class="tag H">HECHO</span>Baja el precio de entrada: <b>ChatGPT Go</b> llegó a Colombia en dic 2025 a $20.900 COP al mes (con Rappi), y Google lanzó AI Plus y ofertas para estudiantes en la región.<sup>7,8</sup></li>
+          <li><span class="tag H">HECHO</span>La <b>Ley 2626 de 2026</b> (Educación Digital, sancionada el 24 ago 2026) incluye IA, datos y pensamiento computacional en el currículo de los colegios oficiales. El MEN publicó un decálogo de IA para educación superior.<sup>9,10</sup></li>
+          <li><span class="tag H">HECHO</span>La necesidad es grande. En PISA 2022 Colombia sacó <b>383</b> en matemáticas (OCDE: 472) y solo el 29% llegó al nivel 2. En Saber 11 de 2025 la brecha entre niveles socioeconómicos fue de 77 puntos. La matrícula en educación superior llegó a un récord de <b>2,72 M</b> en 2025.<sup>11,12,13</sup></li>
+          <li><span class="tag H">HECHO</span>Hay una contraseñal. Un preprint del MIT (jun 2025, 54 personas) asoció escribir con ChatGPT a menor actividad cerebral y peor recuerdo, lo que llamó <b>“deuda cognitiva”</b>. Es preliminar.<sup>14</sup></li>
+        </ul>
+      </section>
+
+      <section>
+        <h2><span>2</span>Hacia dónde va (12–24 meses)</h2>
+        <ul>
+          <li><span class="tag O">PROYECCIÓN</span><b>La técnica se vuelve una función.</b> La recuperación activa y la autoevaluación ya vienen dentro del asistente (quices, tarjetas, preguntas socráticas). El estudiante deja de elegir una técnica y elige un modo.<sup>3,6</sup></li>
+          <li><span class="tag O">PROYECCIÓN</span><b>Presión de precio sobre las apps independientes</b> frente a la oferta gratis de Google y OpenAI. Ganan las que hacen lo que el asistente hace mal: repetición espaciada con calendario (Anki), seguimiento del progreso y contenido alineado al examen local.<sup>15</sup></li>
+          <li><span class="tag O">PROYECCIÓN</span>Se pasa de <b>“usar IA” a “saber estudiar con IA”</b>. La brecha de formación y la Ley 2626 abren demanda institucional: colegios, secretarías y universidades comprarán formación docente y alfabetización en IA.<sup>1,9</sup></li>
+          <li><span class="tag O">PROYECCIÓN</span><b>El preicfes se digitaliza</b> con tutor IA y simulacros adaptativos (ICFES, Sabero). Es el punto de pago más claro en Colombia, porque el examen tiene fecha fija y alto impacto.<sup>16,17</sup></li>
+          <li><span class="tag O">RIESGO</span>Debate de integridad y “deuda cognitiva”: más evaluación presencial y oral. Los asistentes gratuitos ya muestran anuncios en algunos mercados, y el modo tutor se puede apagar para pedir la respuesta directa.<sup>14</sup></li>
+        </ul>
+      </section>
+    </div>
+
+    <div class="col">
+      <section>
+        <h2><span>3</span>Qué tan madura está</h2>
+        <p><b>Dos velocidades.</b> El conocimiento de las técnicas es viejo y gratuito: la revisión de Dunlosky et al. (2013) ya mostró que la autoevaluación y la práctica espaciada funcionan, y que subrayar y releer rinden poco.<sup>18</sup> El contenido sobra (Julioprofe ~4,4 M de suscriptores, StudyTok).<sup>19,20</sup> La capa de IA crece rápido, pero la dominan productos globales gratuitos. Lo colombiano con IA es <b>naciente</b>: no encontré un líder local financiado. Ver la tabla en la hoja 2.</p>
+      </section>
+
+      <section>
+        <h2><span>4</span>Players y referentes</h2>
+        <dl class="players">
+          <dt>Asistentes IA</dt><dd><b>ChatGPT</b> (modo estudio), <b>Gemini</b> (Guided Learning, Gemini Notebook), Claude (Learning mode). Son el nuevo punto de entrada.</dd>
+          <dt>Apps de estudio</dt><dd><b>Anki</b> (gratis, algoritmo FSRS), Quizlet (pago), Knowt (gratis con IA), StudySmarter.<sup>15</sup></dd>
+          <dt>Preicfes CO</dt><dd><b>ICFES</b> (simulacro gratis y adaptativo), Puntaje Nacional (gratis), Milton Ochoa, Preicfes Univérsate. Con IA: Sabero (cifras propias), OE SABER (Riiid + Casa Grande, 2022).<sup>16,17,21,22</sup></dd>
+          <dt>Edtech Latam</dt><dd><b>Platzi</b> (CO; dice tener 7 M de estudiantes), Crehana (PE). Se enfocan en adultos y empleo, no en técnicas escolares.<sup>23,24</sup></dd>
+          <dt>Creadores</dt><dd><b>Julioprofe</b> (Cali; récord Guinness 2020), comunidad StudyTok y #studywithme.<sup>19,20</sup></dd>
+        </dl>
+      </section>
+
+      <section>
+        <h2><span>5</span>Vocabulario del mercado</h2>
+        <div class="vocab">
+          <span><b>Técnicas</b> / métodos / hábitos de estudio</span><span>Aprender a aprender</span><span>Metacognición</span>
+          <span><b>Recuperación activa</b> (active recall)</span><span><b>Repetición espaciada</b></span><span>Curva del olvido</span>
+          <span>Autoevaluación</span><span>Práctica intercalada</span><span>Técnica Feynman</span><span>Pomodoro</span>
+          <span>Método Cornell</span><span>Mapa mental / conceptual</span><span>Flashcards / tarjetas</span><span>Mazo (deck)</span>
+          <span>Palacio de la memoria</span><span>Study with me</span><span>StudyTok</span><span><b>Modo estudio</b></span>
+          <span>Aprendizaje guiado</span><span>Tutor IA</span><span>Alucinación</span><span>Deuda cognitiva</span>
+          <span><b>Preicfes</b></span><span>Simulacro</span><span>Puntaje global</span><span>Saber 11 / Saber Pro</span>
+          <span>Parcial · quiz · corte</span><span>“Rajarse”</span>
+        </div>
+      </section>
+
+      <p class="note"><b>No verificable:</b> el tamaño del mercado en Colombia, las tendencias de búsqueda locales, cuántos colombianos usan Anki, Quizlet o Gemini Notebook, las cifras de Sabero y el promedio nacional oficial de Saber 11 2025. Un medio reportó lineamientos del MEN sobre IA en colegios (ene 2026), pero no encontré el documento.</p>
+    </div>
+  </div>
+
+  <footer class="foot">
+    <strong>Leyenda:</strong>
+    <span><span class="tag H">HECHO</span>publicado y fechado por una fuente</span>
+    <span><span class="tag E">ESTIM.</span>estimación de terceros</span>
+    <span><span class="tag O">PROYECCIÓN</span>/<span class="tag O">OPINIÓN</span>juicio del analista o de terceros</span>
+    <span><span class="tag NV">NO VERIF.</span>sin evidencia</span>
+    <span>Superíndices = fuentes en la hoja 2.</span>
+  </footer>
+</article>
+
+<!-- ===================== HOJA 2 ===================== -->
+<article class="sheet" aria-label="Señales de madurez">
+  <span class="sheet-label">Hoja 2 / 2 · Anexo</span>
+  <div>
+    <p class="eyebrow">Anexo · Evidencia del veredicto</p>
+    <h2 class="h2big">Señales de madurez</h2>
+    <p class="sub">Cada fila es una señal observable. La lectura ubica la señal en la escala naciente (●○○), crecimiento (●●○) o saturado (●●●). El tipo dice qué tan firme es el dato.</p>
+  </div>
+
+  <div class="tally" aria-label="Conteo de señales">
+    <div><strong>4</strong><span>señales de categoría <b>naciente</b> (players locales con IA, regulación, evidencia de eficacia, datos de mercado)</span></div>
+    <div><strong>5</strong><span>señales de <b>crecimiento</b> (IA gratis de Big Tech, adopción, precio, necesidad, capital)</span></div>
+    <div><strong>4</strong><span>señales de <b>saturación</b> (técnicas conocidas, contenido gratis, apps de tarjetas, preicfes)</span></div>
+  </div>
+
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>Señal</th><th>Dato observado</th><th>Lectura</th><th>Tipo</th><th>Fuente</th></tr></thead>
+    <tbody>
+      <tr><td>Conocimiento de las técnicas</td><td>Pomodoro, Cornell y Leitner tienen décadas. La evidencia sobre qué funciona está consolidada desde 2013 y se repite en todo el contenido.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b class="on"></b></span>Saturado</span></td><td><span class="tag H">HECHO</span></td><td class="src">18</td></tr>
+      <tr><td>Contenido gratuito en español</td><td>Julioprofe tiene ~4,4 M de suscriptores (dic 2024). StudyTok es una subcomunidad global de consejos de estudio. Hay oferta abundante y gratis.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b class="on"></b></span>Saturado</span></td><td><span class="tag E">ESTIM.</span></td><td class="src">19, 20</td></tr>
+      <tr><td>Apps de tarjetas y quices</td><td>Comparativas de 2026 dividen el mercado en tres carriles (gratis y complejo, gratis y nuevo, probado y de pago) y hablan de rechazo a los precios.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b class="on"></b></span>Saturado</span></td><td><span class="tag O">OPINIÓN</span></td><td class="src">15</td></tr>
+      <tr><td>Preicfes tradicional</td><td>Muchos institutos, rankings por ciudad y alternativas gratuitas del ICFES, de Puntaje Nacional y de la Alcaldía de Bogotá.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b class="on"></b></span>Saturado</span></td><td><span class="tag H">HECHO</span></td><td class="src">16, 21, 22</td></tr>
+      <tr><td>Modos de estudio de Big Tech</td><td>Tres lanzamientos en 2025 (Claude, ChatGPT, Gemini), todos gratuitos o en planes básicos. Gemini Notebook supera los 30 M de usuarios, según Google.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b></b></span>Crecimiento</span></td><td><span class="tag H">HECHO</span></td><td class="src">3, 4, 5, 6</td></tr>
+      <tr><td>Adopción de IA por estudiantes</td><td>84% la usa con frecuencia, pero el 61% no tiene formación y solo el 35% dice ir más allá de lo básico. Hay uso masivo y poca competencia.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b></b></span>Crecimiento</span></td><td><span class="tag H">HECHO</span></td><td class="src">1, 2</td></tr>
+      <tr><td>Precio para el consumidor</td><td>ChatGPT Go a $20.900 COP (dic 2025). Una guía de 2026 lo ubica en $24.900, sin anuncio oficial. Google AI Plus ya está disponible en Colombia.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b></b></span>Crecimiento</span></td><td><span class="tag H">HECHO</span></td><td class="src">7, 8</td></tr>
+      <tr><td>Necesidad estructural</td><td>PISA bajo, brechas de 77 puntos en Saber 11, matrícula superior récord (2,72 M) y deserción anual cercana al 9% (2023).</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b></b></span>Crecimiento</span></td><td><span class="tag H">HECHO</span></td><td class="src">11, 12, 13, 25</td></tr>
+      <tr><td>Capital en edtech</td><td>Edtech es ~6,3% de 2.295 startups colombianas (KPMG, 2025). Las grandes rondas regionales (Crehana, Platzi) son de 2021. No encontré cifras de inversión edtech de 2025–2026.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b></b></span>Crecimiento</span></td><td><span class="tag E">ESTIM.</span></td><td class="src">24, 26</td></tr>
+      <tr><td>Players colombianos con IA</td><td>Sabero (cifras propias) y OE SABER (piloto de 2022) son los únicos que encontré. Ninguno muestra financiación ni tracción pública.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b></b><b></b></span>Naciente</span></td><td><span class="tag NV">NO VERIF.</span></td><td class="src">17, 27</td></tr>
+      <tr><td>Política pública</td><td>Ley 2626 de 2026 (ago 2026) en implementación progresiva. Hay un decálogo del MEN para educación superior. Aún no hay reglas sobre el uso de IA en evaluaciones.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b></b><b></b></span>Naciente</span></td><td><span class="tag H">HECHO</span></td><td class="src">9, 10</td></tr>
+      <tr><td>Evidencia de eficacia de la IA</td><td>El estudio más citado es un preprint de 54 personas sin revisión por pares. No encontré estudios hechos en Colombia.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b></b><b></b></span>Naciente</span></td><td><span class="tag H">HECHO</span></td><td class="src">14</td></tr>
+      <tr><td>Medición del mercado</td><td>No hay un tamaño de mercado ni datos públicos de búsqueda o de uso de apps de estudio para Colombia.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b></b><b></b></span>Naciente</span></td><td><span class="tag NV">NO VERIF.</span></td><td class="src">—</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="gaps">
+    <h3>Límites de este análisis</h3>
+    <p>Varias cifras salen de prensa que cita los informes originales (GAD3, KPMG, ICFES). No pude abrir todos esos informes directamente. La encuesta GAD3 es de 2024 y mezcla cuatro países. Las cifras de usuarios de Google, Platzi y Sabero son de las propias empresas. Las comparativas de apps son blogs con posible sesgo comercial. Las proyecciones son juicio del analista, no pronósticos de una fuente.</p>
+  </div>
+
+  <section>
+    <h2><span>§</span>Fuentes</h2>
+    <ol class="sources">
+      <li><a href="https://www.enter.co/especiales/dev/el-84-de-estudiantes-colombianos-usa-herramientas-de-ia-como-chatgpt-pero-saben-usarlas">Enter.co, el 84% de estudiantes colombianos usa IA (GAD3)</a></li>
+      <li><a href="https://www.eltiempo.com/tecnosfera/novedades-tecnologia/ocho-de-cada-diez-estudiantes-en-colombia-usan-inteligencia-artificial-sin-formacion-previa-para-su-uso-adecuado-3576237">El Tiempo, 8 de cada 10 usan IA sin formación (nov 2024)</a></li>
+      <li><a href="https://alternativeto.net/news/2025/7/chatgpt-launches-study-mode-to-foster-student-learning-and-critical-thinking">AlternativeTo, ChatGPT lanza el modo estudio (jul 2025)</a></li>
+      <li><a href="https://engadget.com/ai/claudes-new-learning-mode-will-prompt-students-to-answer-questions-on-their-own-172057828.html">Engadget, Learning mode de Claude (abr 2025)</a></li>
+      <li><a href="https://www.multichats.ai/blog/study-mode-vs-guided-learning-vs-gemini-classroom">Multichats, modo estudio vs. Guided Learning (fuente secundaria)</a></li>
+      <li><a href="https://blog.google/innovation-and-ai/products/gemini-notebook/notebooklm-gemini-notebook/">Google, NotebookLM ahora es Gemini Notebook (16 jul 2026)</a></li>
+      <li><a href="https://www.larepublica.co/empresas/open-ai-anuncio-el-lanzamiento-de-chatgpt-go-en-el-pais-en-colaboracion-con-rappi-4288481">La República, ChatGPT Go llega a Colombia con Rappi</a></li>
+      <li><a href="https://blog.google/intl/es-419/actualizaciones-de-producto/informacion/la-ia-de-google-al-alcance-de-todos-llega-a-hispanoamerica-ai-plus-y-el-gemini-gratuito-para-estudiantes/">Google, AI Plus y Gemini para estudiantes en Hispanoamérica</a></li>
+      <li><a href="https://sidn.ramajudicial.gov.co/SIDN//NORMATIVA/TEXTOS_COMPLETOS/7_LEYES/LEYES%202026/Ley%202626%20de%202026.pdf">Rama Judicial, texto de la Ley 2626 de 2026</a></li>
+      <li><a href="https://www.mineducacion.gov.co/1780/articles-429623_Decalogo_inteligencia_artificial.pdf">MEN, decálogo de IA para educación superior</a></li>
+      <li><a href="https://www.mineducacion.gov.co/1780/w3-article-417751.html">MEN, resultados de Colombia en PISA 2022</a></li>
+      <li><a href="https://www.portafolio.co/tendencias/pruebas-saber-11-15-000-estudiantes-de-estratos-bajos-dejaron-de-presentar-el-examen-en-un-ano-494360">Portafolio, brechas en Saber 11 2025</a></li>
+      <li><a href="https://www.diariodelsur.com.co/?p=594580">Diario del Sur, la matrícula superior supera 2,7 M (SNIES 2025)</a></li>
+      <li><a href="https://www.media.mit.edu/publications/your-brain-on-chatgpt/">MIT Media Lab, “Your Brain on ChatGPT” (preprint, jun 2025)</a></li>
+      <li><a href="https://haznos.org/best-flashcard-apps-2026/">Haznos, apps de tarjetas 2026 (blog comparativo)</a></li>
+      <li><a href="https://www.semana.com/educacion/articulo/ojo-estudiantes-asi-pueden-acceder-a-un-preicfes-completamente-gratis/202103/">Semana, preicfes gratis del ICFES</a></li>
+      <li><a href="https://hunted.space/product/sabero">Product Hunt (espejo), ficha de Sabero</a></li>
+      <li><a href="https://doi.org/10.1177/1529100612453266">Dunlosky et al. (2013), Psychological Science in the Public Interest</a></li>
+      <li><a href="https://www.elpais.com.co/cali/julioprofe-ganador-del-record-guinness-por-la-clase-virtual-con-mas-alumnos-narra-como-lo-hizo.html">El País Cali, Julioprofe y su récord Guinness</a></li>
+      <li><a href="https://explodingtopics.com/topic/studytok-iHHr43QH">Exploding Topics, StudyTok</a></li>
+      <li><a href="https://www.colombia.com/educacion/noticias/institutos-de-preicfes-con-mejor-calificacion-para-formarse-en-bogota-558190">Colombia.com, institutos de preicfes en Bogotá</a></li>
+      <li><a href="https://www.eltiempo.com/contenido-comercial/preparese-para-la-prueba-saber-11-745634">El Tiempo, Milton Ochoa (contenido patrocinado)</a></li>
+      <li><a href="https://platzi.com/cursos/confbog2026/platzi-learn-convierte-tus-documentos-en/">Platzi, Conf Bogotá 2026 y Platzi Learn</a></li>
+      <li><a href="https://www.venturecapitaljournal.com/latin-american-edtech-startup-crehana-fetches-70m-series-b/">VCJ, Crehana levanta US$70 M (Serie B)</a></li>
+      <li><a href="https://www.bancolombia.com/empresas/capital-inteligente/actualidad-economica-sectorial/impacto-desercion-universitaria-colombia">Bancolombia, deserción universitaria (SPADIES 2023)</a></li>
+      <li><a href="https://ecosistemastartup.com/colombia-tech-2026-2-295-startups-y-us857m-en-inversion-2/">Ecosistema Startup, Colombia Tech Report (KPMG)</a></li>
+      <li><a href="https://technode.global/?p=24521">TechNode Global, Riiid y Casa Grande lanzan OE SABER</a></li>
+    </ol>
+  </section>
+</article>
+</div>

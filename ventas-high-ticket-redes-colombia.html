@@ -1,0 +1,307 @@
+<title>High Ticket por Redes CO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: dos hojas tamaño carta (8.5×11 in); hoja 1 = resumen ejecutivo, hoja 2 = tabla de señales de madurez + fuentes. En móvil, las hojas se vuelven fluidas. */
+:root{
+  --desk:#e3e6ea; --paper:#ffffff; --ink:#18212b; --muted:#5a6672; --rule:#d5dbe1;
+  --accent:#1d4e89; --accent-soft:#e8eff8; --mark:#ffd84d; --mark-ink:#3b3000;
+  --t-hecho:#1f6f4a; --t-hecho-bg:#e3f3ea; --t-est:#7a5a00; --t-est-bg:#fbf1d2;
+  --t-op:#6a3d8f; --t-op-bg:#f1e9f8; --t-nv:#9a2f2f; --t-nv-bg:#f8e6e6;
+  --f-display:"IBM Plex Sans Condensed","Arial Narrow",Arial,sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  --shadow:0 1px 2px rgba(20,30,40,.08),0 8px 28px rgba(20,30,40,.10);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --desk:#0e1216; --paper:#171c22; --ink:#e4e9ee; --muted:#9aa6b2; --rule:#2c343d;
+  --accent:#8cb6ea; --accent-soft:#1e2a38; --mark:#e9c53a; --mark-ink:#1c1600;
+  --t-hecho:#7fd4a6; --t-hecho-bg:#173126; --t-est:#e8c46a; --t-est-bg:#332a12;
+  --t-op:#c9a6ea; --t-op-bg:#2a2036; --t-nv:#f0a0a0; --t-nv-bg:#3a1f1f;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.35); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --desk:#0e1216; --paper:#171c22; --ink:#e4e9ee; --muted:#9aa6b2; --rule:#2c343d;
+  --accent:#8cb6ea; --accent-soft:#1e2a38; --mark:#e9c53a; --mark-ink:#1c1600;
+  --t-hecho:#7fd4a6; --t-hecho-bg:#173126; --t-est:#e8c46a; --t-est-bg:#332a12;
+  --t-op:#c9a6ea; --t-op-bg:#2a2036; --t-nv:#f0a0a0; --t-nv-bg:#3a1f1f;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.35); color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--desk);color:var(--ink);font-family:var(--f-body);font-size:10.5px;line-height:1.42;
+  padding-inline:16px;padding-block:28px 40px;-webkit-font-smoothing:antialiased}
+.desk{display:flex;flex-direction:column;align-items:center;gap:28px}
+.sheet{background:var(--paper);width:816px;max-width:100%;min-height:1056px;padding:40px 52px;box-shadow:var(--shadow);
+  display:flex;flex-direction:column;gap:14px;position:relative}
+.sheet-label{position:absolute;top:-18px;left:0;font:500 10px/1 var(--f-mono);color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+a{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0}
+p{margin:0}
+ul{margin:0;padding-left:14px;display:flex;flex-direction:column;gap:4px}
+li::marker{color:var(--accent)}
+sup{font:500 8px/0 var(--f-mono);color:var(--accent);margin-left:1px}
+
+/* Encabezado */
+.head{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:18px;align-items:end;border-bottom:2px solid var(--ink);padding-bottom:10px}
+.eyebrow{font:500 9.5px/1.3 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font-size:30px;line-height:1.02;font-weight:700;letter-spacing:-.01em;margin-top:4px}
+.def{color:var(--muted);margin-top:5px;max-width:62ch}
+.verdict{min-width:250px;display:flex;flex-direction:column;gap:6px}
+.verdict-title{font:600 13px/1.15 var(--f-display)}
+.verdict-title mark{background:var(--mark);color:var(--mark-ink);padding:0 3px}
+.gauge{position:relative;height:8px;border-radius:4px;background:linear-gradient(90deg,var(--accent-soft),var(--accent))}
+.gauge i{position:absolute;top:-4px;left:70%;width:3px;height:16px;background:var(--ink);border-radius:2px}
+.gauge-scale{display:flex;justify-content:space-between;font:500 8.5px/1 var(--f-mono);color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+
+/* Columnas */
+.cols{display:grid;grid-template-columns:1.12fr 1fr;gap:22px;flex:1}
+.col{display:flex;flex-direction:column;gap:13px;min-width:0}
+section h2{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--accent);
+  display:flex;gap:6px;align-items:baseline;border-bottom:1px solid var(--rule);padding-bottom:3px;margin-bottom:6px}
+section h2 span{font-family:var(--f-mono);font-weight:500;font-size:10px;color:var(--muted)}
+
+/* Etiquetas de evidencia */
+.tag{display:inline-block;font:500 8px/1 var(--f-mono);letter-spacing:.04em;padding:2px 4px 2px;border-radius:2px;vertical-align:1px;margin-right:3px;white-space:nowrap}
+.H{color:var(--t-hecho);background:var(--t-hecho-bg)}
+.E{color:var(--t-est);background:var(--t-est-bg)}
+.O{color:var(--t-op);background:var(--t-op-bg)}
+.NV{color:var(--t-nv);background:var(--t-nv-bg)}
+
+.players{display:grid;grid-template-columns:auto 1fr;gap:4px 8px}
+.players dt{font:600 9px/1.5 var(--f-mono);text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+.players dd{margin:0}
+.vocab{display:flex;flex-wrap:wrap;gap:4px}
+.vocab span{border:1px solid var(--rule);padding:1px 6px;border-radius:10px;font-size:9.8px;white-space:nowrap}
+.vocab span b{font-weight:600}
+.note{font-size:9.6px;color:var(--muted)}
+.foot{border-top:1px solid var(--rule);padding-top:7px;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;font-size:9.4px;color:var(--muted)}
+.foot strong{color:var(--ink);font-weight:600}
+
+/* Hoja 2: tabla */
+.h2big{font-size:22px;font-weight:700}
+.sub{color:var(--muted);max-width:80ch}
+.tablewrap{overflow-x:auto;min-width:0}
+table{border-collapse:collapse;width:100%;font-size:10px;min-width:640px}
+th{font:600 9px/1.2 var(--f-mono);text-transform:uppercase;letter-spacing:.05em;color:var(--muted);text-align:left;padding:6px 6px;border-bottom:2px solid var(--ink)}
+td{padding:4.5px 6px;border-bottom:1px solid var(--rule);vertical-align:top}
+td:first-child{font-weight:600;width:19%}
+td.read{width:13%}
+td.src{width:7%;font:500 9px/1.4 var(--f-mono);color:var(--muted);white-space:nowrap}
+.stage{display:inline-flex;align-items:center;gap:5px;font:600 9.5px/1.2 var(--f-display);text-transform:uppercase;letter-spacing:.03em}
+.dots{display:inline-flex;gap:2px}
+.dots b{width:7px;height:7px;border-radius:50%;border:1px solid var(--accent)}
+.dots b.on{background:var(--accent)}
+.tally{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.tally div{border:1px solid var(--rule);padding:8px 10px;display:flex;flex-direction:column;gap:2px}
+.tally strong{font:700 20px/1 var(--f-display);font-variant-numeric:tabular-nums}
+.tally span{font-size:9.6px;color:var(--muted)}
+.sources{columns:2;column-gap:22px;font-size:9px;line-height:1.38;color:var(--muted);margin:0;padding-left:18px}
+.sources li{break-inside:avoid;margin-bottom:2px}
+.sources a{word-break:break-word}
+.gaps{background:var(--accent-soft);padding:9px 12px;display:flex;flex-direction:column;gap:4px}
+.gaps h3{font-size:11.5px;text-transform:uppercase;letter-spacing:.04em}
+
+@media (max-width:760px){
+  body{font-size:12.5px}
+  .sheet{min-height:0;padding:26px 18px}
+  .head,.cols{grid-template-columns:1fr}
+  .verdict{min-width:0}
+  h1{font-size:26px}
+  .sources{columns:1}
+  .tally{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<div class="desk">
+
+<!-- ===================== HOJA 1 ===================== -->
+<article class="sheet" aria-label="Resumen ejecutivo">
+  <span class="sheet-label">Hoja 1 / 2 · Resumen ejecutivo</span>
+
+  <header class="head">
+    <div>
+      <p class="eyebrow">Brief de mercado · Colombia → Latam · corte 8 oct 2026</p>
+      <h1>Ventas high ticket por redes sociales</h1>
+      <p class="def">Embudos de marcas personales e infoproductores que venden programas, mentorías o masterminds de ~US$1.000 a 10.000 por Instagram y WhatsApp. Un <b>setter</b> califica por DM y agenda, y un <b>closer</b> cierra en una llamada. En Colombia se suele hablar de high ticket desde ~$5 M COP.<sup>37</sup></p>
+    </div>
+    <div class="verdict" aria-label="Veredicto de madurez">
+      <p class="eyebrow">Veredicto de madurez</p>
+      <p class="verdict-title"><mark>Crecimiento tardío</mark>. El formato clásico DM → llamada → cierre ya muestra saturación.</p>
+      <div class="gauge" role="img" aria-label="Indicador en 70% entre naciente y saturado"><i></i></div>
+      <div class="gauge-scale"><span>Naciente</span><span>Crecimiento</span><span>Saturado</span></div>
+    </div>
+  </header>
+
+  <div class="cols">
+    <div class="col">
+      <section>
+        <h2><span>1</span>Qué pasa ahora</h2>
+        <ul>
+          <li><span class="tag H">HECHO</span>Colombia es el <b>principal origen de productores de Hotmart</b> en la Latam hispana, por delante de México, Argentina y Perú (dato de Hotmart).<sup>1,2</sup></li>
+          <li><span class="tag H">HECHO</span>Según Hotmart, el <b>74%</b> de sus productores en crecimiento (menos de US$250.000 al año) tiene <b>≤50.000 seguidores</b>: se vende high ticket con audiencias pequeñas.<sup>3,5</sup></li>
+          <li><span class="tag H">HECHO</span>En vacantes remotas con horario de Colombia, un setter por DM gana <b>US$800–1.300 al mes</b> en programas de US$2.000–5.000. Un closer cobra <b>4–10%</b> del cash collected; muchas ofertas son solo comisión.<sup>6–10</sup></li>
+          <li><span class="tag H">HECHO</span>La SIC confirmó en abril de 2025 una multa de <b>$813 M COP</b> a Grupo Cossio. Su curso prometía ganar dinero en redes sin pruebas: precedente local sobre <i>claims</i> de ingresos.<sup>12,13</sup></li>
+          <li><span class="tag H">HECHO</span>El canal se encarece y se automatiza. WhatsApp cobra por mensaje (jul 2025) y por respuestas de servicio (oct 2026). <b>Meta Business Agent</b> (jun 2026), gratis por ahora, califica leads y agenda en WhatsApp e Instagram.<sup>17–20</sup></li>
+          <li><span class="tag E">ESTIM.</span>En 273 empresas high ticket (sobre todo de EE. UU.), el cierre (<b>~25%</b>) y el no-show (<b>~25%</b>) están estables. El churn sube y la captación se aleja de los anuncios.<sup>11</sup></li>
+        </ul>
+      </section>
+
+      <section>
+        <h2><span>2</span>Hacia dónde va (12–24 meses)</h2>
+        <ul>
+          <li><span class="tag O">PROYECCIÓN</span><b>La IA reemplaza al setter, no al closer.</b> El primer contacto y el agendamiento pasan a agentes (Meta, ManyChat, Kommo). El setter junior se abarata; el closer gana peso.<sup>19,21,22</sup></li>
+          <li><span class="tag O">PROYECCIÓN</span><b>Más escrutinio.</b> Las promesas de ingresos tendrán que sustentarse (SIC, PL 394/2025, T-241/2026). Los nichos de "hacerse rico" (trading, dropshipping, "vive de redes") son los más expuestos.<sup>12,14–16,25</sup></li>
+          <li><span class="tag O">PROYECCIÓN</span><b>Del meta-nicho a los verticales.</b> Pierde fuerza "vender a vender". Crecen las ofertas con resultados medibles: salud, finanzas, inmobiliario, profesionales, B2B y <i>done-with-you</i>.</li>
+          <li><span class="tag O">PROYECCIÓN</span><b>Escaleras híbridas.</b> Comunidad barata (mediana en Skool: US$27 al mes) + orgánico + llamada. El cierre en una sola llamada da paso al seguimiento con varios contactos.<sup>23,24</sup></li>
+          <li><span class="tag O">PROYECCIÓN</span><b>Colombia como hub de talento comercial remoto</b> para ofertas de EE. UU., España y México: más volumen, rol más commodity.</li>
+        </ul>
+      </section>
+    </div>
+
+    <div class="col">
+      <section>
+        <h2><span>3</span>Madurez: por qué "crecimiento tardío"</h2>
+        <ul>
+          <li><b>Señales de madurez:</b> el rol está estandarizado (sueldos, comisiones, KPIs como show rate, close rate y cash collected). Hay academias que venden el oficio de closer y regulación que reacciona. El canal ya se monetiza.<sup>8–13,17,28–30</sup></li>
+          <li><b>Señales de que aún crece:</b> la oferta colombiana de creadores es la mayor de la región; la inversión de marcas en creadores crece 23% al año; 37,7 M de colombianos usan redes; la IA conversacional recibe capital, y los verticales fuera de "negocios digitales" están poco explotados.<sup>1,19,32–34,38</sup></li>
+          <li><span class="tag O">OPINIÓN</span>El modelo clásico (anuncio → DM → llamada) está <b>saturado y con poca confianza</b> en el nicho de negocios digitales. El modelo aplicado a expertos de verticales reales todavía está <b>en crecimiento</b>.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2><span>4</span>Players y referentes</h2>
+        <dl class="players">
+          <dt>Plataformas</dt><dd>Hotmart (cobro y FIRE Sessions en Medellín), Meta (Instagram, WhatsApp, Business Agent), Skool (Hormozi), ManyChat, Kommo, Leadsales, Calendly. GoHighLevel: cuota en Colombia <span class="tag NV">NO VERIF.</span><sup>1,5,19,24,32,38</sup></dd>
+          <dt>Formación</dt><dd>Globales: Alex Hormozi (Acquisition.com, marco CLOSER), Cole Gordon (Closers.io), Dan Lok (High Ticket Closers). En español: Alfonso y Christian, SerCloser y ADN Closers, todos de España. Sus cifras son autorreportadas.<sup>28–31,36</sup></dd>
+          <dt>Operadores</dt><dd>Empresas que contratan setters y closers en Latam, como Coach Social y Level Up Media (Medellín), además de agencias de "closers como servicio".<sup>6,8</sup></dd>
+          <dt>Colombia</dt><dd>No existe un ranking público verificable de mentores high ticket colombianos <span class="tag NV">NO VERIF.</span> Los casos visibles son influencers con infoproductos, como el "Método Cossio".<sup>12</sup></dd>
+          <dt>Reguladores</dt><dd>SIC (publicidad engañosa), Congreso (PL 394/2025), Corte Constitucional y MinTIC.<sup>12–16</sup></dd>
+        </dl>
+      </section>
+
+    </div>
+  </div>
+
+  <section class="vocab-band">
+        <h2><span>5</span>Vocabulario del mercado</h2>
+        <div class="vocab">
+          <span><b>High / low ticket</b></span><span><b>Setter</b> · DM setting</span><span><b>Closer</b> · remote closer</span>
+          <span>Llamada de diagnóstico / estratégica</span><span>Aplicación / formulario de calificación</span>
+          <span><b>Show rate</b> · no-show</span><span><b>Close rate</b></span><span><b>Cash collected</b> vs. contract value</span>
+          <span>PIF vs. cuotas / financiación</span><span>Lead magnet · "comenta MENTORÍA"</span><span>Calificar · calentar el lead</span>
+          <span>Objeciones ("lo tengo que pensar")</span><span>Follow-up · seguimiento</span><span>VSL · masterclass · webinar</span>
+          <span>Lanzamiento vs. evergreen</span><span>Escalera de valor · upsell · downsell</span><span>Oferta irresistible</span>
+          <span>Mentoría 1:1 / grupal · mastermind</span><span>DFY / DWY</span><span>EOD (reporte diario)</span><span>Infoproductor · experto · marca personal</span>
+        </div>
+  </section>
+  <footer class="foot">
+    <strong>Leyenda:</strong>
+    <span><span class="tag H">HECHO</span>publicado y fechado por una fuente</span>
+    <span><span class="tag E">ESTIM.</span>estimación de terceros</span>
+    <span><span class="tag O">PROYECCIÓN</span>/ <span class="tag O">OPINIÓN</span>juicio del analista</span>
+    <span><span class="tag NV">NO VERIF.</span>sin evidencia</span>
+    <span>Superíndices = fuentes en la hoja 2.</span>
+  </footer>
+</article>
+
+<!-- ===================== HOJA 2 ===================== -->
+<article class="sheet" aria-label="Señales de madurez y fuentes">
+  <span class="sheet-label">Hoja 2 / 2 · Señales de madurez</span>
+
+  <header>
+    <h2 class="h2big">Señales de madurez</h2>
+    <p class="sub">Cada fila es un indicador observable. La lectura ubica la señal entre naciente, en crecimiento y saturado. El tipo de evidencia sigue la leyenda de la hoja 1.</p>
+  </header>
+
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>Señal</th><th>Dato observado</th><th>Lectura</th><th>Tipo</th><th>Fuente</th></tr></thead>
+    <tbody>
+      <tr><td>Base de oferentes (infoproductores)</td><td>Colombia es el primer origen de productores de Hotmart en la Latam hispana, con más de 250.000 creadores en la plataforma, en su mayoría colombianos. 34% tiene más de 3 productos activos.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b></b></span>Crecimiento</span></td><td><span class="tag H">HECHO</span></td><td class="src">1, 2</td></tr>
+      <tr><td>Estandarización del rol setter/closer</td><td>Vacantes con sueldos y comisiones de mercado: setter US$800–1.300 al mes, closer 4–10% del cash collected. Piden ManyChat, CRM y experiencia de 1–2 años en tickets de US$2.000–5.000.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b class="on"></b></span>Saturado</span></td><td><span class="tag H">HECHO</span></td><td class="src">6–9</td></tr>
+      <tr><td>Métricas y gestión profesionalizadas</td><td>Hay vacantes de "director comercial high ticket" que gestionan show-up, calidad de agenda, close rate y ventas por closer.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b class="on"></b></span>Saturado</span></td><td><span class="tag H">HECHO</span></td><td class="src">10</td></tr>
+      <tr><td>Meta-mercado ("vender a vender")</td><td>Varias academias en español forman closers: SerCloser dice tener más de 1.500 alumnos, A&amp;C más de 1.000, y ADN Closers ofrece garantía de empleabilidad. Cuando el oficio se vuelve producto, es señal de un ciclo avanzado.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b class="on"></b></span>Saturado</span></td><td><span class="tag E">ESTIM.</span></td><td class="src">28–30</td></tr>
+      <tr><td>Rendimiento del embudo</td><td>Cierre ~25% y no-show ~25%, estables. El churn de clientes sube y la captación se diversifica hacia outbound. La muestra es de 273 empresas, sobre todo de EE. UU.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b class="on"></b></span>Saturado</span></td><td><span class="tag E">ESTIM.</span></td><td class="src">11</td></tr>
+      <tr><td>Debate sobre el formato</td><td>En EE. UU. se discute si "las llamadas de venta murieron". Referentes como Amy Porterfield retoman ellas mismas las llamadas. El consenso que emerge es que el cierre en una sola llamada se acabó.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b class="on"></b></span>Saturado</span></td><td><span class="tag O">OPINIÓN</span></td><td class="src">23</td></tr>
+      <tr><td>IA en el rol del setter</td><td>Meta Business Agent salió global (jun 2026), gratis por ahora. Un operador reporta 442.000 chats que terminaron en 614 reuniones agendadas por IA. Ningún agente cierra todavía ventas complejas.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b></b></span>Crecimiento</span></td><td><span class="tag H">HECHO</span></td><td class="src">19–22</td></tr>
+      <tr><td>Monetización del canal</td><td>WhatsApp pasó a cobrar por mensaje en jul 2025. Desde oct 2026 cobra las respuestas de servicio. El marketing en Colombia cuesta ~US$0,0125–0,0144 por mensaje según terceros.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b class="on"></b></span>Saturado</span></td><td><span class="tag H">HECHO</span></td><td class="src">17, 18</td></tr>
+      <tr><td>Capital en infraestructura conversacional</td><td>ManyChat levantó US$140 M (abr 2025) y Leadsales, que opera en México, Colombia y Perú, US$3,7 M (2023).</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b></b></span>Crecimiento</span></td><td><span class="tag H">HECHO</span></td><td class="src">32, 38</td></tr>
+      <tr><td>Regulación y enforcement</td><td>Multa de la SIC de $813 M COP (abr 2025). El PL 394/2025 sigue en trámite, la Corte ordenó regular (T-241/2026) y hay un nuevo PL de sep 2026. En EE. UU., la FTC propuso ampliar la Business Opportunity Rule al coaching (ene 2025, estado final no confirmado).</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b></b></span>Crecimiento</span></td><td><span class="tag H">HECHO</span></td><td class="src">12–16, 25</td></tr>
+      <tr><td>Confianza del comprador</td><td>Hay críticas al "gurú" de marca personal y casos de estafa con mentorías en la región (Argentina). En Colombia no hay encuesta sobre confianza en mentorías.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b class="on"></b></span>Saturado</span></td><td><span class="tag NV">NO VERIF.</span></td><td class="src">26, 27, 35</td></tr>
+      <tr><td>Modelos híbridos (comunidad + high ticket)</td><td>En Skool, de 1.000 comunidades analizadas, el 84,6% cobra. La mediana es US$27 al mes y 205 miembros. Hormozi recomienda ofertas premium 1:1 para generar caja temprano.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b></b></span>Crecimiento</span></td><td><span class="tag E">ESTIM.</span></td><td class="src">24, 36</td></tr>
+      <tr><td>Medición del mercado local</td><td>No hay datos del tamaño del high ticket en Colombia: ni facturación, ni número de setters y closers, ni tasas de cierre locales.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b></b><b></b></span>Naciente</span></td><td><span class="tag NV">NO VERIF.</span></td><td class="src">—</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="tally" aria-label="Conteo de señales">
+    <div><strong>1</strong><span>señal de categoría <b>naciente</b> (medición local)</span></div>
+    <div><strong>5</strong><span>señales <b>en crecimiento</b> (oferentes, IA, capital, regulación, híbridos)</span></div>
+    <div><strong>7</strong><span>señales de <b>saturación</b> (rol, métricas, meta-mercado, embudo, formato, canal, confianza)</span></div>
+  </div>
+
+  <div class="gaps">
+    <h3>Límites de este análisis</h3>
+    <p>La red de este entorno bloqueó la lectura directa de las páginas. Los datos salen de los extractos de búsqueda de las fuentes listadas y conviene revisarlos antes de citarlos en público. Las cifras de Hotmart, academias y proveedores son autorreportadas. El benchmark de cierre y no-show es de EE. UU. Las vacantes son ejemplos, no una muestra representativa. No pude verificar referentes colombianos de high ticket con cifras públicas.</p>
+  </div>
+
+  <section>
+    <h2><span>§</span>Fuentes</h2>
+    <ol class="sources">
+      <li><a href="https://marketing4ecommerce.co/colombia-economia-creadores-de-contenido/">Marketing4Ecommerce, Colombia lidera la economía de creadores (Hotmart)</a></li>
+      <li><a href="https://impactotic.co/tecnologia/colombia-lider-en-contenidos-digitales-en-america-latina-segun-hotmart/">ImpactoTIC, Colombia líder en contenidos digitales (Hotmart)</a></li>
+      <li><a href="https://www.cronista.com/mexico/finanzas-economia/no-necesitas-millones-de-seguidores-el-negocio-que-se-multiplicara-por-9-en-latinoamerica-hotmart/">El Cronista, "No necesitas millones de seguidores" (Hotmart, 2026)</a></li>
+      <li><a href="https://www.cronista.com/mexico/finanzas-economia/de-influencers-a-microempresas-mexico-ya-exporta-conocimiento-digital-al-mundo/">El Cronista, exportación de conocimiento digital (Hotmart)</a></li>
+      <li><a href="https://emprendedor.com/fire-sessions-2026-neil-patel-encabeza-encuentro-creator-economy-medellin-hotmart/">Emprendedor, FIRE Sessions 2026 en Medellín</a></li>
+      <li><a href="https://www.getonbrd.com/jobs/sales/setter-high-ticket-instagram-facebook-coach-social-remote">Get on Board, Setter High Ticket (Coach Social)</a></li>
+      <li><a href="https://www.workana.com/job/closer-de-ventas-high-ticket-para-consultoria-ecommerce-en-latam">Workana, closer high ticket para un programa de US$5.500</a></li>
+      <li><a href="https://co.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-closer-de-ventas-remoto-ventas-high-ticket-en-medellin-E4EACD39152AAFA661373E686DCF3405">Computrabajo, closer remoto high ticket (Medellín)</a></li>
+      <li><a href="https://www.freelancer.com/projects/sales/gestor-instagram-con-emphasis-ventas">Freelancer, setter y closer solo por comisión</a></li>
+      <li><a href="https://www.workana.com/es/job/director-comercial-gerente-de-ventas-high-ticket-para-liderar-y-escalar-departamento-comercial">Workana, director comercial high ticket</a></li>
+      <li><a href="https://instarecruiter.notion.site/The-State-of-High-Ticket-Sales-Recruiting-A-Market-Intelligence-Report-317e7975a432809da7c5e0e81495cb58">InstaRecruiter, State of High-Ticket Sales Recruiting (mar 2026)</a></li>
+      <li><a href="https://www.larepublica.co/empresas/la-sic-confirmo-la-sancion-a-la-empresa-de-yefferson-cossio-por-publicidad-enganosa-4114615">La República, la SIC confirma la sanción a Grupo Cossio</a></li>
+      <li><a href="https://cambiocolombia.com/pais/articulo/2025/4/por-enganosa-promesa-de-hacerse-rico-con-un-curso-la-sic-confirmo-millonaria-sancion">Cambio, curso con promesa de hacerse rico (abr 2025)</a></li>
+      <li><a href="https://www.senado.gov.co/index.php/el-senado/noticias/6278-radican-proyecto-de-ley-en-senado-para-regular-creadores-de-contenido-o-influencers">Senado, PL para regular creadores (2025)</a></li>
+      <li><a href="https://www.eltiempo.com/amp/tecnosfera/corte-constitucional-ordena-al-gobierno-y-al-congreso-regular-a-los-influencers-y-creadores-de-contenido-en-colombia-por-que-3580173">El Tiempo, la Corte ordena regular a los creadores</a></li>
+      <li><a href="https://www.infobae.com/colombia/2026/09/08/el-congreso-de-colombia-insiste-en-regular-la-labor-de-los-influencers-autor-de-la-iniciativa-explico-en-que-consiste/">Infobae, nuevo PL de influenciadores (sep 2026)</a></li>
+      <li><a href="https://www.ycloud.com/es/blog/whatsapp-api-pricing-update">YCloud, WhatsApp cobra por mensaje (jul 2025)</a></li>
+      <li><a href="https://blog.mercately.com/?p=30248">Mercately, cobro de respuestas de servicio desde el 1 oct 2026</a></li>
+      <li><a href="https://marketing4ecommerce.net/meta-business-agent/">Marketing4Ecommerce, Meta presenta Business Agent</a></li>
+      <li><a href="https://www.techwyse.com/news/platform-updates/meta-business-agent-global-launch-whatsapp-instagram">TechWyse, lanzamiento global de Business Agent (jun 2026)</a></li>
+      <li><a href="https://www.saastr.com/we-run-21-ai-agents-and-theyve-closed-millions-but-there-still-isnt-a-good-ai-account-executive-yet/">SaaStr, 21 agentes de IA y todavía ningún AE de IA</a></li>
+      <li><a href="https://setsmart.io/blog/setter-de-ventas">SetSmart, setter de ventas y la IA (blog de proveedor)</a></li>
+      <li><a href="https://confessionsofacloser.substack.com/p/are-sales-calls-dead-amy-porterfield">Confessions of a Closer, ¿murieron las llamadas? (Porterfield)</a></li>
+      <li><a href="https://revenuegeeks.com/es/software/skool">RevenueGeeks, análisis de 1.000 comunidades de Skool</a></li>
+      <li><a href="https://ftc.gov/business-guidance/blog/2025/01/concerned-about-deceptive-earnings-claims-sos-ftc-we-want-your-feedback">FTC, propuesta sobre claims de ingresos (ene 2025)</a></li>
+      <li><a href="https://www.iproup.com/coffee-break/52616-acusan-a-joven-correntino-por-estafar-presuntamente-a-jovenes-y-menores-de-edad">iProUP, denuncia por mentorías digitales (Argentina)</a></li>
+      <li><a href="https://emprendedor.com/gurus-marca-personal-emprendedores/">Emprendedor, el problema del gurú de marca personal (opinión)</a></li>
+      <li><a href="https://emprendedores.es/noticias-de-empresa/sercloser-com-se-consolida-como-uno-de-los-lideres-en-formacion-de-cierre-de-ventas-en-espana-con-mas-de-1-500-alumnos/">Emprendedores, SerCloser y sus 1.500 alumnos (nota de empresa)</a></li>
+      <li><a href="https://www.que.es/2021/10/26/escuela-de-preparacion-ac-para-convertirse-en-closer-de-ventas-de-la-mano-de-los-expertos-alfonso-y-christian/">Que.es, escuela de closers de Alfonso y Christian (2021)</a></li>
+      <li><a href="https://emprendedores.es/uncategorized/las-ventas-high-ticket-escriben-un-nuevo-capitulo-del-cierre-comercial-con-adn-closers/">Emprendedores, ADN Closers</a></li>
+      <li><a href="https://ippei.com/remote-closing-academy/">Ippei, reseña de Remote Closing Academy (Cole Gordon, 2026)</a></li>
+      <li><a href="https://latamlist.com/leadsales-raises-3-7m-to-expand-operation-to-brazil/">LatamList, Leadsales levanta US$3,7 M</a></li>
+      <li><a href="https://www.elcolombiano.com/tendencias/como-esta-mercado-influencers-colombia-inversion-crecio-publicidad-IB41265397">El Colombiano, inversión en influencers +23% (IAB)</a></li>
+      <li><a href="https://datareportal.com/reports/digital-2026-colombia">DataReportal, Digital 2026: Colombia</a></li>
+      <li><a href="https://fastcompany.mx/2026/09/27/creadores-confianza-marketing-influencers-marcas/">Fast Company MX, confianza en el marketing de creadores (sep 2026)</a></li>
+      <li><a href="https://www.shortform.com/podcast/episode/the-game-w-alex-hormozi-2025-12-11-episode-summary-if-i-started-a-business-in-2026-i-d-do-this-ep-977">Shortform, Hormozi: "si empezara un negocio en 2026" (resumen)</a></li>
+      <li><a href="https://cangrejodigital.com/consultoria/embudo-ventas-high-ticket-colombia-2026/">Cangrejo Digital, embudo high ticket en Colombia (agencia)</a></li>
+      <li><a href="https://www.summitpartners.com/news/manychat-raises-140m-to-fuel-the-future-of-ai-driven-customer-engagement-on-social-and-messaging-platforms">Summit Partners, ManyChat levanta US$140 M (abr 2025)</a></li>
+    </ol>
+  </section>
+</article>
+</div>

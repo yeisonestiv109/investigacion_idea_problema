@@ -1,0 +1,336 @@
+<title>Voz del Emprendedor CO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: dos hojas tamaño carta (8.5×11 in) sobre una mesa gris; hoja 1 = resumen ejecutivo, hoja 2 = tabla de señales + fuentes. En móvil, las hojas se vuelven fluidas. */
+:root{
+  --desk:#e3e6ea; --paper:#ffffff; --ink:#18212b; --muted:#5a6672; --rule:#d5dbe1;
+  --accent:#1d4e89; --accent-soft:#e8eff8; --mark:#ffd84d; --mark-ink:#3b3000;
+  --t-hecho:#1f6f4a; --t-hecho-bg:#e3f3ea; --t-est:#7a5a00; --t-est-bg:#fbf1d2;
+  --t-op:#6a3d8f; --t-op-bg:#f1e9f8; --t-nv:#9a2f2f; --t-nv-bg:#f8e6e6;
+  --f-display:"IBM Plex Sans Condensed","Arial Narrow",Arial,sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  --shadow:0 1px 2px rgba(20,30,40,.08),0 8px 28px rgba(20,30,40,.10);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --desk:#0e1216; --paper:#171c22; --ink:#e4e9ee; --muted:#9aa6b2; --rule:#2c343d;
+  --accent:#8cb6ea; --accent-soft:#1e2a38; --mark:#e9c53a; --mark-ink:#1c1600;
+  --t-hecho:#7fd4a6; --t-hecho-bg:#173126; --t-est:#e8c46a; --t-est-bg:#332a12;
+  --t-op:#c9a6ea; --t-op-bg:#2a2036; --t-nv:#f0a0a0; --t-nv-bg:#3a1f1f;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.35); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --desk:#0e1216; --paper:#171c22; --ink:#e4e9ee; --muted:#9aa6b2; --rule:#2c343d;
+  --accent:#8cb6ea; --accent-soft:#1e2a38; --mark:#e9c53a; --mark-ink:#1c1600;
+  --t-hecho:#7fd4a6; --t-hecho-bg:#173126; --t-est:#e8c46a; --t-est-bg:#332a12;
+  --t-op:#c9a6ea; --t-op-bg:#2a2036; --t-nv:#f0a0a0; --t-nv-bg:#3a1f1f;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.35); color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--desk);color:var(--ink);font-family:var(--f-body);font-size:10.5px;line-height:1.42;
+  padding-inline:16px;padding-block:28px 40px;-webkit-font-smoothing:antialiased}
+.desk{display:flex;flex-direction:column;align-items:center;gap:28px}
+.sheet{background:var(--paper);width:816px;max-width:100%;min-height:1056px;padding:40px 52px;box-shadow:var(--shadow);
+  display:flex;flex-direction:column;gap:14px;position:relative}
+.sheet-label{position:absolute;top:-18px;left:0;font:500 10px/1 var(--f-mono);color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+a{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0}
+p{margin:0}
+ul{margin:0;padding-left:14px;display:flex;flex-direction:column;gap:4px}
+li::marker{color:var(--accent)}
+sup{font:500 8px/0 var(--f-mono);color:var(--accent);margin-left:1px}
+
+/* Encabezado */
+.head{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:18px;align-items:end;border-bottom:2px solid var(--ink);padding-bottom:10px}
+.eyebrow{font:500 9.5px/1.3 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font-size:30px;line-height:1.02;font-weight:700;letter-spacing:-.01em;margin-top:4px}
+.def{color:var(--muted);margin-top:5px;max-width:62ch}
+.verdict{min-width:250px;display:flex;flex-direction:column;gap:6px}
+.verdict-title{font:600 13px/1.15 var(--f-display)}
+.verdict-title mark{background:var(--mark);color:var(--mark-ink);padding:0 3px}
+.gauge{position:relative;height:8px;border-radius:4px;background:linear-gradient(90deg,var(--accent-soft),var(--accent))}
+.gauge i{position:absolute;top:-4px;width:3px;height:16px;background:var(--ink);border-radius:2px}
+.gauge i.alt{background:var(--accent);width:9px;height:9px;top:-0.5px;border-radius:50%;border:2px solid var(--paper);box-shadow:0 0 0 1px var(--ink);margin-left:-3px}
+.gauge-keys{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:9.4px;color:var(--muted)}
+.gauge-keys span{display:inline-flex;align-items:center;gap:5px}
+.gauge-keys i{display:inline-block;width:3px;height:11px;background:var(--ink);border-radius:2px}
+.gauge-keys i.alt{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 1px var(--ink)}
+.gauge-scale{display:flex;justify-content:space-between;font:500 8.5px/1 var(--f-mono);color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+
+/* Columnas */
+.cols{display:grid;grid-template-columns:1.12fr 1fr;gap:22px;flex:1}
+.col{display:flex;flex-direction:column;gap:13px;min-width:0}
+section h2{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--accent);
+  display:flex;gap:6px;align-items:baseline;border-bottom:1px solid var(--rule);padding-bottom:3px;margin-bottom:6px}
+section h2 span{font-family:var(--f-mono);font-weight:500;font-size:10px;color:var(--muted)}
+
+/* Etiquetas de evidencia */
+.tag{display:inline-block;font:500 8px/1 var(--f-mono);letter-spacing:.04em;padding:2px 4px 2px;border-radius:2px;vertical-align:1px;margin-right:3px;white-space:nowrap}
+.H{color:var(--t-hecho);background:var(--t-hecho-bg)}
+.E{color:var(--t-est);background:var(--t-est-bg)}
+.O{color:var(--t-op);background:var(--t-op-bg)}
+.NV{color:var(--t-nv);background:var(--t-nv-bg)}
+
+.players{display:grid;grid-template-columns:auto 1fr;gap:4px 8px}
+.players dt{font:600 9px/1.5 var(--f-mono);text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+.players dd{margin:0}
+.vocab{display:flex;flex-wrap:wrap;gap:4px}
+.vocab span{border:1px solid var(--rule);padding:1px 6px;border-radius:10px;font-size:9.8px;white-space:nowrap}
+.vocab span b{font-weight:600}
+.note{font-size:9.6px;color:var(--muted)}
+.foot{border-top:1px solid var(--rule);padding-top:7px;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;font-size:9.4px;color:var(--muted)}
+.foot strong{color:var(--ink);font-weight:600}
+
+/* Hoja 2: tabla */
+.h2big{font-size:22px;font-weight:700}
+.sub{color:var(--muted);max-width:80ch}
+.tablewrap{overflow-x:auto;min-width:0}
+table{border-collapse:collapse;width:100%;font-size:10px;min-width:640px}
+th{font:600 9px/1.2 var(--f-mono);text-transform:uppercase;letter-spacing:.05em;color:var(--muted);text-align:left;padding:6px 6px;border-bottom:2px solid var(--ink)}
+td{padding:4.5px 6px;border-bottom:1px solid var(--rule);vertical-align:top}
+td:first-child{font-weight:600;width:19%}
+td.read{width:13%}
+td.src{width:7%;font:500 9px/1.4 var(--f-mono);color:var(--muted);white-space:nowrap}
+.stage{display:inline-flex;align-items:center;gap:5px;font:600 9.5px/1.2 var(--f-display);text-transform:uppercase;letter-spacing:.03em}
+.dots{display:inline-flex;gap:2px}
+.dots b{width:7px;height:7px;border-radius:50%;border:1px solid var(--accent)}
+.dots b.on{background:var(--accent)}
+.tally{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.tally div{border:1px solid var(--rule);padding:8px 10px;display:flex;flex-direction:column;gap:2px}
+.tally strong{font:700 20px/1 var(--f-display);font-variant-numeric:tabular-nums}
+.tally span{font-size:9.6px;color:var(--muted)}
+.sources{columns:2;column-gap:22px;font-size:9px;line-height:1.38;color:var(--muted);margin:0;padding-left:18px}
+.sources li{break-inside:avoid;margin-bottom:2px}
+.sources a{word-break:break-word}
+.gaps{background:var(--accent-soft);padding:9px 12px;display:flex;flex-direction:column;gap:4px}
+.gaps h3{font-size:11.5px;text-transform:uppercase;letter-spacing:.04em}
+
+@media (max-width:760px){
+  body{font-size:12.5px}
+  .sheet{min-height:0;padding:26px 18px}
+  .head,.cols{grid-template-columns:1fr}
+  .verdict{min-width:0}
+  h1{font-size:26px}
+  .sources{columns:1}
+  .tally{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+/* VoC: una hoja larga tipo documento; citas como fichas con origen y fidelidad */
+.sheet.long{min-height:0}
+.lede{max-width:72ch}
+.ev{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.ev div{border:1px solid var(--rule);padding:8px 10px;display:flex;flex-direction:column;gap:2px}
+.ev strong{font:700 20px/1 var(--f-display);font-variant-numeric:tabular-nums}
+.ev span{font-size:9.6px;color:var(--muted)}
+.warn{background:var(--t-nv-bg);color:var(--ink);padding:9px 12px;display:flex;flex-direction:column;gap:4px}
+.warn h3{font-size:11.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--t-nv)}
+.top5{counter-reset:t;list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0}
+.top5 li{counter-increment:t;display:grid;grid-template-columns:28px minmax(0,1fr) 92px;gap:10px;align-items:baseline;padding:7px 0;border-bottom:1px solid var(--rule)}
+.top5 li::before{content:counter(t);font:700 18px/1 var(--f-display);color:var(--accent)}
+.top5 q{font:600 12.5px/1.3 var(--f-display);quotes:"“" "”"}
+.top5 .n{font:500 9px/1.3 var(--f-mono);color:var(--muted);text-align:right}
+.top5 p{font-size:9.8px;color:var(--muted);margin-top:2px}
+.theme{display:flex;flex-direction:column;gap:6px}
+.theme h3{font:600 12px/1.2 var(--f-display);text-transform:uppercase;letter-spacing:.03em;color:var(--ink);margin-top:4px}
+.quotes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.q{border-left:3px solid var(--accent);background:var(--accent-soft);padding:7px 10px;display:flex;flex-direction:column;gap:4px;min-width:0}
+.q.para{border-left-style:dashed;background:transparent;border:1px dashed var(--rule);border-left:3px dashed var(--muted)}
+.q blockquote{margin:0;font-size:11px;line-height:1.38}
+.q.para blockquote{font-style:italic;color:var(--muted)}
+.q .meta{display:flex;flex-wrap:wrap;gap:4px 6px;align-items:center;font-size:9px;color:var(--muted)}
+.q .meta a{color:var(--accent)}
+.chip{display:inline-block;font:500 8px/1 var(--f-mono);padding:2px 4px;border-radius:2px;letter-spacing:.04em;white-space:nowrap;border:1px solid var(--rule);color:var(--muted)}
+.chip.co{color:var(--t-hecho);background:var(--t-hecho-bg);border-color:transparent}
+.chip.ex{color:var(--accent);border-color:var(--accent)}
+.chip.sn{color:var(--t-est);background:var(--t-est-bg);border-color:transparent}
+.chip.pa{color:var(--t-op);background:var(--t-op-bg);border-color:transparent}
+.chip.mi{color:var(--t-nv);background:var(--t-nv-bg);border-color:transparent}
+.gap{font-size:9.8px;color:var(--t-nv);display:flex;gap:6px;align-items:baseline}
+.gap b{font:600 8.5px/1 var(--f-mono);letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
+.insight{font-size:10.4px;max-width:80ch}
+@media (max-width:760px){
+  .ev{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .quotes{grid-template-columns:1fr}
+  .top5 li{grid-template-columns:24px minmax(0,1fr)}
+  .top5 .n{grid-column:2;text-align:left}
+}
+</style>
+
+<div class="desk">
+<article class="sheet long" aria-label="Mapa de voz del cliente">
+
+  <header class="head">
+    <div>
+      <p class="eyebrow">Mapa de voz del cliente · Productividad personal · Colombia · corte 8 oct 2026</p>
+      <h1>Voz del emprendedor sin jefe</h1>
+      <p class="def">Perfil: emprendedores y creadores en Colombia que trabajan sin jefe, saben lo que deben hacer y sienten que el día no les rinde. Aquí está cómo lo dicen ellos mismos: dolores, deseos, objeciones y soluciones que abandonaron.</p>
+    </div>
+    <div class="verdict" aria-label="Solidez de la evidencia">
+      <p class="eyebrow">Solidez de la evidencia</p>
+      <p class="verdict-title"><mark>Baja-media</mark>: hay lenguaje real en español, pero poco de Colombia y nada de foros cerrados.</p>
+    </div>
+  </header>
+
+  <div class="ev" aria-label="Base de evidencia">
+    <div><strong>~60</strong><span>páginas revisadas a través del buscador</span></div>
+    <div><strong>44</strong><span>frases recogidas: 33 textuales y 11 paráfrasis o datos</span></div>
+    <div><strong>6</strong><span>fuentes con origen colombiano confirmado</span></div>
+    <div><strong>0</strong><span>hilos de Reddit, grupos de Facebook o reseñas de apps leídos</span></div>
+  </div>
+
+  <div class="warn">
+    <h3>Qué no pude leer y por qué</h3>
+    <p>La red de este entorno bloqueó Reddit, Facebook, la App Store, Google Play, YouTube, TikTok, X y Platzi, y el buscador no indexa Reddit. Por eso <b>ninguna cita sale de un grupo de Facebook, de un hilo de Reddit ni de reseñas de apps</b>. Todo viene de títulos y extractos que devolvió el buscador: preguntas de Quora y MundoPsicologos, comentarios de Platzi, foros españoles, blogs en primera persona y prensa colombiana. No abrí ninguna página completa. No inventé ninguna cita; cuando solo tengo el sentido de lo dicho, lo marco como <b>paráfrasis</b>.</p>
+  </div>
+
+  <footer class="foot">
+    <strong>Fidelidad:</strong>
+    <span><span class="chip ex">TÍTULO EXACTO</span>título o pregunta tal como aparece</span>
+    <span><span class="chip sn">EXTRACTO</span>texto citado por el buscador; la página no se pudo abrir</span>
+    <span><span class="chip pa">PARÁFRASIS</span>no es cita, es el sentido</span>
+    <strong>Origen:</strong>
+    <span><span class="chip co">CO</span>Colombia</span><span><span class="chip">LATAM</span></span><span><span class="chip">ES</span>España</span><span><span class="chip">?</span>país no visible</span>
+  </footer>
+
+  <!-- TOP 5 -->
+  <section>
+    <h2><span>★</span>Las 5 frases más repetidas</h2>
+    <p class="note">Las conté por el número de páginas distintas de esta muestra donde aparece la frase o una variante directa. Es recurrencia en la muestra, no volumen real de conversación.</p>
+    <ol class="top5">
+      <li><div><q>trabajo mucho y avanzo poco</q><p>Variantes: “siento que no avanzo ni profesionalmente”, “pasan los meses y no avanzo con mi empresa”, “¿por qué trabajo tanto y avanzo tan poco?”.</p></div><span class="n">9 páginas</span></li>
+      <li><div><q>no me rinde el día</q><p>Variantes: “¿por qué no me rinde el tiempo para nada?”, “no te rinde el tiempo”, “el tiempo no alcanza”. Es un modismo colombiano y latino; aparece en Quora, El Tiempo y Canal Institucional.</p></div><span class="n">8 páginas</span></li>
+      <li><div><q>más tiempo aprendiendo y configurando la app que utilizándola</q><p>Variantes: “trabajaba para la aplicación, no la aplicación para mí”, “cementerio de aplicaciones”, “volví al papel”.</p></div><span class="n">8 páginas</span></li>
+      <li><div><q>Soy un procrastinador profesional.</q><p>Aparece junto a terminar en YouTube o en redes “por cansancio” aunque haya agenda. Viene sobre todo de comentarios de Platzi.</p></div><span class="n">6 páginas</span></li>
+      <li><div><q>como si estuviera apagando fuegos</q><p>Variantes: “saltaba de una cosa a otra”, “hacerlo todo uno mismo”, “constantemente ocupados”, “sin tiempo para nada”.</p></div><span class="n">6 páginas</span></li>
+    </ol>
+  </section>
+
+  <!-- 1 DOLORES -->
+  <section class="theme">
+    <h2><span>1</span>Dolores</h2>
+
+    <h3>El día se va y el avance no se ve</h3>
+    <div class="quotes">
+      <div class="q"><blockquote>“¿Por qué no me rinde el tiempo para nada?”</blockquote><div class="meta"><span class="chip ex">TÍTULO EXACTO</span><span class="chip">?</span><a href="https://es.quora.com/Por-qu%C3%A9-no-me-rinde-el-tiempo-para-nada">Pregunta en Quora</a></div></div>
+      <div class="q"><blockquote>“¿Por qué todo se me hace tan difícil? siento que no avanzo ni profesionalmente”</blockquote><div class="meta"><span class="chip ex">TÍTULO EXACTO</span><span class="chip">?</span><a href="https://www.mundopsicologos.com/consultas/por-que-todo-se-me-hace-tan-dificil">Consulta en MundoPsicologos</a></div></div>
+      <div class="q"><blockquote>“¿Por qué trabajo tanto y avanzo tan poco?”</blockquote><div class="meta"><span class="chip ex">TÍTULO EXACTO</span><span class="chip">?</span><a href="https://escritoronofre.substack.com/p/por-que-trabajo-tanto-y-avanzo-tan">Boletín en primera persona</a></div></div>
+      <div class="q"><blockquote>“sin sentir que avanzas, sin celebrar los logros, sin tener a nadie que reconozca el esfuerzo”</blockquote><div class="meta"><span class="chip sn">EXTRACTO</span><span class="chip">ES</span><a href="https://comuniteam.es/me-siento-solo-con-mi-negocio/">“Me siento solo con mi negocio”</a></div></div>
+      <div class="q"><blockquote>“¿No te rinde el día?”</blockquote><div class="meta"><span class="chip ex">TÍTULO EXACTO</span><span class="chip co">CO</span><a href="https://www.canalinstitucional.tv/te-interesa/tips-para-aprovechar-mejor-el-tiempo">Canal Institucional</a> · titular de medio que imita al lector</div></div>
+      <div class="q"><blockquote>“¿Por qué no me rinde el tiempo?”</blockquote><div class="meta"><span class="chip ex">TÍTULO EXACTO</span><span class="chip co">CO</span><a href="https://www.eltiempo.com/cultura/gente/por-que-no-me-rinde-el-tiempo-estudio-revela-que-la-causa-podria-estar-relacionada-con-la-edad-3359931">El Tiempo</a> · titular de medio</div></div>
+    </div>
+
+    <h3>Hago de todo y vivo apagando fuegos</h3>
+    <div class="quotes">
+      <div class="q"><blockquote>“saltaba de una cosa a otra como si estuviera apagando fuegos”</blockquote><div class="meta"><span class="chip sn">EXTRACTO</span><span class="chip">?</span><a href="https://remotoconmariela.com/un-dia-en-mi-vida-como-emprendedora-digital/">Emprendedora digital, blog</a></div></div>
+      <div class="q"><blockquote>“llenamos nuestros días con tareas porque sentimos que no nos esforzamos lo suficiente por nuestro negocio si no estamos constantemente ocupados”</blockquote><div class="meta"><span class="chip sn">EXTRACTO</span><span class="chip">ES</span><a href="https://www.lauralofer.com/consejos-gestion-tiempo-freelance/">Freelance, blog</a></div></div>
+      <div class="q"><blockquote>“Me cuesta mucho concentrarme, ¿Qué hago?”</blockquote><div class="meta"><span class="chip ex">TÍTULO EXACTO</span><span class="chip">?</span><a href="https://thenterpriser.wordpress.com/2014/03/06/me-cuesta-mucho-concentrarme-que-hago/">Blog de emprendedor (2014)</a></div></div>
+      <div class="q"><blockquote>“Responder cada mensaje, confirmar pedidos, enviar información de pago y mantener comunicación con los clientes consume tiempo”</blockquote><div class="meta"><span class="chip sn">EXTRACTO</span><span class="chip">LATAM</span><a href="https://expansion.mx/tecnologia/2026/10/07/la-ia-permite-que-taquerias-o-panaderias-automaticen">Expansión (oct 2026)</a> · voz de periodista sobre pequeños negocios en WhatsApp</div></div>
+    </div>
+
+    <h3>Procrastinación y distracción en el celular</h3>
+    <div class="quotes">
+      <div class="q"><blockquote>“Soy un procrastinador profesional.”</blockquote><div class="meta"><span class="chip sn">EXTRACTO</span><span class="chip">?</span><a href="https://platzi.com/clases/1749-gestion-tiempo/24665-entiendete-para-organizarte/">Comentario de un estudiante en Platzi</a> (christian rojas)</div></div>
+      <div class="q para"><blockquote>Busca excusas aunque tenga agenda y sepa qué debe hacer, incluso lo programa por horas; al final termina en YouTube porque llega cansado.</blockquote><div class="meta"><span class="chip pa">PARÁFRASIS</span><span class="chip">?</span><a href="https://platzi.com/clases/1749-gestion-tiempo/24665-entiendete-para-organizarte/">Mismo comentario de Platzi</a></div></div>
+      <div class="q para"><blockquote>Se describe como muy disperso: si tiene acceso a una red social o de video, ahí se pierde.</blockquote><div class="meta"><span class="chip pa">PARÁFRASIS</span><span class="chip">?</span><a href="https://platzi.com/clases/1749-gestion-tiempo/24664-soy-productivo/">Platzi, clase “¿Soy productivo?”</a></div></div>
+      <div class="q para"><blockquote>Procrastinaba por miedo a quedar mal con jefes o clientes.</blockquote><div class="meta"><span class="chip pa">PARÁFRASIS</span><span class="chip">?</span><a href="https://platzi.com/clases/2660-procrastinacion/45951-el-loop-de-las-justificaciones/">Platzi, curso de procrastinación</a></div></div>
+    </div>
+
+    <h3>Casa sin límites y soledad</h3>
+    <div class="quotes">
+      <div class="q"><blockquote>“¿Por qué los emprendedores se sienten solos a veces?”</blockquote><div class="meta"><span class="chip ex">TÍTULO EXACTO</span><span class="chip">?</span><a href="https://es.quora.com/Por-qu%C3%A9-los-emprendedores-se-sienten-solos-a-veces">Pregunta en Quora</a></div></div>
+      <div class="q"><blockquote>“No estás ocupada: estás saturada”</blockquote><div class="meta"><span class="chip ex">TÍTULO EXACTO</span><span class="chip">?</span><a href="https://taniaeufracio.substack.com/p/no-estas-ocupada-estas-saturada">Boletín de una creadora</a></div></div>
+      <div class="q para"><blockquote>Con horario flexible no logra desconectarse de la casa: mientras trabaja pone una lavadora, cocina y atiende al niño.</blockquote><div class="meta"><span class="chip pa">PARÁFRASIS</span><span class="chip">ES</span><a href="https://www.forocrianzanatural.com/trabajar-desde-casa_topic166193.html">Foro Crianza Natural</a></div></div>
+      <div class="q para"><blockquote>Los clientes asumen que, como está en casa, siempre está disponible.</blockquote><div class="meta"><span class="chip pa">PARÁFRASIS</span><span class="chip">ES</span><a href="https://sobreviviratrabajarencasa.com/el-trabajo-en-casa-desde-fuera/">Freelance, blog</a></div></div>
+    </div>
+
+    <h3>Miedo y desgaste al empezar</h3>
+    <div class="quotes">
+      <div class="q"><blockquote>“Al principio fue bastante difícil porque no vendíamos nada, no teníamos un plan de marketing y estábamos realmente asustados.”</blockquote><div class="meta"><span class="chip sn">EXTRACTO</span><span class="chip co">CO</span><a href="https://www.semana.com/emprendimiento/articulo/como-crecer-un-negocio-solo-con-redes-sociales/282808/">Semana, emprendedor de Medellín</a></div></div>
+      <div class="q para"><blockquote>Dato, no cita: el 42% de los emprendedores hispanohablantes dice tener falta de energía habitual y el 39,8% dificultad para concentrarse (Ancla.Life, reportado el 8 oct 2026).</blockquote><div class="meta"><span class="chip pa">DATO</span><span class="chip">LATAM/ES</span><a href="https://cordobabn.com/economia/seis-cada-diez-emprendedores-presentan-senales-frecuentes-fatiga-mental-informe-ancla-life/20261008102903270761.html">Córdoba BN</a> · no pude ver el informe original</div></div>
+    </div>
+  </section>
+
+  <!-- 2 DESEOS -->
+  <section class="theme">
+    <h2><span>2</span>Deseos y aspiraciones</h2>
+    <div class="quotes">
+      <div class="q"><blockquote>“para estar más tiempo con mi familia, ayudar en la crianza de mis hijos”</blockquote><div class="meta"><span class="chip sn">EXTRACTO</span><span class="chip co">CO</span><a href="https://forbes.co/2022/11/18/capital-humano/lo-bueno-lo-desafiante-y-lo-malo-del-freelance/">Forbes Colombia, periodista que se volvió freelance</a></div></div>
+      <div class="q"><blockquote>“He desinstalado todas las apps de productividad de mi teléfono. Ahora soy mucho más productivo”</blockquote><div class="meta"><span class="chip ex">TÍTULO EXACTO</span><span class="chip">ES</span><a href="https://www.xataka.com/aplicaciones/he-desinstalado-todas-apps-productividad-mi-telefono-ahora-soy-mucho-productivo">Xataka, en primera persona</a> · deseo de menos herramientas</div></div>
+      <div class="q para"><blockquote>Dato, no cita: el 48% de los hombres que trabajan como independientes lo hace para diversificar proyectos, controlar sus tiempos y actuar con autonomía (Colombia, Chile, México y Perú).</blockquote><div class="meta"><span class="chip pa">DATO</span><span class="chip">LATAM</span><a href="https://www.buk.co/blog/dia-del-emprendimiento-en-colombia">Buk, Work in Progress 2025</a></div></div>
+      <div class="q para"><blockquote>Una emprendedora de jabones redujo cerca de la mitad del tiempo que le dedicaba a atender por WhatsApp al automatizar esa parte.</blockquote><div class="meta"><span class="chip pa">PARÁFRASIS</span><span class="chip">LATAM</span><a href="https://expansion.mx/tecnologia/2026/10/07/la-ia-permite-que-taquerias-o-panaderias-automaticen">Expansión (oct 2026)</a> · deseo: recuperar horas de chat</div></div>
+      <div class="q para"><blockquote>Concluye que el foco y la estrategia valen más que estar ocupada todo el día.</blockquote><div class="meta"><span class="chip pa">PARÁFRASIS</span><span class="chip">?</span><a href="https://remotoconmariela.com/un-dia-en-mi-vida-como-emprendedora-digital/">Emprendedora digital, blog</a></div></div>
+    </div>
+    <p class="insight"><b>Lectura:</b> el deseo no es “hacer más”. Es <b>ver avance</b>, <b>recuperar tiempo para la familia</b> y <b>tener estructura sin perder la libertad</b>. Ojo: el GEM Colombia dice que la necesidad (no la libertad) sigue siendo la principal razón para emprender en el país.<sup>†</sup></p>
+    <p class="gap"><b>Sin evidencia</b>No encontré frases de colombianos sobre deseos en foros abiertos. “Trabajar menos y ganar más” o “tener tiempo para mí” son plausibles, pero no las vi citadas, así que no las incluyo.</p>
+  </section>
+
+  <!-- 3 OBJECIONES -->
+  <section class="theme">
+    <h2><span>3</span>Objeciones y desconfianzas</h2>
+
+    <h3>“Los gurús venden humo”</h3>
+    <div class="quotes">
+      <div class="q"><blockquote>“He pagado programas, talleres, asesorías premium y cursos “ultra exclusivos”. Pago… y no veo.”</blockquote><div class="meta"><span class="chip sn">EXTRACTO</span><span class="chip">LATAM</span><a href="https://www.pioneroslatam.com/post/los-gur%C3%BAs-del-humo-lo-que-me-ha-tocado-vivir-intentando-crecer-mi-negocio">Pioneros Latam, emprendedor</a></div></div>
+      <div class="q"><blockquote>“Después me ofrecen acceso exclusivo con descuentos irrepetibles que “solo duran 15 minutos”.”</blockquote><div class="meta"><span class="chip sn">EXTRACTO</span><span class="chip">LATAM</span><a href="https://www.pioneroslatam.com/post/los-gur%C3%BAs-del-humo-lo-que-me-ha-tocado-vivir-intentando-crecer-mi-negocio">Mismo autor</a></div></div>
+      <div class="q"><blockquote>“¿Porqué la gente llama “Vende humo” a los que venden cursos?”</blockquote><div class="meta"><span class="chip ex">TÍTULO EXACTO</span><span class="chip">?</span><a href="https://www.threads.com/@eder_luisp/post/DEbPu0pO3Vu/porqu%C3%A9-la-gente-llama-vende-humo-a-los-que-venden-cursos">Publicación en Threads</a></div></div>
+      <div class="q"><blockquote>“la productividad no es una ciencia exacta”</blockquote><div class="meta"><span class="chip sn">EXTRACTO</span><span class="chip">?</span><a href="https://productibits.substack.com/p/la-productividad-toxica">“La productividad tóxica”, boletín</a></div></div>
+    </div>
+
+    <h3>“Eso no es trabajo duro”</h3>
+    <div class="quotes">
+      <div class="q"><blockquote>“no sé en qué momento los creadores de contenido hicieron ver esto como un trabajo difícil”</blockquote><div class="meta"><span class="chip sn">EXTRACTO</span><span class="chip co">CO</span><a href="https://www.infobae.com/colombia/2026/08/05/polemica-entre-creadoras-de-contenido-por-dificultades-durante-la-feria-colombiamoda-ser-influencer-no-es-un-trabajo-dificil/">La Paisa Chiviada, creadora, vía Infobae (ago 2026)</a> · el propio gremio minimiza el cansancio</div></div>
+    </div>
+
+    <h3>Métodos rígidos y apps complejas</h3>
+    <div class="quotes">
+      <div class="q"><blockquote>“te interrumpe justo cuando más rindes”</blockquote><div class="meta"><span class="chip sn">EXTRACTO</span><span class="chip">ES</span><a href="https://thinkwasabi.com/tecnica-flowtime/">Sobre el Pomodoro, blog</a></div></div>
+      <div class="q"><blockquote>“podemos pasar horas personalizándolo, pero ¿es esto productivo?”</blockquote><div class="meta"><span class="chip sn">EXTRACTO</span><span class="chip">?</span><a href="https://www.lisandraramos.com/blog/notion-productividad-sin-procrastinar">Sobre Notion, blog</a></div></div>
+    </div>
+
+    <h3>Precio en dólares y privacidad</h3>
+    <div class="quotes">
+      <div class="q para"><blockquote>Un cobro de ChatGPT Plus llegó por $80.400 cuando la tasa del día daba $73.600; la diferencia fue la comisión del banco.</blockquote><div class="meta"><span class="chip pa">PARÁFRASIS</span><span class="chip co">CO</span><a href="https://www.plenti.com.co/blog-post/como-pagar-suscripciones-en-dolares-desde-colombia-sin-comisiones">Plenti</a> · empresa que vende tarjetas en dólares</div></div>
+      <div class="q para"><blockquote>Críticas a asistentes de IA que leen correo y calendario: cláusulas amplias sobre los datos y acciones sin autorización.</blockquote><div class="meta"><span class="chip pa">PARÁFRASIS</span><span class="chip">ES</span><a href="https://sintokens.es/noticias/2026-08-24-instinct-asistente-ia-privacidad-seguridad.html">SinTokens (ago 2026)</a> · caso Instinct</div></div>
+    </div>
+    <p class="gap"><b>Sin evidencia</b>No encontré a ningún emprendedor colombiano quejándose con sus palabras del precio en dólares de las apps, ni de dar acceso a la IA a su correo. Las objeciones existen en prensa y blogs, pero no en voz de cliente.</p>
+  </section>
+
+  <!-- 4 SOLUCIONES ABANDONADAS -->
+  <section class="theme">
+    <h2><span>4</span>Qué probaron y por qué lo dejaron</h2>
+    <div class="tablewrap">
+    <table>
+      <thead><tr><th>Solución</th><th>Por qué la abandonaron (su lenguaje)</th><th>Fidelidad</th><th>Origen</th></tr></thead>
+      <tbody>
+        <tr><td>Notion</td><td>“tenía que pasar más tiempo aprendiendo y configurando la app que utilizándola”. Terminó en Google Calendar, Tasks y OneNote. <a href="https://www.mediavida.com/foro/electronica-telefonia/notion-app-tu-quieres-sea-682014">Foro Mediavida</a></td><td><span class="chip sn">EXTRACTO</span></td><td><span class="chip">ES</span></td></tr>
+        <tr><td>Muchas apps seguidas</td><td>“Tengo un cementerio de aplicaciones de productividad que usé una semana”. <a href="https://rubenloan.com/blog/tengo-un-cementerio-de-aplicaciones-de-productividad">Blog</a></td><td><span class="chip ex">TÍTULO</span></td><td><span class="chip">?</span></td></tr>
+        <tr><td>Muchas apps seguidas</td><td>“trabajaba para la aplicación, no la aplicación para mí” · “corriendo como pollo sin cabeza de servicio en servicio”. <a href="https://www.xataka.com/aplicaciones/he-desinstalado-todas-apps-productividad-mi-telefono-ahora-soy-mucho-productivo">Xataka</a>, <a href="https://www.xataka.com/servicios/llevo-anos-probando-todas-apps-productividad-posibles-ha-sido-busqueda-muy-improductiva">Xataka</a></td><td><span class="chip sn">EXTRACTO</span></td><td><span class="chip">ES</span></td></tr>
+        <tr><td>47 apps, luego papel</td><td>“Por qué volví al papel después de probar 47 apps de productividad”: pasaba más tiempo “configurando, sincronizando, migrando y aprendiendo herramientas que realmente ejecutando”. <a href="https://50plusenaccion.substack.com/p/por-que-volvi-al-papel-despues-de-probar-47-apss">Boletín</a></td><td><span class="chip ex">TÍTULO</span> <span class="chip sn">EXTRACTO</span></td><td><span class="chip">?</span></td></tr>
+        <tr><td>Bullet Journal</td><td>“invertía demasiado tiempo haciendo rayas, usando reglas, diseñando plantillas”. <a href="https://50plusenaccion.substack.com/p/por-que-volvi-al-papel-despues-de-probar-47-apss">Mismo boletín</a></td><td><span class="chip sn">EXTRACTO</span></td><td><span class="chip">?</span></td></tr>
+        <tr><td>TickTick</td><td>“too many features that were just distracting side quests” (demasiadas funciones que distraen). <a href="https://2sync.com/blog/ticktick-vs-todoist">2sync</a></td><td><span class="chip sn">EXTRACTO</span> de segunda mano</td><td><span class="chip">EN</span></td></tr>
+        <tr><td>Notion (3 intentos)</td><td>“Everyone Recommends Notion. I’ve Abandoned It Three Times.” Capturar una idea requería demasiados pasos. <a href="https://oh-kayyyy.medium.com/everyone-recommends-notion-ive-abandoned-it-three-times-ef2fcad2ef22">Medium</a></td><td><span class="chip ex">TÍTULO</span></td><td><span class="chip">EN</span></td></tr>
+        <tr><td>Agenda por horas</td><td>Aun con agenda y bloques por hora, termina en YouTube por cansancio. <a href="https://platzi.com/clases/1749-gestion-tiempo/24665-entiendete-para-organizarte/">Platzi</a></td><td><span class="chip pa">PARÁFRASIS</span></td><td><span class="chip">?</span></td></tr>
+        <tr><td>Pomodoro</td><td>Rompe el flujo en tareas creativas largas: “te interrumpe justo cuando más rindes”. <a href="https://thinkwasabi.com/tecnica-flowtime/">Blog</a></td><td><span class="chip sn">EXTRACTO</span></td><td><span class="chip">ES</span></td></tr>
+        <tr><td>Cursos y mentorías</td><td>“Pago… y no veo.” <a href="https://www.pioneroslatam.com/post/los-gur%C3%BAs-del-humo-lo-que-me-ha-tocado-vivir-intentando-crecer-mi-negocio">Pioneros Latam</a></td><td><span class="chip sn">EXTRACTO</span></td><td><span class="chip">LATAM</span></td></tr>
+        <tr><td>Apps en el celular</td><td>Quien vuelve a la libreta lo justifica porque una app tarda en cargar y “depende de la batería de mi móvil”. <a href="https://iagofraga.com/elegir-herramientas/">Blog</a></td><td><span class="chip sn">EXTRACTO</span></td><td><span class="chip">ES</span></td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="insight"><b>Patrón:</b> no dejan las herramientas porque les falten funciones, sino porque <b>mantener el sistema se volvió otro trabajo</b>. Lo que sí se queda es lo simple: papel, Google Calendar y Tasks, bloques fijos de horario, salir de casa a trabajar y automatizar el chat de clientes.</p>
+    <p class="gap"><b>Sin evidencia</b>No pude leer reseñas de Todoist, TickTick, Notion o Google Calendar escritas desde Colombia (App Store y Google Play bloqueadas), ni testimonios sobre abandonar asistentes de IA.</p>
+  </section>
+
+  <section class="gaps">
+    <h3>Cómo cerrar los huecos</h3>
+    <p>1) Permitir en la red del entorno <b>reddit.com, facebook.com, apps.apple.com, play.google.com, youtube.com y platzi.com</b> y repetir la extracción de r/Colombia, r/emprendedores, reseñas de apps desde la tienda de Colombia y comentarios de YouTube. 2) Hacer 8 a 12 entrevistas cortas con este perfil (creadores, freelancers, emprendedores con venta por WhatsApp) para validar el top 5 con voz colombiana. 3) Revisar a mano grupos de Facebook de emprendedoras colombianas, que son privados y no se pueden leer de forma automática.</p>
+  </section>
+
+  <section>
+    <h2><span>§</span>Notas</h2>
+    <p class="note">† <a href="https://www.researchgate.net/publication/382078058_INFORME_GEM_COLOMBIA_20232024_DINAMICA_DE_LA_ACTIVIDAD_EMPRESARIAL_EN_COLOMBIA_ENFRENTANDO_DESAFIOS">Informe GEM Colombia 2023/2024</a>, según el resumen del buscador. Cada cita enlaza a su fuente. Los textos de proveedores (bancos, apps, agencias) se usan solo como contexto, no como voz del cliente.</p>
+  </section>
+
+</article>
+</div>

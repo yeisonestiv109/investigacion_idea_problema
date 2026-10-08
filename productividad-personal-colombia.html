@@ -1,0 +1,301 @@
+<title>Productividad Personal CO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: dos hojas tamaño carta (8.5×11 in) sobre una mesa gris; hoja 1 = resumen ejecutivo, hoja 2 = tabla de señales + fuentes. En móvil, las hojas se vuelven fluidas. */
+:root{
+  --desk:#e3e6ea; --paper:#ffffff; --ink:#18212b; --muted:#5a6672; --rule:#d5dbe1;
+  --accent:#1d4e89; --accent-soft:#e8eff8; --mark:#ffd84d; --mark-ink:#3b3000;
+  --t-hecho:#1f6f4a; --t-hecho-bg:#e3f3ea; --t-est:#7a5a00; --t-est-bg:#fbf1d2;
+  --t-op:#6a3d8f; --t-op-bg:#f1e9f8; --t-nv:#9a2f2f; --t-nv-bg:#f8e6e6;
+  --f-display:"IBM Plex Sans Condensed","Arial Narrow",Arial,sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  --shadow:0 1px 2px rgba(20,30,40,.08),0 8px 28px rgba(20,30,40,.10);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --desk:#0e1216; --paper:#171c22; --ink:#e4e9ee; --muted:#9aa6b2; --rule:#2c343d;
+  --accent:#8cb6ea; --accent-soft:#1e2a38; --mark:#e9c53a; --mark-ink:#1c1600;
+  --t-hecho:#7fd4a6; --t-hecho-bg:#173126; --t-est:#e8c46a; --t-est-bg:#332a12;
+  --t-op:#c9a6ea; --t-op-bg:#2a2036; --t-nv:#f0a0a0; --t-nv-bg:#3a1f1f;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.35); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --desk:#0e1216; --paper:#171c22; --ink:#e4e9ee; --muted:#9aa6b2; --rule:#2c343d;
+  --accent:#8cb6ea; --accent-soft:#1e2a38; --mark:#e9c53a; --mark-ink:#1c1600;
+  --t-hecho:#7fd4a6; --t-hecho-bg:#173126; --t-est:#e8c46a; --t-est-bg:#332a12;
+  --t-op:#c9a6ea; --t-op-bg:#2a2036; --t-nv:#f0a0a0; --t-nv-bg:#3a1f1f;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.35); color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--desk);color:var(--ink);font-family:var(--f-body);font-size:10.5px;line-height:1.42;
+  padding-inline:16px;padding-block:28px 40px;-webkit-font-smoothing:antialiased}
+.desk{display:flex;flex-direction:column;align-items:center;gap:28px}
+.sheet{background:var(--paper);width:816px;max-width:100%;min-height:1056px;padding:40px 52px;box-shadow:var(--shadow);
+  display:flex;flex-direction:column;gap:14px;position:relative}
+.sheet-label{position:absolute;top:-18px;left:0;font:500 10px/1 var(--f-mono);color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+a{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0}
+p{margin:0}
+ul{margin:0;padding-left:14px;display:flex;flex-direction:column;gap:4px}
+li::marker{color:var(--accent)}
+sup{font:500 8px/0 var(--f-mono);color:var(--accent);margin-left:1px}
+
+/* Encabezado */
+.head{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:18px;align-items:end;border-bottom:2px solid var(--ink);padding-bottom:10px}
+.eyebrow{font:500 9.5px/1.3 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font-size:30px;line-height:1.02;font-weight:700;letter-spacing:-.01em;margin-top:4px}
+.def{color:var(--muted);margin-top:5px;max-width:62ch}
+.verdict{min-width:250px;display:flex;flex-direction:column;gap:6px}
+.verdict-title{font:600 13px/1.15 var(--f-display)}
+.verdict-title mark{background:var(--mark);color:var(--mark-ink);padding:0 3px}
+.gauge{position:relative;height:8px;border-radius:4px;background:linear-gradient(90deg,var(--accent-soft),var(--accent))}
+.gauge i{position:absolute;top:-4px;width:3px;height:16px;background:var(--ink);border-radius:2px}
+.gauge i.alt{background:var(--accent);width:9px;height:9px;top:-0.5px;border-radius:50%;border:2px solid var(--paper);box-shadow:0 0 0 1px var(--ink);margin-left:-3px}
+.gauge-keys{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:9.4px;color:var(--muted)}
+.gauge-keys span{display:inline-flex;align-items:center;gap:5px}
+.gauge-keys i{display:inline-block;width:3px;height:11px;background:var(--ink);border-radius:2px}
+.gauge-keys i.alt{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 1px var(--ink)}
+.gauge-scale{display:flex;justify-content:space-between;font:500 8.5px/1 var(--f-mono);color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+
+/* Columnas */
+.cols{display:grid;grid-template-columns:1.12fr 1fr;gap:22px;flex:1}
+.col{display:flex;flex-direction:column;gap:13px;min-width:0}
+section h2{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--accent);
+  display:flex;gap:6px;align-items:baseline;border-bottom:1px solid var(--rule);padding-bottom:3px;margin-bottom:6px}
+section h2 span{font-family:var(--f-mono);font-weight:500;font-size:10px;color:var(--muted)}
+
+/* Etiquetas de evidencia */
+.tag{display:inline-block;font:500 8px/1 var(--f-mono);letter-spacing:.04em;padding:2px 4px 2px;border-radius:2px;vertical-align:1px;margin-right:3px;white-space:nowrap}
+.H{color:var(--t-hecho);background:var(--t-hecho-bg)}
+.E{color:var(--t-est);background:var(--t-est-bg)}
+.O{color:var(--t-op);background:var(--t-op-bg)}
+.NV{color:var(--t-nv);background:var(--t-nv-bg)}
+
+.players{display:grid;grid-template-columns:auto 1fr;gap:4px 8px}
+.players dt{font:600 9px/1.5 var(--f-mono);text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+.players dd{margin:0}
+.vocab{display:flex;flex-wrap:wrap;gap:4px}
+.vocab span{border:1px solid var(--rule);padding:1px 6px;border-radius:10px;font-size:9.8px;white-space:nowrap}
+.vocab span b{font-weight:600}
+.note{font-size:9.6px;color:var(--muted)}
+.foot{border-top:1px solid var(--rule);padding-top:7px;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;font-size:9.4px;color:var(--muted)}
+.foot strong{color:var(--ink);font-weight:600}
+
+/* Hoja 2: tabla */
+.h2big{font-size:22px;font-weight:700}
+.sub{color:var(--muted);max-width:80ch}
+.tablewrap{overflow-x:auto;min-width:0}
+table{border-collapse:collapse;width:100%;font-size:10px;min-width:640px}
+th{font:600 9px/1.2 var(--f-mono);text-transform:uppercase;letter-spacing:.05em;color:var(--muted);text-align:left;padding:6px 6px;border-bottom:2px solid var(--ink)}
+td{padding:4.5px 6px;border-bottom:1px solid var(--rule);vertical-align:top}
+td:first-child{font-weight:600;width:19%}
+td.read{width:13%}
+td.src{width:7%;font:500 9px/1.4 var(--f-mono);color:var(--muted);white-space:nowrap}
+.stage{display:inline-flex;align-items:center;gap:5px;font:600 9.5px/1.2 var(--f-display);text-transform:uppercase;letter-spacing:.03em}
+.dots{display:inline-flex;gap:2px}
+.dots b{width:7px;height:7px;border-radius:50%;border:1px solid var(--accent)}
+.dots b.on{background:var(--accent)}
+.tally{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.tally div{border:1px solid var(--rule);padding:8px 10px;display:flex;flex-direction:column;gap:2px}
+.tally strong{font:700 20px/1 var(--f-display);font-variant-numeric:tabular-nums}
+.tally span{font-size:9.6px;color:var(--muted)}
+.sources{columns:2;column-gap:22px;font-size:9px;line-height:1.38;color:var(--muted);margin:0;padding-left:18px}
+.sources li{break-inside:avoid;margin-bottom:2px}
+.sources a{word-break:break-word}
+.gaps{background:var(--accent-soft);padding:9px 12px;display:flex;flex-direction:column;gap:4px}
+.gaps h3{font-size:11.5px;text-transform:uppercase;letter-spacing:.04em}
+
+@media (max-width:760px){
+  body{font-size:12.5px}
+  .sheet{min-height:0;padding:26px 18px}
+  .head,.cols{grid-template-columns:1fr}
+  .verdict{min-width:0}
+  h1{font-size:26px}
+  .sources{columns:1}
+  .tally{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<div class="desk">
+
+<!-- ===================== HOJA 1 ===================== -->
+<article class="sheet" aria-label="Resumen ejecutivo">
+  <span class="sheet-label">Hoja 1 / 2 · Resumen ejecutivo</span>
+
+  <header class="head">
+    <div>
+      <p class="eyebrow">Brief de mercado · Colombia → Latam · corte 8 oct 2026</p>
+      <h1>Productividad personal</h1>
+      <p class="def">Herramientas, métodos y contenidos con los que una persona organiza su tiempo, tareas, información y energía: apps de tareas y notas, calendarios, métodos (GTD, Pomodoro, bloques de tiempo, segundo cerebro), asistentes de IA y lo que los enseña (libros, cursos, plantillas). No incluye software de gestión de equipos.</p>
+    </div>
+    <div class="verdict" aria-label="Veredicto de madurez">
+      <p class="eyebrow">Veredicto de madurez</p>
+      <p class="verdict-title"><mark>Saturada en lo básico</mark>, en transición hacia agentes de IA que crecen rápido.</p>
+      <div class="gauge" role="img" aria-label="Agentes de IA personales en 38%; apps y métodos en 86%, entre naciente y saturado"><i style="left:38%"></i><i class="alt" style="left:86%"></i></div>
+      <div class="gauge-scale"><span>Naciente</span><span>Crecimiento</span><span>Saturado</span></div>
+      <div class="gauge-keys"><span><i></i>Agentes de IA personales</span><span><i class="alt"></i>Apps y métodos</span></div>
+    </div>
+  </header>
+
+  <div class="cols">
+    <div class="col">
+      <section>
+        <h2><span>1</span>Qué pasa ahora</h2>
+        <ul>
+          <li><span class="tag H">HECHO</span>Desde el <b>15 jul 2026</b> la jornada máxima es de <b>42 horas</b> semanales (última fase de la Ley 2101), sin bajar el salario. La reforma laboral (Ley 2466 de 2025) movió el recargo nocturno a las 7 p. m. y subió el dominical al 90%. Cada hora cuesta más.<sup>1,2,3</sup></li>
+          <li><span class="tag H">HECHO</span>Colombia es el <b>último país de la OCDE en productividad laboral</b> (dic 2025). La productividad total de los factores cayó 0,1% al año entre 2005 y 2025, y el DANE la ubica en 0,91% para 2025 (preliminar).<sup>4,5,6</sup></li>
+          <li><span class="tag H">HECHO</span>Según Microsoft (Work Trend Index 2026), el <b>63%</b> de los usuarios de IA en Colombia hace trabajo que hace un año no podía, y el 70% teme quedarse atrás. Solo el 28% ve a su liderazgo alineado con la IA.<sup>7,8</sup></li>
+          <li><span class="tag H">HECHO</span>Las apps se vuelven <b>agentes</b>. Notion lanzó agentes personalizados (feb 2026) y los conectó a correo y calendario (abr 2026). ChatGPT Pulse arma un resumen diario con Gmail y Calendar. Microsoft metió Copilot en 365 Personal y subió el precio por primera vez en 12 años, y Todoist subió el suyo por la IA.<sup>9,10,11,12,13</sup></li>
+          <li><span class="tag H">HECHO</span>Hay demanda cultural. <b>Hábitos atómicos</b> fue el 2.º libro de no ficción más vendido en Colombia en 2025. El curso de productividad de Platzi tiene 1.933 reseñas.<sup>17,18</sup></li>
+          <li><span class="tag E">ESTIM.</span>El agotamiento se mide mal: un estudio da 48% de trabajadores con síntomas de burnout (Gallup 2025) y otro, 13%. La informalidad es del 54,5% (jun 2026).<sup>19,20,21</sup></li>
+        </ul>
+      </section>
+
+      <section>
+        <h2><span>2</span>Hacia dónde va (12–24 meses)</h2>
+        <ul>
+          <li><span class="tag O">PROYECCIÓN</span><b>De organizar a delegar.</b> El valor pasa de la lista de pendientes a un agente que agenda, redacta y resume. Se medirá el tiempo recuperado, no las tareas tachadas.<sup>9,11</sup></li>
+          <li><span class="tag O">PROYECCIÓN</span><b>Las suites absorben la IA</b> (Google, Microsoft, Notion) y presionan a las apps de una sola función. Las subidas de precio por IA chocan con un usuario que paga en pesos.<sup>12,13</sup></li>
+          <li><span class="tag O">PROYECCIÓN</span>La jornada de 42 h hace que <b>las empresas compren productividad</b> para su gente: formación, herramientas y políticas de desconexión. Es un canal empresa → persona.<sup>1,22</sup></li>
+          <li><span class="tag O">PROYECCIÓN</span>Crece la <b>productividad sostenible</b>: foco, límites digitales y desconexión antes que “hacer más”. La Ley 2191 de desconexión laboral le da respaldo.<sup>22</sup></li>
+          <li><span class="tag O">PROYECCIÓN</span>Segmento desatendido: <b>13 M de informales</b>, 6 de cada 10 por cuenta propia, que se organizan en WhatsApp y cuaderno. <sup>21</sup></li>
+          <li><span class="tag O">RIESGO</span>Privacidad del correo y calendario, y errores de agentes.<sup>11</sup></li>
+        </ul>
+      </section>
+    </div>
+
+    <div class="col">
+      <section>
+        <h2><span>3</span>Qué tan madura está</h2>
+        <p><b>Saturada en lo básico, en transición.</b> Los métodos tienen décadas (Pomodoro, GTD, Eisenhower). Hay decenas de apps globales con plan gratis, y las plantillas de Notion se venden en Gumroad entre US$0 y US$199.<sup>23,24</sup> La capa de agentes de IA sí crece: Notion vale ~US$11.000 M y factura entre US$600 M y US$865 M al año según quien estime.<sup>14,15</sup> En Colombia no encontré players locales ni datos de uso. Ver la tabla en la hoja 2.</p>
+      </section>
+
+      <section>
+        <h2><span>4</span>Players y referentes</h2>
+        <dl class="players">
+          <dt>Suites con IA</dt><dd><b>Google</b> (Calendar, Tasks, Gemini), <b>Microsoft</b> (365 con Copilot, To Do, Outlook), Apple (Notas, Recordatorios).</dd>
+          <dt>Todo en uno</dt><dd><b>Notion</b> (100 M+ usuarios, agentes), ClickUp, Obsidian, Evernote.<sup>16</sup></dd>
+          <dt>Tareas</dt><dd><b>Todoist</b> (IA por voz), TickTick (más barato, con Pomodoro y hábitos; 30 M usuarios según un tercero), Google Tasks.<sup>13,26</sup></dd>
+          <dt>Asistentes IA</dt><dd><b>ChatGPT</b> (Pulse, agente), Gemini, Copilot, Claude. Son la nueva puerta de entrada.</dd>
+          <dt>Referentes</dt><dd>James Clear (<i>Hábitos atómicos</i>), David Allen (GTD), Tiago Forte (segundo cerebro, PARA), Cal Newport (trabajo profundo). En español: Platzi y vendedores de plantillas.<sup>17,18</sup></dd>
+        </dl>
+      </section>
+
+      <section>
+        <h2><span>5</span>Vocabulario del mercado</h2>
+        <div class="vocab">
+          <span><b>Productividad personal</b></span><span>Gestión / administración del tiempo</span><span>Pendientes / to-do</span>
+          <span><b>Bloques de tiempo</b> (time blocking)</span><span>Pomodoro</span><span>GTD</span><span>Matriz de Eisenhower</span>
+          <span>Urgente vs. importante</span><span><b>Trabajo profundo</b> (deep work)</span><span><b>Segundo cerebro</b></span><span>Método PARA</span>
+          <span>Hábitos</span><span>Rutina de mañana</span><span>Journaling</span><span>Inbox cero</span><span>Planner / agenda</span>
+          <span>Plantilla de Notion</span><span>Flujo de trabajo</span>
+          <span><b>Agente de IA</b></span><span>Copiloto</span><span>Prompt</span><span>Procrastinar</span><span>Foco</span>
+          <span><b>Burnout</b></span><span>Desconexión laboral</span><span>Jornada de 42 h</span><span>Equilibrio vida-trabajo</span>
+          <span>Bienestar digital</span><span>Slow productivity</span><span>“Camellar”</span>
+        </div>
+      </section>
+
+      <p class="note"><b>No verificable:</b> el tamaño del mercado en Colombia, cuántos colombianos usan Notion, Todoist o TickTick, las tendencias de búsqueda locales, el precio en pesos de 365 con Copilot y si Pulse ya está abierto en Colombia. No encontré startups colombianas de productividad personal con financiación pública.</p>
+    </div>
+  </div>
+
+  <footer class="foot">
+    <strong>Leyenda:</strong>
+    <span><span class="tag H">HECHO</span>publicado y fechado por una fuente</span>
+    <span><span class="tag E">ESTIM.</span>estimación de terceros</span>
+    <span><span class="tag O">PROYECCIÓN</span>/<span class="tag O">OPINIÓN</span>juicio del analista o de terceros</span>
+    <span><span class="tag NV">NO VERIF.</span>sin evidencia</span>
+    <span>Superíndices = fuentes en la hoja 2.</span>
+  </footer>
+</article>
+
+<!-- ===================== HOJA 2 ===================== -->
+<article class="sheet" aria-label="Señales de madurez">
+  <span class="sheet-label">Hoja 2 / 2 · Anexo</span>
+  <div>
+    <p class="eyebrow">Anexo · Evidencia del veredicto</p>
+    <h2 class="h2big">Señales de madurez</h2>
+    <p class="sub">Cada fila es una señal observable. La lectura ubica la señal en la escala naciente (●○○), crecimiento (●●○) o saturado (●●●). El tipo dice qué tan firme es el dato.</p>
+  </div>
+
+  <div class="tally" aria-label="Conteo de señales">
+    <div><strong>3</strong><span>señales de categoría <b>naciente</b> (players locales, segmento informal, medición del mercado)</span></div>
+    <div><strong>5</strong><span>señales de <b>crecimiento</b> (agentes de IA, capital, adopción de IA, presión laboral, bienestar)</span></div>
+    <div><strong>5</strong><span>señales de <b>saturación</b> (métodos, apps de tareas, plantillas, contenido, precios)</span></div>
+  </div>
+
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>Señal</th><th>Dato observado</th><th>Lectura</th><th>Tipo</th><th>Fuente</th></tr></thead>
+    <tbody>
+      <tr><td>Métodos de productividad</td><td>Pomodoro, GTD, Eisenhower y PARA tienen años o décadas. Las plantillas y cursos repiten los mismos marcos.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b class="on"></b></span>Saturado</span></td><td><span class="tag H">HECHO</span></td><td class="src">23, 24</td></tr>
+      <tr><td>Apps de tareas y notas</td><td>Muchas apps globales con plan gratis. Compiten por precio: TickTick cuesta ~40% menos que Todoist y suma Pomodoro y hábitos.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b class="on"></b></span>Saturado</span></td><td><span class="tag O">OPINIÓN</span></td><td class="src">13, 26</td></tr>
+      <tr><td>Mercado de plantillas</td><td>Plantillas de “segundo cerebro” en español de US$0 a US$199 en Gumroad, con versiones gratis y pocas ventas visibles. Notion tiene su propia galería.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b class="on"></b></span>Saturado</span></td><td><span class="tag H">HECHO</span></td><td class="src">23, 24</td></tr>
+      <tr><td>Contenido y formación</td><td><i>Hábitos atómicos</i> lidera ventas desde 2023. Platzi tiene un curso con 1.933 reseñas y Google ofrece cursos gratis. Abunda el contenido sin costo.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b class="on"></b></span>Saturado</span></td><td><span class="tag H">HECHO</span></td><td class="src">17, 18</td></tr>
+      <tr><td>Precios y suscripciones</td><td>Microsoft subió 365 Personal por Copilot (ene 2025, EE. UU.) y Todoist subió precio (dic 2025). Las subidas se justifican con IA.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b class="on"></b></span>Saturado</span></td><td><span class="tag H">HECHO</span></td><td class="src">12, 13</td></tr>
+      <tr><td>Agentes de IA personales</td><td>Notion: agentes (feb 2026), correo y calendario (abr 2026), app de agentes (jul 2026). ChatGPT Pulse con Gmail y Calendar. Son productos de menos de un año.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b></b></span>Crecimiento</span></td><td><span class="tag H">HECHO</span></td><td class="src">9, 10, 11</td></tr>
+      <tr><td>Capital en la categoría</td><td>Notion: ~US$11.000 M de valoración (ene 2026) y entre US$600 M y US$865 M de ingresos anuales estimados. Más de la mitad viene de clientes con IA, según la empresa.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b></b></span>Crecimiento</span></td><td><span class="tag E">ESTIM.</span></td><td class="src">14, 15, 16</td></tr>
+      <tr><td>Adopción de IA en el trabajo (CO)</td><td>63% de los usuarios de IA hace tareas nuevas y 70% teme quedarse atrás, por encima del promedio global. Las empresas van más lento que las personas.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b></b></span>Crecimiento</span></td><td><span class="tag H">HECHO</span></td><td class="src">7, 8</td></tr>
+      <tr><td>Presión laboral por productividad</td><td>Jornada de 42 h desde jul 2026, recargos más altos y Colombia último en productividad de la OCDE. Hay que rendir igual en menos horas.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b></b></span>Crecimiento</span></td><td><span class="tag H">HECHO</span></td><td class="src">1, 3, 4, 5</td></tr>
+      <tr><td>Bienestar y desconexión</td><td>Ley 2191 de 2022 obliga a tener política de desconexión (multas de hasta 5.000 salarios mínimos). Cifras de burnout de 13% a 48% según el estudio.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b></b></span>Crecimiento</span></td><td><span class="tag E">ESTIM.</span></td><td class="src">19, 20, 22</td></tr>
+      <tr><td>Players colombianos</td><td>No encontré startups colombianas de productividad personal con financiación ni tracción pública. Lo local es formación (Platzi) y consultoría de RR. HH.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b></b><b></b></span>Naciente</span></td><td><span class="tag NV">NO VERIF.</span></td><td class="src">18</td></tr>
+      <tr><td>Oferta para informales</td><td>54,5% de los ocupados son informales (13,3 M) y 6 de cada 10 trabajan por cuenta propia. No vi herramientas pensadas para ellos.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b></b><b></b></span>Naciente</span></td><td><span class="tag NV">NO VERIF.</span></td><td class="src">21</td></tr>
+      <tr><td>Medición del mercado</td><td>No hay tamaño de mercado, uso de apps por país ni tendencias de búsqueda públicas para Colombia. Sí hay base digital: 41,7 M de usuarios de internet (77,8%).</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b></b><b></b></span>Naciente</span></td><td><span class="tag NV">NO VERIF.</span></td><td class="src">25</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="gaps">
+    <h3>Límites de este análisis</h3>
+    <p>Las cifras de Microsoft, DANE y Gallup salen de prensa que cita los informes originales; no abrí todos esos informes. Los ingresos de Notion son estimaciones de terceros (Sacra, Multiples) porque la empresa no publica cifras auditadas. Las comparativas de apps son blogs con posible sesgo comercial, y el aumento de Microsoft 365 está confirmado para EE. UU., no para Colombia. Las proyecciones son juicio del analista, no pronósticos de una fuente.</p>
+  </div>
+
+  <section>
+    <h2><span>§</span>Fuentes</h2>
+    <ol class="sources">
+      <li><a href="https://www.vanguardia.com/colombia/2026/07/02/desde-el-16-de-julio-la-jornada-laboral-en-colombia-sera-de-42-horas-asi-queda-la-reduccion/">Vanguardia, jornada de 42 horas desde julio de 2026</a></li>
+      <li><a href="https://www.portafolio.co/economia/empleo/jornada-laboral-de-42-horas-estos-trabajadores-no-tendran-reduccion-desde-el-15-de-julio-de-2026-en-colombia-498103">Portafolio, a quién no aplica la jornada de 42 horas</a></li>
+      <li><a href="https://actualicese.com/como-quedan-los-recargos-nocturnos-dominicales-y-festivos-con-la-reforma-laboral-ley-2466-de-2025/">Actualícese, recargos con la Ley 2466 de 2025</a></li>
+      <li><a href="https://www.larepublica.co/globoeconomia/paises-con-menor-productividad-laboral-de-la-ocde-4290004">La República, países con menor productividad de la OCDE</a></li>
+      <li><a href="https://www.portafolio.co/economia/la-productividad-de-la-economia-colombiana-ha-estado-estancada-al-menos-durante-los-ultimos-20-anos-499594">Portafolio, productividad estancada 20 años</a></li>
+      <li><a href="https://www.dane.gov.co/files/operaciones/GEIH/press-GEIH-Insumos%20contextoMesaConcertacion-2026.pdf">DANE, insumos para la mesa del salario mínimo 2026</a></li>
+      <li><a href="https://www.portafolio.co/tecnologia/ia-en-colombia-trabajadores-ganan-nuevas-capacidades-pero-las-empresas-avanzan-mas-lento-501093">Portafolio, Work Trend Index 2026 en Colombia</a></li>
+      <li><a href="https://ecosistemastartup.com/colombia-supera-el-promedio-global-de-adopcion-de-ia-63-ya-la-usa/">Ecosistema Startup, Colombia supera el promedio global en IA</a></li>
+      <li><a href="https://www.notion.com/releases/2026-04-17">Notion, notas de versión (17 abr 2026)</a></li>
+      <li><a href="https://releases.sh/notion/notion-releases/highlights">Releases.sh, historial de lanzamientos de Notion</a></li>
+      <li><a href="https://venturebeat.com/ai/chatgpt-pulse-delivers-daily-personalized-research-moving-ai-from-reactive">VentureBeat, ChatGPT Pulse</a></li>
+      <li><a href="https://www.muycomputer.com/2025/01/19/microsoft-365-suma-copilot-y-sube-de-precio/">MuyComputer, Microsoft 365 suma Copilot y sube de precio</a></li>
+      <li><a href="https://2sync.com/blog/ticktick-vs-todoist">2sync, TickTick vs. Todoist (blog comparativo)</a></li>
+      <li><a href="https://sacra.com/research/notion-at-865m-year-growing-82-yoy/">Sacra, Notion a US$865 M al año (estimación)</a></li>
+      <li><a href="https://multiples.vc/private-comps/notion">Multiples, ingresos y valoración de Notion</a></li>
+      <li><a href="https://axis-intelligence.com/?p=40715">Axis Intelligence, usuarios e IA en Notion</a></li>
+      <li><a href="https://www.bluradio.com/sociedad/cuantos-ha-leido-estos-son-los-libros-que-mas-se-vendieron-en-colombia-durante-2025-so35">Blu Radio, libros más vendidos en Colombia en 2025</a></li>
+      <li><a href="https://platzi.com/cursos/productividad/opiniones/">Platzi, opiniones del Curso de Productividad</a></li>
+      <li><a href="https://www.larepublica.co/alta-gerencia/sindrome-burnout-afecta-a-13-de-los-colombianos-y-en-mayor-medida-a-generacion-z-4188374">La República, burnout en el 13% de los colombianos</a></li>
+      <li><a href="https://repository.universidadean.edu.co/bitstreams/6e432efd-ccc9-48fc-8cad-35f63f141770/download">Universidad EAN, tesis que cita a Gallup (48%)</a></li>
+      <li><a href="https://forbes.co/2026/07/31/economia-y-finanzas/desempleo-bajo-a-8-en-junio-pero-la-informalidad-se-mantuvo-en-551/">Forbes Colombia, informalidad a junio de 2026</a></li>
+      <li><a href="https://www.asuntoslegales.com.co/consultorio/claves-de-la-ley-2191-de-2022-denominada-ley-de-desconexion-laboral-3285954">Asuntos Legales, claves de la Ley 2191 de desconexión</a></li>
+      <li><a href="https://clickup.com/es-ES/blog/493192/plantillas-de-notion-second-brain">ClickUp, plantillas de segundo cerebro en Notion</a></li>
+      <li><a href="https://javrezt.gumroad.com/l/second-brain">Gumroad, ejemplo de plantilla de segundo cerebro</a></li>
+      <li><a href="https://datareportal.com/reports/digital-2026-colombia">DataReportal, Digital 2026: Colombia</a></li>
+      <li><a href="https://clickup.com/learn/topic/task-management/tools/ticktick/">ClickUp, reseña de TickTick (posible sesgo)</a></li>
+    </ol>
+  </section>
+</article>
+</div>

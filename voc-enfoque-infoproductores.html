@@ -1,0 +1,264 @@
+<title>Voz del Cliente Enfoque</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Voz del cliente (Enfoque) — misma serie, acento oliva, una hoja larga. Layout: dos hojas tamaño carta (8.5×11 in) sobre una mesa gris; hoja 1 = resumen ejecutivo, hoja 2 = tabla de señales + fuentes. En móvil, las hojas se vuelven fluidas. */
+:root{
+  --desk:#e3e6ea; --paper:#ffffff; --ink:#18212b; --muted:#5a6672; --rule:#d5dbe1;
+  --accent:#53661a; --accent-soft:#eef2e0; --mark:#ffd84d; --mark-ink:#3b3000;
+  --t-hecho:#1f6f4a; --t-hecho-bg:#e3f3ea; --t-est:#7a5a00; --t-est-bg:#fbf1d2;
+  --t-op:#6a3d8f; --t-op-bg:#f1e9f8; --t-nv:#9a2f2f; --t-nv-bg:#f8e6e6;
+  --f-display:"IBM Plex Sans Condensed","Arial Narrow",Arial,sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  --shadow:0 1px 2px rgba(20,30,40,.08),0 8px 28px rgba(20,30,40,.10);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --desk:#0e1216; --paper:#171c22; --ink:#e4e9ee; --muted:#9aa6b2; --rule:#2c343d;
+  --accent:#c3d67a; --accent-soft:#252c14; --mark:#e9c53a; --mark-ink:#1c1600;
+  --t-hecho:#7fd4a6; --t-hecho-bg:#173126; --t-est:#e8c46a; --t-est-bg:#332a12;
+  --t-op:#c9a6ea; --t-op-bg:#2a2036; --t-nv:#f0a0a0; --t-nv-bg:#3a1f1f;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.35); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --desk:#0e1216; --paper:#171c22; --ink:#e4e9ee; --muted:#9aa6b2; --rule:#2c343d;
+  --accent:#c3d67a; --accent-soft:#252c14; --mark:#e9c53a; --mark-ink:#1c1600;
+  --t-hecho:#7fd4a6; --t-hecho-bg:#173126; --t-est:#e8c46a; --t-est-bg:#332a12;
+  --t-op:#c9a6ea; --t-op-bg:#2a2036; --t-nv:#f0a0a0; --t-nv-bg:#3a1f1f;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.35); color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--desk);color:var(--ink);font-family:var(--f-body);font-size:10.5px;line-height:1.42;
+  padding-inline:16px;padding-block:28px 40px;-webkit-font-smoothing:antialiased}
+.desk{display:flex;flex-direction:column;align-items:center;gap:28px}
+.sheet{background:var(--paper);width:816px;max-width:100%;min-height:1056px;padding:40px 52px;box-shadow:var(--shadow);
+  display:flex;flex-direction:column;gap:14px;position:relative}
+.sheet-label{position:absolute;top:-18px;left:0;font:500 10px/1 var(--f-mono);color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+a{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0}
+p{margin:0}
+ul{margin:0;padding-left:14px;display:flex;flex-direction:column;gap:4px}
+li::marker{color:var(--accent)}
+sup{font:500 8px/0 var(--f-mono);color:var(--accent);margin-left:1px}
+
+/* Encabezado */
+.head{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:18px;align-items:end;border-bottom:2px solid var(--ink);padding-bottom:10px}
+.eyebrow{font:500 9.5px/1.3 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font-size:30px;line-height:1.02;font-weight:700;letter-spacing:-.01em;margin-top:4px}
+.def{color:var(--muted);margin-top:5px;max-width:62ch}
+.verdict{min-width:250px;display:flex;flex-direction:column;gap:6px}
+.verdict-title{font:600 13px/1.15 var(--f-display)}
+.verdict-title mark{background:var(--mark);color:var(--mark-ink);padding:0 3px}
+.gauge{position:relative;height:8px;border-radius:4px;background:linear-gradient(90deg,var(--accent-soft),var(--accent))}
+.gauge i{position:absolute;top:-4px;left:35%;width:3px;height:16px;background:var(--ink);border-radius:2px}
+.gauge-scale{display:flex;justify-content:space-between;font:500 8.5px/1 var(--f-mono);color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+
+/* Columnas */
+.cols{display:grid;grid-template-columns:1.12fr 1fr;gap:22px;flex:1}
+.col{display:flex;flex-direction:column;gap:13px;min-width:0}
+section h2{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--accent);
+  display:flex;gap:6px;align-items:baseline;border-bottom:1px solid var(--rule);padding-bottom:3px;margin-bottom:6px}
+section h2 span{font-family:var(--f-mono);font-weight:500;font-size:10px;color:var(--muted)}
+
+/* Etiquetas de evidencia */
+.tag{display:inline-block;font:500 8px/1 var(--f-mono);letter-spacing:.04em;padding:2px 4px 2px;border-radius:2px;vertical-align:1px;margin-right:3px;white-space:nowrap}
+.H{color:var(--t-hecho);background:var(--t-hecho-bg)}
+.E{color:var(--t-est);background:var(--t-est-bg)}
+.O{color:var(--t-op);background:var(--t-op-bg)}
+.NV{color:var(--t-nv);background:var(--t-nv-bg)}
+
+.players{display:grid;grid-template-columns:auto 1fr;gap:4px 8px}
+.players dt{font:600 9px/1.5 var(--f-mono);text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+.players dd{margin:0}
+.vocab{display:flex;flex-wrap:wrap;gap:4px}
+.vocab span{border:1px solid var(--rule);padding:1px 6px;border-radius:10px;font-size:9.8px;white-space:nowrap}
+.vocab span b{font-weight:600}
+.note{font-size:9.6px;color:var(--muted)}
+.foot{border-top:1px solid var(--rule);padding-top:7px;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;font-size:9.4px;color:var(--muted)}
+.foot strong{color:var(--ink);font-weight:600}
+
+/* Hoja 2: tabla */
+.h2big{font-size:22px;font-weight:700}
+.sub{color:var(--muted);max-width:80ch}
+.tablewrap{overflow-x:auto;min-width:0}
+table{border-collapse:collapse;width:100%;font-size:10px;min-width:640px}
+th{font:600 9px/1.2 var(--f-mono);text-transform:uppercase;letter-spacing:.05em;color:var(--muted);text-align:left;padding:6px 6px;border-bottom:2px solid var(--ink)}
+td{padding:4.5px 6px;border-bottom:1px solid var(--rule);vertical-align:top}
+td:first-child{font-weight:600;width:19%}
+td.read{width:13%}
+td.src{width:7%;font:500 9px/1.4 var(--f-mono);color:var(--muted);white-space:nowrap}
+.stage{display:inline-flex;align-items:center;gap:5px;font:600 9.5px/1.2 var(--f-display);text-transform:uppercase;letter-spacing:.03em}
+.dots{display:inline-flex;gap:2px}
+.dots b{width:7px;height:7px;border-radius:50%;border:1px solid var(--accent)}
+.dots b.on{background:var(--accent)}
+.tally{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.tally div{border:1px solid var(--rule);padding:8px 10px;display:flex;flex-direction:column;gap:2px}
+.tally strong{font:700 20px/1 var(--f-display);font-variant-numeric:tabular-nums}
+.tally span{font-size:9.6px;color:var(--muted)}
+.sources{columns:2;column-gap:22px;font-size:9px;line-height:1.38;color:var(--muted);margin:0;padding-left:18px}
+.sources li{break-inside:avoid;margin-bottom:2px}
+.sources a{word-break:break-word}
+.gaps{background:var(--accent-soft);padding:9px 12px;display:flex;flex-direction:column;gap:4px}
+.gaps h3{font-size:11.5px;text-transform:uppercase;letter-spacing:.04em}
+
+
+.voc{min-height:0}
+.top5{background:var(--accent-soft);padding:12px 16px;display:flex;flex-direction:column;gap:6px}
+.top5 ol{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px}
+.top5 li{font-size:11px}
+.cnt{font:600 8.5px/1 var(--f-mono);color:var(--accent);border:1px solid var(--accent);padding:2px 5px;border-radius:9px;margin-left:4px;white-space:nowrap}
+.ev{color:var(--muted);font-size:9.6px;margin-left:4px}
+h3.theme{font:600 11.5px/1.25 var(--f-display);margin:10px 0 5px;display:flex;gap:6px;align-items:baseline;flex-wrap:wrap}
+.top{font:600 8px/1 var(--f-mono);background:var(--mark);color:var(--mark-ink);padding:2px 4px;border-radius:2px;letter-spacing:.04em}
+blockquote{margin:0 0 7px;padding:5px 0 5px 10px;border-left:2px solid var(--accent);display:flex;flex-direction:column;gap:2px}
+blockquote q{font-size:11px;font-weight:500;line-height:1.38}
+q{quotes:"“" "”"}
+.tr{font-size:9.6px;color:var(--muted);font-style:italic}
+cite{font-style:normal;font-size:9.2px;color:var(--muted)}
+.data,.para,.gap{font-size:10px;margin:2px 0 8px}
+.gap{color:var(--muted)}
+sup a{text-decoration:none}
+table.solutions{min-width:0;table-layout:fixed}
+table.solutions td:first-child{width:24%}
+table.solutions td:last-child{width:28%;font-size:9.4px}
+.gaps p{font-size:10px}
+
+@media (max-width:760px){
+  body{font-size:12.5px}
+  .sheet{min-height:0;padding:26px 18px}
+  .head,.cols{grid-template-columns:1fr}
+  .verdict{min-width:0}
+  h1{font-size:26px}
+  .sources{columns:1}
+  .tally{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+<div class="desk">
+<article class="sheet voc" aria-label="Mapa de voz del cliente">
+  <header class="head">
+    <div>
+      <p class="eyebrow">Mapa VoC · Categoría Enfoque · corte 12 oct 2026</p>
+      <h1>Voz del cliente: Enfoque</h1>
+      <p class="def"><b>Perfil:</b> infoproductores, creadores digitales y fundadores que ya facturan, pero están atrapados en la operación diaria, el scroll infinito y la dispersión mental. Las frases van en su idioma original, con traducción breve. Solo se citan textos encontrados; lo demás va marcado como paráfrasis o sin evidencia.</p>
+    </div>
+    <div class="verdict" aria-label="Calidad de la evidencia">
+      <p class="eyebrow">Calidad de la evidencia</p>
+      <p class="verdict-title"><mark>Baja a media</mark>: 24 citas textuales de 21 fuentes; solo 4 en español y ninguna de grupos de Facebook.</p>
+      <div class="gauge" role="img" aria-label="Indicador en 35% de cobertura"><i></i></div>
+      <div class="gauge-scale"><span>Anecdótica</span><span>Indicativa</span><span>Representativa</span></div>
+    </div>
+  </header>
+
+  <section class="top5" aria-label="Las 5 frases más repetidas">
+    <h2><span>★</span>Las 5 ideas más repetidas en la muestra</h2>
+    <p class="note">“Repetida” significa que aparece en más fuentes independientes de esta muestra (unas 30). No mide volumen real en redes.</p>
+    <ol>
+      <li><b>“No puedo dejar de scrollear aunque sé que me hace daño.”</b> <span class="cnt">5 fuentes</span> <span class="ev">Quora, 3 hilos de Hacker News, Substack en español</span></li>
+      <li><b>“Los bloqueadores se saltan fácil.”</b> <span class="cnt">4 fuentes</span> <span class="ev">reseñas de Opal y Freedom (Trustpilot, AlternativeTo, Blok)</span></li>
+      <li><b>“Si no publico seguido, el algoritmo me castiga.”</b> <span class="cnt">3 fuentes + encuesta</span> <span class="ev">75% de 1.000 creadores (Patreon), Vanessa Lau, ensayo en español</span></li>
+      <li><b>“Reviso correo o métricas apenas me despierto y a cada rato.”</b> <span class="cnt">3 fuentes</span> <span class="ev">fundador, creador de YouTube, datos de Microsoft</span></li>
+      <li><b>“Ya lo probé todo (apps, cursos, libros).”</b> <span class="cnt">3 fuentes</span> <span class="ev">reseña de Blok, blog en español, comentario en Hacker News</span></li>
+    </ol>
+    <p class="note">Empata en 3 fuentes: “quiero mi tiempo / mi vida de vuelta”. Las frases de esta lista son la síntesis de cada idea; las citas textuales que la sostienen están abajo.</p>
+  </section>
+
+  <div class="cols">
+    <div class="col">
+      <section>
+        <h2><span>1</span>Dolores</h2>
+
+        <h3 class="theme">A. Scroll compulsivo, aunque sé que me hace daño <span class="top">TOP 1</span></h3>
+        <blockquote><q>I can't stop doomscrolling even when I know it's destroying my focus, sleep, and mental health.</q><span class="tr">No puedo dejar de hacer doomscrolling aunque sé que destruye mi foco, mi sueño y mi salud mental.</span><cite><span class="tag H">USUARIO</span>Pregunta en Quora · <a href="https://www.quora.com/How-do-I-overcome-phone-scrolling-addiction-I-can-t-stop-doomscrolling-even-when-I-know-it-s-destroying-my-focus-sleep-and-mental-health">ver</a></cite></blockquote>
+        <blockquote><q>How do you fight YouTube addiction and procrastination? I'm struggling</q><span class="tr">¿Cómo combaten la adicción a YouTube y la procrastinación? Me está costando.</span><cite><span class="tag H">USUARIO</span>Ask HN · <a href="https://news.ycombinator.com/item?id=45085014">ver</a></cite></blockquote>
+        <blockquote><q>Mobile phone addiction help?</q><span class="tr">¿Ayuda con la adicción al celular?</span><cite><span class="tag H">USUARIO</span>Ask HN · <a href="https://news.ycombinator.com/item?id=27017776">ver</a> · también <a href="https://news.ycombinator.com/item?id=36184605">“Struggling with Productivity and Procrastination”</a></cite></blockquote>
+        <blockquote><q>Ya es 2026 y estamos cansados de scrollear</q><cite><span class="tag E">ENSAYO</span>Substack en español · <a href="https://archivonaranja.substack.com/p/es-2026-y-estamos-cansados-de-scrollear">ver</a></cite></blockquote>
+
+        <h3 class="theme">B. Siempre conectado: correo, Slack y métricas <span class="top">TOP 4</span></h3>
+        <blockquote><q>I try really hard not to check my email first thing in the morning, but depending on what's happening, sometimes I do.</q><span class="tr">Me esfuerzo mucho por no revisar el correo apenas me levanto, pero según lo que pase, a veces lo hago.</span><cite><span class="tag H">FUNDADOR</span>My Morning Routine · <a href="https://mymorningroutine.com/qa/checking-email/">ver</a></cite></blockquote>
+        <blockquote><q>I'm an addict</q><span class="tr">Soy un adicto. Lo dice un creador que revisa sus estadísticas varias veces al día y anuncia 21 días sin mirarlas.</span><cite><span class="tag H">CREADOR</span>The Tech Packer · <a href="https://thetechpacker.substack.com/p/im-an-addict">ver</a></cite></blockquote>
+        <p class="data"><span class="tag O">DATO</span>Microsoft mide una interrupción cada 2 minutos en horario laboral: 275 al día, entre reuniones, correos y notificaciones.<sup><a href="https://unleash.ai/artificial-intelligence/news/microsoft-employees-are-interrupted-every-2-minutes-how-can-ai-help-us-re-focus-on-the-work-that-matters">↗</a></sup></p>
+
+        <h3 class="theme">C. Atrapado en la operación: el negocio depende de mí</h3>
+        <blockquote><q>Mi negocio me tiene atrapado</q><cite><span class="tag E">PODCAST</span>Título de Superhábitos #401, que pone la frase entre comillas como si fuera de un oyente (no verificado) · <a href="https://superhabitos.com/mi-negocio-me-tiene-atrapado">ver</a></cite></blockquote>
+        <blockquote><q>a big zigzag rather than a straight line</q><span class="tr">Un gran zigzag, no una línea recta. Así describe su motivación un fundador con TDAH.</span><cite><span class="tag H">FUNDADOR</span>BDC Canadá · <a href="https://www.bdc.ca/en/articles-tools/blog/building-businesses-differently-adhd-entrepreneurship-canada">ver</a></cite></blockquote>
+        <p class="gap"><span class="tag NV">SIN EVIDENCIA</span>No encontré frases textuales de infoproductores latinos sobre “apagar incendios” o “soy el cuello de botella”. Esas expresiones aparecen en blogs de consultores, no en boca del cliente.</p>
+
+        <h3 class="theme">D. Presión del algoritmo y agotamiento <span class="top">TOP 3</span></h3>
+        <blockquote><q>Burnout forced me to walk away, and at the time, I wasn't sure if I would even return.</q><span class="tr">El burnout me obligó a irme y en ese momento no sabía si volvería.</span><cite><span class="tag H">CREADORA</span>Vanessa Lau, creadora con un negocio de cursos de siete cifras · <a href="https://vanessalau.substack.com/p/why-i-quit-youtube">ver</a></cite></blockquote>
+        <blockquote><q>my relationship with YouTube (and business) took a toxic turn</q><span class="tr">Mi relación con YouTube (y con el negocio) se volvió tóxica.</span><cite><span class="tag H">CREADORA</span>Vanessa Lau · <a href="https://vanessalau.substack.com/p/why-i-quit-youtube">ver</a></cite></blockquote>
+        <p class="data"><span class="tag O">DATO</span>Patreon, 2025 (1.000 creadores): el 75% cree que las plataformas lo castigan si no publica con constancia y el 78% dice que el burnout afecta su motivación.<sup><a href="https://news.patreon.com/articles/Strengthening-transparency-mental-health-support-and-community-guidelines-in-2025">↗</a> <a href="https://news.patreon.com/articles/sxsw-2025-recap-the-creator-economy-needs-a-reset">↗</a></sup></p>
+      </section>
+
+      <section>
+        <h2><span>2</span>Deseos y aspiraciones</h2>
+        <h3 class="theme">Recuperar el tiempo y la vida</h3>
+        <blockquote><q>Sold the working nutrition business - because the model itself demanded hours I didn't want to give it.</q><span class="tr">Vendí el negocio de nutrición porque el modelo exigía horas que no quería dar.</span><cite><span class="tag H">FUNDADOR</span>SovLyfe, en <a href="https://sovlyfe.substack.com/p/nobody-gives-you-time-back-you-have-to-take-it">“Nobody Gives You Time Back. You Have to Take It.”</a></cite></blockquote>
+        <blockquote><q>What If What We Really Want From Work Is Our Life Back?</q><span class="tr">¿Y si lo que de verdad queremos del trabajo es recuperar la vida?</span><cite><span class="tag E">ENSAYO</span>Treasure Madonna · <a href="https://treasuremadonna.substack.com/p/i-wonder-if-what-i-really-want-from">ver</a></cite></blockquote>
+        <h3 class="theme">Un negocio que funcione sin mí</h3>
+        <blockquote><q>How I'm Building My Business To Run Without Me</q><span class="tr">Cómo estoy construyendo mi negocio para que funcione sin mí.</span><cite><span class="tag H">FUNDADOR</span>Very Good Productized Guides · <a href="https://verygoodproductizedguides.substack.com/p/build-a-business-to-run-without-me">ver</a></cite></blockquote>
+        <h3 class="theme">Usar las redes para trabajar sin que me consuman</h3>
+        <blockquote><q>Quitarme Instagram fue la mejor decisión del año</q><cite><span class="tag H">PROFESIONAL</span>Periodista que necesita Instagram para trabajar; borró la app del celular y la dejó solo en la tableta · <a href="https://brillibrilli.substack.com/p/quitarse-instagram">ver</a></cite></blockquote>
+        <p class="data"><span class="tag O">DATO</span>El 81% de los creadores quiere una conexión más directa con su audiencia, sin depender del algoritmo (Patreon).<sup><a href="https://news.patreon.com/articles/Strengthening-transparency-mental-health-support-and-community-guidelines-in-2025">↗</a></sup></p>
+        <p class="para"><span class="tag E">PARÁFRASIS</span>Una infoproductora citada por Hotmart dice que el mayor cambio en su vida y su negocio fue la calma de poder concentrarse en crear. Es un testimonio elegido por la plataforma.<sup><a href="https://hotmart.com/es/blog/hotmart-opiniones">↗</a></sup></p>
+      </section>
+    </div>
+
+    <div class="col">
+      <section>
+        <h2><span>3</span>Objeciones y desconfianzas</h2>
+        <h3 class="theme">“Las apps se saltan fácil o fallan” <span class="top">TOP 2</span></h3>
+        <blockquote><q>Able to avoid restrictions through in-private browsing on mobile phone.</q><span class="tr">Pude evadir las restricciones con la navegación privada del celular.</span><cite><span class="tag H">USUARIO</span>Reseña de Freedom en Trustpilot · <a href="https://uk.trustpilot.com/review/freedom.to">ver</a></cite></blockquote>
+        <blockquote><q>there are numerous effortless ways</q><span class="tr">Hay muchas formas fáciles de saltárselo (proxy, otro navegador, cerrar el proceso).</span><cite><span class="tag H">USUARIO</span>Reseña de Freedom en AlternativeTo · <a href="https://www.alternativeto.net/software/macfreedom/about/">ver</a></cite></blockquote>
+        <blockquote><q>there are sometimes bugs that allow me to still get notifications/messages on snapchat and instagram</q><span class="tr">A veces hay fallas y me siguen llegando notificaciones de Snapchat e Instagram.</span><cite><span class="tag H">USUARIO</span>Reseña de Opal en App Store · <a href="https://apps.apple.com/us/app/opal-screen-time-control/id1497465230">ver</a></cite></blockquote>
+        <p class="para"><span class="tag E">PARÁFRASIS</span>Reseñas de Opal cuentan que una actualización impidió “hacer trampa” para salir de las sesiones, lo que indica que antes se podía.<sup><a href="https://justuseapp.com/en/app/1497465230/opal-save-time-daily/reviews">↗</a></sup> Un análisis de Freedom resume que bloquear no ataca el impulso.<sup><a href="https://www.blok.so/resources/freedom-app-review-does-blocking-websites-and-apps-actually-work">↗</a></sup></p>
+
+        <h3 class="theme">“Los métodos son obvios o no encajan con mi trabajo”</h3>
+        <blockquote><q>shallow writing that should have been a blogpost at best</q><span class="tr">Escritura superficial que, a lo sumo, debió ser un post de blog.</span><cite><span class="tag H">LECTOR</span>Reseña de <i>Deep Work</i> en Goodreads · <a href="https://www.goodreads.com/book/show/25744928-deep-work">ver</a></cite></blockquote>
+        <blockquote><q>almost none of the arguments in this book are air tight</q><span class="tr">Casi ningún argumento del libro es sólido. Lo dice un lector que igual lo valoró.</span><cite><span class="tag H">LECTOR</span>Goodreads · <a href="https://www.goodreads.com/book/show/25744928-deep-work">ver</a></cite></blockquote>
+        <p class="para"><span class="tag E">PARÁFRASIS</span>Otro lector critica que el libro ignora a quienes deben responder correos rápido como parte de su trabajo.<sup><a href="https://www.goodreads.com/book/show/25744928-deep-work">↗</a></sup></p>
+
+        <h3 class="theme">“Otro curso más no”</h3>
+        <blockquote><q>Tengo 50 cursos comprados y solo he terminado 2. ¿Te suena?</q><cite><span class="tag H">EMPRENDEDOR</span>Blog en español · <a href="https://pedromayaalvarez.wordpress.com/2026/05/06/tengo-50-cursos-comprados-y-solo-he-terminado-2-te-suena-%F0%9F%99%8B%E2%99%82%EF%B8%8F%F0%9F%99%8B%E2%99%80%EF%B8%8F/">ver</a></cite></blockquote>
+
+        <h3 class="theme">“No puedo dejar las redes: son mi negocio”</h3>
+        <p class="gap"><span class="tag NV">SIN CITA TEXTUAL</span>La objeción aparece de forma indirecta (75% de creadores teme el castigo del algoritmo; la periodista que dejó Instagram solo en la tableta), pero no encontré la frase dicha por un infoproductor. Es probablemente la objeción más importante para este perfil y hay que validarla en entrevistas.</p>
+      </section>
+
+      <section>
+        <h2><span>4</span>Soluciones probadas y por qué se abandonan</h2>
+        <blockquote><q>I have tried them all — Opal, Forest, iPhone Screen Time.</q><span class="tr">Las he probado todas: Opal, Forest, Tiempo en pantalla del iPhone.</span><cite><span class="tag H">USUARIO</span>Citado por Blok · <a href="https://www.blok.so/resources/freedom-app-review-does-blocking-websites-and-apps-actually-work">ver</a> · <span class="top">TOP 5</span></cite></blockquote>
+        <div class="tablewrap">
+        <table class="solutions">
+          <thead><tr><th>Solución</th><th>Por qué la dejan</th><th>Evidencia</th></tr></thead>
+          <tbody>
+            <tr><td>Bloqueadores (Freedom, Opal)</td><td>Se saltan con otro navegador o el modo privado, fallan en iOS, cuestan más que lo que ya trae el teléfono. Hay quien deja vencer la suscripción.</td><td><span class="tag H">CITA</span> Trustpilot, AlternativeTo, App Store</td></tr>
+            <tr><td>Pausa antes de abrir (one sec)</td><td>Para algunos funciona: <q>I got to the point of immediately closing both apps</q>. Para otros la pausa se vuelve costumbre y ya no frena.</td><td><span class="tag H">CITA</span> <a href="https://justuseapp.com/en/app/1532875441/one-sec-delay-distracting-apps/reviews">JustUseApp</a> · <span class="tag E">PARÁFR.</span> reseñadores</td></tr>
+            <tr><td>Hardware de fricción (Brick)</td><td>Funciona porque obliga a levantarse a buscar el aparato. Las críticas: la fricción también molesta y hay un límite de desbloqueos de emergencia.</td><td><span class="tag E">PARÁFR.</span> <a href="https://getdetach.app/blog/brick-vs-opal">comparativas</a>, <a href="https://whatifididnt.com/blog/brick-phone-app/">reseña</a></td></tr>
+            <tr><td>Dejarlo de golpe / borrar apps</td><td>Se recae en días y se termina scrolleando más. Lo que sí se sostiene es mover la app a otro dispositivo.</td><td><span class="tag E">PARÁFR.</span> <a href="https://www.quora.com/How-can-I-stop-scrolling-on-my-phone">Quora</a>, <a href="https://brillibrilli.substack.com/p/quitarse-instagram">Substack</a></td></tr>
+            <tr><td>Trucos de entorno (escala de grises, cajón)</td><td>Funcionan mientras duran. Un usuario dice que cambia una distracción por otra.</td><td><span class="tag E">PARÁFR.</span> <a href="https://news.ycombinator.com/item?id=45085014">Hacker News</a></td></tr>
+            <tr><td>Libros y cursos (Deep Work, productividad)</td><td>“Obvios”, no encajan con trabajos que exigen responder rápido y se acumulan sin terminar.</td><td><span class="tag H">CITA</span> Goodreads, blog en español</td></tr>
+            <tr><td>Dejar de ver métricas</td><td>Pausas de 21 días o salir de la plataforma. En español, una creadora dejó redes por agotamiento y luego cayó en el mismo scroll en Substack.</td><td><span class="tag H">CITA</span> Tech Packer · <span class="tag E">PARÁFR.</span> <a href="https://evelyndalind.substack.com/p/substack-el-eden-digital">Evelyn Dalind</a></td></tr>
+          </tbody>
+        </table>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <div class="gaps">
+    <h3>Qué falta y cómo cerrarlo</h3>
+    <p><b>Fuentes bloqueadas:</b> la red de este entorno no permitió abrir Reddit, Hacker News, Indie Hackers, App Store, Trustpilot ni DataReportal. Las citas salen de fragmentos de buscador; conviene abrir cada enlace para confirmar el texto exacto. Los grupos de Facebook y las comunidades de Hotmart o Skool no se pueden consultar sin acceso.</p>
+    <p><b>Sesgo de la muestra:</b> la mayoría de las voces son anglosajonas y genéricas (usuarios de apps, lectores). Hay poca voz de infoproductores latinos con facturación. <b>Siguiente paso:</b> 8 a 10 entrevistas de 30 minutos con este perfil en Colombia, una encuesta corta en comunidades de creadores y reseñas en español (es-CO) de Opal, Freedom y one sec.</p>
+  </div>
+
+  <footer class="foot">
+    <strong>Leyenda:</strong>
+    <span><span class="tag H">USUARIO / FUNDADOR / CREADOR</span>cita textual en primera persona</span>
+    <span><span class="tag E">ENSAYO / PARÁFRASIS</span>texto de autor o resumen, no cita del cliente</span>
+    <span><span class="tag O">DATO</span>encuesta o medición</span>
+    <span><span class="tag NV">SIN EVIDENCIA</span>no encontré cita</span>
+  </footer>
+</article>
+</div>

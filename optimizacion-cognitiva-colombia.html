@@ -1,0 +1,296 @@
+<title>Optimización Cognitiva CO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Optimización cognitiva — misma serie de briefs, acento teal. Layout: dos hojas tamaño carta (8.5×11 in) sobre una mesa gris; hoja 1 = resumen ejecutivo, hoja 2 = tabla de señales + fuentes. En móvil, las hojas se vuelven fluidas. */
+:root{
+  --desk:#e3e6ea; --paper:#ffffff; --ink:#18212b; --muted:#5a6672; --rule:#d5dbe1;
+  --accent:#0e5e63; --accent-soft:#e3f1f1; --mark:#ffd84d; --mark-ink:#3b3000;
+  --t-hecho:#1f6f4a; --t-hecho-bg:#e3f3ea; --t-est:#7a5a00; --t-est-bg:#fbf1d2;
+  --t-op:#6a3d8f; --t-op-bg:#f1e9f8; --t-nv:#9a2f2f; --t-nv-bg:#f8e6e6;
+  --f-display:"IBM Plex Sans Condensed","Arial Narrow",Arial,sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  --shadow:0 1px 2px rgba(20,30,40,.08),0 8px 28px rgba(20,30,40,.10);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --desk:#0e1216; --paper:#171c22; --ink:#e4e9ee; --muted:#9aa6b2; --rule:#2c343d;
+  --accent:#7fd0cf; --accent-soft:#16302f; --mark:#e9c53a; --mark-ink:#1c1600;
+  --t-hecho:#7fd4a6; --t-hecho-bg:#173126; --t-est:#e8c46a; --t-est-bg:#332a12;
+  --t-op:#c9a6ea; --t-op-bg:#2a2036; --t-nv:#f0a0a0; --t-nv-bg:#3a1f1f;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.35); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --desk:#0e1216; --paper:#171c22; --ink:#e4e9ee; --muted:#9aa6b2; --rule:#2c343d;
+  --accent:#7fd0cf; --accent-soft:#16302f; --mark:#e9c53a; --mark-ink:#1c1600;
+  --t-hecho:#7fd4a6; --t-hecho-bg:#173126; --t-est:#e8c46a; --t-est-bg:#332a12;
+  --t-op:#c9a6ea; --t-op-bg:#2a2036; --t-nv:#f0a0a0; --t-nv-bg:#3a1f1f;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.35); color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--desk);color:var(--ink);font-family:var(--f-body);font-size:10.5px;line-height:1.42;
+  padding-inline:16px;padding-block:28px 40px;-webkit-font-smoothing:antialiased}
+.desk{display:flex;flex-direction:column;align-items:center;gap:28px}
+.sheet{background:var(--paper);width:816px;max-width:100%;min-height:1056px;padding:40px 52px;box-shadow:var(--shadow);
+  display:flex;flex-direction:column;gap:14px;position:relative}
+.sheet-label{position:absolute;top:-18px;left:0;font:500 10px/1 var(--f-mono);color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+a{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0}
+p{margin:0}
+ul{margin:0;padding-left:14px;display:flex;flex-direction:column;gap:4px}
+li::marker{color:var(--accent)}
+sup{font:500 8px/0 var(--f-mono);color:var(--accent);margin-left:1px}
+
+/* Encabezado */
+.head{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:18px;align-items:end;border-bottom:2px solid var(--ink);padding-bottom:10px}
+.eyebrow{font:500 9.5px/1.3 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font-size:30px;line-height:1.02;font-weight:700;letter-spacing:-.01em;margin-top:4px}
+.def{color:var(--muted);margin-top:5px;max-width:62ch}
+.verdict{min-width:250px;display:flex;flex-direction:column;gap:6px}
+.verdict-title{font:600 13px/1.15 var(--f-display)}
+.verdict-title mark{background:var(--mark);color:var(--mark-ink);padding:0 3px}
+.gauge{position:relative;height:8px;border-radius:4px;background:linear-gradient(90deg,var(--accent-soft),var(--accent))}
+.gauge i{position:absolute;top:-4px;left:28%;width:3px;height:16px;background:var(--ink);border-radius:2px}
+.gauge-scale{display:flex;justify-content:space-between;font:500 8.5px/1 var(--f-mono);color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+
+/* Columnas */
+.cols{display:grid;grid-template-columns:1.12fr 1fr;gap:22px;flex:1}
+.col{display:flex;flex-direction:column;gap:13px;min-width:0}
+section h2{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--accent);
+  display:flex;gap:6px;align-items:baseline;border-bottom:1px solid var(--rule);padding-bottom:3px;margin-bottom:6px}
+section h2 span{font-family:var(--f-mono);font-weight:500;font-size:10px;color:var(--muted)}
+
+/* Etiquetas de evidencia */
+.tag{display:inline-block;font:500 8px/1 var(--f-mono);letter-spacing:.04em;padding:2px 4px 2px;border-radius:2px;vertical-align:1px;margin-right:3px;white-space:nowrap}
+.H{color:var(--t-hecho);background:var(--t-hecho-bg)}
+.E{color:var(--t-est);background:var(--t-est-bg)}
+.O{color:var(--t-op);background:var(--t-op-bg)}
+.NV{color:var(--t-nv);background:var(--t-nv-bg)}
+
+.players{display:grid;grid-template-columns:auto 1fr;gap:4px 8px}
+.players dt{font:600 9px/1.5 var(--f-mono);text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+.players dd{margin:0}
+.vocab{display:flex;flex-wrap:wrap;gap:4px}
+.vocab span{border:1px solid var(--rule);padding:1px 6px;border-radius:10px;font-size:9.8px;white-space:nowrap}
+.vocab span b{font-weight:600}
+.note{font-size:9.6px;color:var(--muted)}
+.foot{border-top:1px solid var(--rule);padding-top:7px;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;font-size:9.4px;color:var(--muted)}
+.foot strong{color:var(--ink);font-weight:600}
+
+/* Hoja 2: tabla */
+.h2big{font-size:22px;font-weight:700}
+.sub{color:var(--muted);max-width:80ch}
+.tablewrap{overflow-x:auto;min-width:0}
+table{border-collapse:collapse;width:100%;font-size:10px;min-width:640px}
+th{font:600 9px/1.2 var(--f-mono);text-transform:uppercase;letter-spacing:.05em;color:var(--muted);text-align:left;padding:6px 6px;border-bottom:2px solid var(--ink)}
+td{padding:4.5px 6px;border-bottom:1px solid var(--rule);vertical-align:top}
+td:first-child{font-weight:600;width:19%}
+td.read{width:13%}
+td.src{width:7%;font:500 9px/1.4 var(--f-mono);color:var(--muted);white-space:nowrap}
+.stage{display:inline-flex;align-items:center;gap:5px;font:600 9.5px/1.2 var(--f-display);text-transform:uppercase;letter-spacing:.03em}
+.dots{display:inline-flex;gap:2px}
+.dots b{width:7px;height:7px;border-radius:50%;border:1px solid var(--accent)}
+.dots b.on{background:var(--accent)}
+.tally{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.tally div{border:1px solid var(--rule);padding:8px 10px;display:flex;flex-direction:column;gap:2px}
+.tally strong{font:700 20px/1 var(--f-display);font-variant-numeric:tabular-nums}
+.tally span{font-size:9.6px;color:var(--muted)}
+.sources{columns:2;column-gap:22px;font-size:9px;line-height:1.38;color:var(--muted);margin:0;padding-left:18px}
+.sources li{break-inside:avoid;margin-bottom:2px}
+.sources a{word-break:break-word}
+.gaps{background:var(--accent-soft);padding:9px 12px;display:flex;flex-direction:column;gap:4px}
+.gaps h3{font-size:11.5px;text-transform:uppercase;letter-spacing:.04em}
+
+@media (max-width:760px){
+  body{font-size:12.5px}
+  .sheet{min-height:0;padding:26px 18px}
+  .head,.cols{grid-template-columns:1fr}
+  .verdict{min-width:0}
+  h1{font-size:26px}
+  .sources{columns:1}
+  .tally{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+<div class="desk">
+
+<!-- ===================== HOJA 1 ===================== -->
+<article class="sheet" aria-label="Resumen ejecutivo">
+  <span class="sheet-label">Hoja 1 / 2 · Resumen ejecutivo</span>
+
+  <header class="head">
+    <div>
+      <p class="eyebrow">Brief de mercado · Colombia → Latam · corte 12 oct 2026</p>
+      <h1>Optimización cognitiva</h1>
+      <p class="def">Productos y servicios que prometen mejorar el rendimiento mental de personas sanas (enfoque, memoria, energía mental, calma): suplementos nootrópicos y adaptógenos, hongos funcionales, bebidas y café “funcionales”, entrenamiento cognitivo digital, neurotecnología de consumo y biohacking. No incluye el tratamiento clínico de TDAH o demencia.</p>
+    </div>
+    <div class="verdict" aria-label="Veredicto de madurez">
+      <p class="eyebrow">Veredicto de madurez</p>
+      <p class="verdict-title"><mark>Naciente, entrando a crecimiento</mark> en Colombia; en crecimiento a nivel global.</p>
+      <div class="gauge" role="img" aria-label="Indicador en 28% entre naciente y saturado"><i></i></div>
+      <div class="gauge-scale"><span>Naciente</span><span>Crecimiento</span><span>Saturado</span></div>
+    </div>
+  </header>
+
+  <div class="cols">
+    <div class="col">
+      <section>
+        <h2><span>1</span>Qué pasa ahora</h2>
+        <ul>
+          <li><span class="tag H">HECHO</span><b>La demanda llega antes que la regulación.</b> El INVIMA declaró fraudulentos Noopept, phenibut, bacopa y Alpha GPC (2023), una melena de león rotulada “nootropic” (2023), Goli Ashwagandha (oct 2025), Neuro Cell (ene 2026) y rhodiola y ashwagandha promocionadas para <b>memoria</b> y estrés (25 ago 2026).<sup>6–10</sup></li>
+          <li><span class="tag H">HECHO</span>El 3 ago 2026 el INVIMA alertó contra un <b>chocolate con psilocibina</b> vendido por redes “en microdosis” para el estrés. Recordó que su uso en alimentos está prohibido y es delito.<sup>11,12</sup></li>
+          <li><span class="tag H">HECHO</span><b>Primeros productos legales en retail masivo.</b> Pure (Medellín) vende desde ene 2025 un energizante con melena de león y ganoderma, con una referencia “Focus”, en Éxito y Carulla. El registro le tomó meses por los hongos. Café Vital (Vital Setas) está en Farmatodo con notificación sanitaria de 2024.<sup>13,15,16</sup></li>
+          <li><span class="tag H">HECHO</span><b>Medellín es el foco:</b> bebidas que se llaman “funcionales” y no “energizantes” (Persé, Drink Trece, HidraTAO, Mahati, Pure) y oferta de longevidad y biohacking (Wake BioHotel, en nota patrocinada).<sup>14,29</sup></li>
+          <li><span class="tag H">HECHO</span>La Ley 2460 de 2025 y el Decreto 0728 (jun 2025) obligan a las empresas a gestionar el riesgo psicosocial. El 13% reporta burnout frecuente (Buk, 2025).<sup>23–25</sup></li>
+          <li><span class="tag E">ESTIM.</span>Global: los productos con claims de memoria vendieron <b>US$2.655,8 M</b> en 2025 y el 16% de los lanzamientos nootrópicos 2021–25 fueron bebidas (Euromonitor). El mercado mundial se estima entre US$3.450 M y 5.860 M en 2025, según la consultora.<sup>1,3,4</sup></li>
+        </ul>
+      </section>
+
+      <section>
+        <h2><span>2</span>Hacia dónde va (12–24 meses)</h2>
+        <ul>
+          <li><span class="tag O">PROYECCIÓN</span><b>De “nootrópico” a “brain fuel”:</b> energía calmada, enfoque y ánimo en formatos de todos los días. FMCG Gurus lo señala para 2026. En Colombia el vehículo natural es el <b>café con hongos</b> y la bebida funcional.<sup>1,2</sup></li>
+          <li><span class="tag O">PROYECCIÓN</span><b>Más control al mercado gris</b> de importados vendidos por redes y marketplaces. Ganan las marcas con registro INVIMA y claims prudentes; el registro funciona como barrera de entrada.<sup>10,13</sup></li>
+          <li><span class="tag O">PROYECCIÓN</span><b>Canal B2B:</b> programas de foco, sueño y manejo del estrés que las empresas compran para cumplir la Ley 2460.<sup>23</sup></li>
+          <li><span class="tag O">PROYECCIÓN</span><b>Neuroderechos antes que neurotecnología:</b> el PL 395/2025 y la recomendación de la UNESCO (nov 2025) fijan reglas para los neurodatos antes de que exista un mercado masivo de wearables EEG.<sup>20–22</sup></li>
+          <li><span class="tag O">RIESGO</span>Evidencia débil o mixta (ginkgo, creatina “para el cerebro”) y la microdosis, que sigue siendo ilegal.<sup>31,32</sup></li>
+        </ul>
+      </section>
+    </div>
+
+    <div class="col">
+      <section>
+        <h2><span>3</span>Qué tan madura está</h2>
+        <p><b>Naciente, entrando a crecimiento.</b> Hay demanda: un mercado gris que obliga al INVIMA a emitir alertas seguidas, y marcas locales que ya entran a cadenas. Pero no existe una categoría regulatoria propia, no hay cifra pública del tamaño del mercado en Colombia, la producción de hongos es mayormente artesanal<sup>19</sup> con 80–90% de cepas importadas<sup>17</sup>, no encontré startups colombianas de neurotecnología con rondas y el vocabulario sigue en inglés. Nada indica saturación local. Detalle en la hoja 2.</p>
+      </section>
+
+      <section>
+        <h2><span>4</span>Players y referentes</h2>
+        <dl class="players">
+          <dt>Global</dt><dd><b>Onnit / Alpha Brain</b> (de Unilever desde 2021<sup>33</sup>), Neuriva, Magic Mind, Mind Lab Pro, Four Sigmatic. Apps: Lumosity, Elevate. Neurotecnología: Muse, Emotiv.</dd>
+          <dt>Colombia</dt><dd><b>Pure</b> (bebida con hongos), <b>Vital Setas / Café Vital</b>, Persé, Drink Trece, Mahati. Venta directa de café con ganoderma (Gano Excel, DXN; sin cifras verificadas).</dd>
+          <dt>Adyacentes</dt><dd>Salud mental digital: Momentu, Enterapia, Selia<sup>27</sup>. Neurofeedback en consultorios. Wake BioHotel. Colectivo Biohacking Colombia (ciencia ciudadana)<sup>28</sup>.</dd>
+          <dt>Latam</dt><dd>Neurogram (BR, EEG, semilla de US$3 M en jul 2025)<sup>30</sup>. Chile es el referente regional en neuroderechos.</dd>
+          <dt>Reglas</dt><dd><b>INVIMA</b> (suplemento dietario o fitoterapéutico<sup>18</sup>), Defensoría, Uniandes y U. del Rosario (texto del PL 395/2025).</dd>
+        </dl>
+      </section>
+
+      <section>
+        <h2><span>5</span>Vocabulario del mercado</h2>
+        <div class="vocab">
+          <span><b>Nootrópico</b></span><span>Adaptógeno</span><span>Hongos funcionales</span><span>Melena de león</span><span>Reishi / ganoderma</span><span>Cordyceps</span>
+          <span>Brain fuel</span><span>Enfoque / foco</span><span>Claridad mental</span><span>Niebla mental (brain fog)</span><span>Energía sin bajón</span>
+          <span>L-teanina + cafeína</span><span>Citicolina</span><span>Bacopa</span><span>Ashwagandha</span><span>Creatina cognitiva</span>
+          <span>Biohacking</span><span>Longevidad</span><span>Microdosis</span><span>Neurofeedback</span><span>Neurotecnología</span><span>Neurodatos / neuroderechos</span>
+          <span>Suplemento dietario</span><span>Fitoterapéutico</span><span>Registro / NSA INVIMA</span><span>Producto fraudulento</span><span>Riesgo psicosocial</span><span>Burnout</span>
+        </div>
+      </section>
+
+      <p class="note"><b>No verificable:</b> tamaño del mercado de nootrópicos en Colombia o Latam (no hay cifras públicas); volumen de búsquedas y de listados en marketplaces; disponibilidad local de las marcas globales; estado actual del PL 395/2025.</p>
+    </div>
+  </div>
+
+  <footer class="foot">
+    <strong>Leyenda:</strong>
+    <span><span class="tag H">HECHO</span>publicado y fechado por una fuente</span>
+    <span><span class="tag E">ESTIM.</span>estimación de terceros</span>
+    <span><span class="tag O">PROYECCIÓN / OPINIÓN</span>juicio del analista</span>
+    <span><span class="tag NV">NO VERIF.</span>sin evidencia</span>
+    <span>Superíndices = fuentes en la hoja 2.</span>
+  </footer>
+</article>
+
+<!-- ===================== HOJA 2 ===================== -->
+<article class="sheet" aria-label="Señales de madurez">
+  <span class="sheet-label">Hoja 2 / 2 · Anexo</span>
+  <div>
+    <p class="eyebrow">Anexo · Evidencia del veredicto</p>
+    <h2 class="h2big">Señales de madurez</h2>
+    <p class="sub">Cada fila es una señal observable. La lectura ubica la señal en la escala naciente (●○○), crecimiento (●●○) o saturado (●●●). El tipo dice qué tan firme es el dato.</p>
+  </div>
+
+  <div class="tally" aria-label="Conteo de señales">
+    <div><strong>6</strong><span>señales de categoría <b>naciente</b> (datos, regulación, producción, capital, neuroderechos, lenguaje)</span></div>
+    <div><strong>6</strong><span>señales de <b>crecimiento</b> (mercado gris, retail, clúster Medellín, marco laboral, claims globales, consolidación)</span></div>
+    <div><strong>0</strong><span>señales de <b>saturación</b> en Colombia</span></div>
+  </div>
+
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>Señal</th><th>Dato observado</th><th>Lectura</th><th>Tipo</th><th>Fuente</th></tr></thead>
+    <tbody>
+      <tr><td>Medición del mercado local</td><td>No hay cifra pública de nootrópicos en Colombia ni en Latam. Lo más cercano: suplementos dietarios en Colombia, ~US$366 M en 2025 (+5,8% anual estimado).</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b></b><b></b></span>Naciente</span></td><td><span class="tag E">ESTIM.</span></td><td class="src">5</td></tr>
+      <tr><td>Categoría regulatoria</td><td>No existe la categoría “nootrópico”. Los productos entran como suplemento dietario o fitoterapéutico (Decreto 3249 de 2006). Ingredientes como ashwagandha o Noopept aparecen como no autorizados.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b></b><b></b></span>Naciente</span></td><td><span class="tag H">HECHO</span></td><td class="src">6, 8, 18</td></tr>
+      <tr><td>Mercado gris y control</td><td>Alertas del INVIMA con claims cognitivos en 2023, 2025 y 2026 (Noopept, melena “nootropic”, Neuro Cell, rhodiola/ashwagandha “memoria”, chocolate con psilocibina). Hay demanda suficiente para atraer fraude.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b></b></span>Crecimiento</span></td><td><span class="tag H">HECHO</span></td><td class="src">6–11</td></tr>
+      <tr><td>Entrada a retail masivo</td><td>Pure en Éxito y Carulla (desde 2025; la empresa proyecta 500.000 unidades en 2026). Café Vital con melena de león en Farmatodo.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b></b></span>Crecimiento</span></td><td><span class="tag H">HECHO</span></td><td class="src">13, 15</td></tr>
+      <tr><td>Clúster emprendedor</td><td>Al menos 5 marcas de bebidas funcionales de Medellín (2026), oferta de longevidad y biohacking, y libros y divulgación de fundadoras locales.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b></b></span>Crecimiento</span></td><td><span class="tag H">HECHO</span></td><td class="src">14, 16, 29</td></tr>
+      <tr><td>Base productiva</td><td>El mercado de melena de león es mayormente artesanal, con pocos productores semiindustriales. Usa 80–90% de cepas foráneas y no hay reglas claras para hongos medicinales.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b></b><b></b></span>Naciente</span></td><td><span class="tag E">ESTIM.</span></td><td class="src">17, 19</td></tr>
+      <tr><td>Capital y startups</td><td>No encontré startups colombianas de neurotecnología o nootrópicos con rondas públicas. En la región: Neurogram (BR), US$3 M en 2025.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b></b><b></b></span>Naciente</span></td><td><span class="tag NV">NO VERIF.</span></td><td class="src">30</td></tr>
+      <tr><td>Marco laboral (demanda B2B)</td><td>Ley 2460 de 2025 y Decreto 0728 de 2025: salud mental como obligación de la empresa, con reportes anuales de las ARL. Burnout frecuente del 13%.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b></b></span>Crecimiento</span></td><td><span class="tag H">HECHO</span></td><td class="src">23–25</td></tr>
+      <tr><td>Neurotecnología y neuroderechos</td><td>PL 395/2025 radicado en marzo de 2025 y sin aprobar (a abril de 2025). Recomendación de la UNESCO de nov 2025, no vinculante.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b></b><b></b></span>Naciente</span></td><td><span class="tag H">HECHO</span></td><td class="src">20–22</td></tr>
+      <tr><td>Lenguaje del mercado</td><td>Los términos se usan en inglés o se traducen literalmente (“brain fuel”, “nootropic”). Los medios todavía explican qué es el biohacking.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b></b><b></b></span>Naciente</span></td><td><span class="tag O">OPINIÓN</span></td><td class="src">7, 28</td></tr>
+      <tr><td>Difusión de claims (global)</td><td>El 69% de los lanzamientos nootrópicos 2021–25 llevan claims cognitivos, y estos pasan a bebidas (16%), bebidas calientes (6%) y belleza (5%).</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b></b></span>Crecimiento</span></td><td><span class="tag H">HECHO</span></td><td class="src">1, 2</td></tr>
+      <tr><td>Consolidación (global)</td><td>Las grandes de consumo compran marcas del nicho: Unilever adquirió Onnit (Alpha Brain) en 2021. No hay movimientos parecidos en Colombia.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b></b></span>Crecimiento</span></td><td><span class="tag H">HECHO</span></td><td class="src">33</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="gaps">
+    <h3>Límites de este análisis</h3>
+    <p>Varias cifras salen de prensa o resúmenes que citan informes de pago (Euromonitor, FMCG Gurus, Statista) que no pude abrir completos. Los tamaños de mercado globales varían hasta 6 veces según la consultora. Las cifras de Pure son proyecciones de la empresa. Las fuentes sobre Medellín y biohacking son en parte contenido promocional. Las proyecciones son juicio del analista.</p>
+  </div>
+
+  <section>
+    <h2><span>§</span>Fuentes</h2>
+    <ol class="sources">
+      <li><a href="https://www.euromonitor.com/article/the-diffusion-principle-how-nootropic-claims-are-crossing-industry-boundaries">Euromonitor, The Diffusion Principle (ene 2026)</a></li>
+      <li><a href="https://fmcggurus.com/reports/fmcg-gurus-nootropics-and-brain-fuel-a-switch-in-focus-within-the-cognitive-health-market-trend-report-2026/">FMCG Gurus, Nootropics and Brain Fuel 2026</a></li>
+      <li><a href="https://www.expertmarketresearch.com/reports/nootropics-market">Expert Market Research, mercado global de nootrópicos</a></li>
+      <li><a href="https://www.fortunebusinessinsights.com/industry-reports/nootropics-market-100685">Fortune Business Insights, mercado de nootrópicos</a></li>
+      <li><a href="https://www.expertmarketresearch.com/es/reports/colombia-dietary-supplements-market">Expert Market Research, suplementos dietarios Colombia</a></li>
+      <li><a href="https://www.invima.gov.co/biblioteca/download/101287">INVIMA, alerta 158-2023 (Noopept y otros)</a></li>
+      <li><a href="https://www.invima.gov.co/alertas-sanitarias/melena-hericium-erinaceus-nootropic-capsulas">INVIMA, alerta 397-2023 (melena “nootropic”)</a></li>
+      <li><a href="https://www.invima.gov.co/alertas-sanitarias/goli-colombia-ashwagandha">INVIMA, alerta 339-2025 (Goli Ashwagandha)</a></li>
+      <li><a href="https://www.imsalud.gov.co/web/wp-content/uploads/2026/02/Alerta-No_-12-2026.pdf">INVIMA, alerta 12-2026 (Celion / Neuro Cell)</a></li>
+      <li><a href="https://www.invima.gov.co/alertas-sanitarias/suplementos-dietarios-sin-registro-sanitario-rhodiola-rosea-capsula-myod-chiro-inositol-ashwagandha">INVIMA, alerta 266-2026 (rhodiola, ashwagandha)</a></li>
+      <li><a href="https://www.invima.gov.co/blog/sala-de-prensa-13/el-invima-alerta-sobre-la-comercializacion-fraudulenta-del-producto-mellow-mellowxocolat-557">INVIMA, alerta 247-2026 (chocolate con psilocibina)</a></li>
+      <li><a href="https://www.elheraldo.co/colombia/2026/08/05/invima-alerta-sobre-riesgos-para-la-salud-de-chocolate-promocionado-para-el-estres-y-la-ansiedad/">El Heraldo, psilocibina en alimentos (ago 2026)</a></li>
+      <li><a href="https://forbes.co/2025/10/22/emprendedores/la-bebida-colombiana-que-entra-a-competir-en-el-mercado-de-energizantes-saludables">Forbes Colombia, Pure (oct 2025)</a></li>
+      <li><a href="https://www.elcolombiano.com/negocios/medellin-es-la-meca-de-las-bebidas-energizantes-marcas-paisas-van-por-un-mercado-de-us-157000-millones-PJ38644795">El Colombiano, Medellín y las bebidas funcionales (2026)</a></li>
+      <li><a href="https://www.farmatodo.com.co/producto/500029843-cafe-vital-vs-cafevital-100-bolsa-x-polvo">Farmatodo, Café Vital (Vital Setas)</a></li>
+      <li><a href="https://www.elcolombiano.com/medio-ambiente/hongos-funcionales-beneficios-libro-BN38245141">El Colombiano, Vital Setas y “Hongos que curan”</a></li>
+      <li><a href="https://www.bloomberglinea.com/latinoamerica/colombia/hongos-por-que-colombia-corta-las-alas-a-su-industria-e-importa-en-pleno-boom/">Bloomberg Línea, la industria de hongos importa</a></li>
+      <li><a href="https://www.bloomberglinea.com/latinoamerica/colombia/del-campo-a-la-mesa-cuantos-productos-con-hongos-han-sido-registrados-en-colombia/">Bloomberg Línea, registros de productos con hongos</a></li>
+      <li><a href="https://repository.urosario.edu.co/bitstreams/55332948-a2ba-4799-adc0-0f599e5a96c7/download">U. del Rosario, mercado de melena de león (tesis 2026)</a></li>
+      <li><a href="https://senado.gov.co/index.php/el-senado/noticias/13-senadores/6281-senador-carlos-julio-gonzalez-villa-radica-proyecto-de-ley-para-regular-neurociencias-y-neurotecnologias">Senado, PL de neurociencias y neurotecnologías</a></li>
+      <li><a href="https://www.defensoria.gov.co/-/defensoria-acompa%C3%B1a-radicacion-de-proyecto-de-ley-para-regular-neurociencias-y-derechos-humanos">Defensoría del Pueblo, radicación del PL</a></li>
+      <li><a href="https://www.insideprivacy.com/emerging-technologies/unesco-adopts-first-global-framework-on-neurotechnology-ethics/">Inside Privacy, recomendación UNESCO (nov 2025)</a></li>
+      <li><a href="https://www.colpsic.org.co/wp-content/uploads/2025/07/Dia-Nacional-de-SST.pdf">Colpsic, Ley 2460 de 2025</a></li>
+      <li><a href="https://www.arlsura.com/demos/salud-mental/files/decreto_0728_acciones_pyp_salud_mental_prevencion_spa.pdf">ARL SURA, Decreto 0728 de 2025</a></li>
+      <li><a href="https://www.larepublica.co/alta-gerencia/sindrome-burnout-afecta-a-13-de-los-colombianos-y-en-mayor-medida-a-generacion-z-4188374">La República, burnout 13% (Buk, 2025)</a></li>
+      <li><a href="https://cambiocolombia.com/salud-y-bienestar/articulo/2026/6/colombia-y-su-nuevo-espejo-emocional-lo-que-refleja-la-nueva-encuesta-nacional-de-salud-mental">Cambio, Encuesta Nacional de Salud Mental (jun 2026)</a></li>
+      <li><a href="https://www.larepublica.co/salud-ejecutiva/las-principales-startups-en-america-latina-que-se-enfocan-en-atender-la-salud-mental-3910814">La República, startups de salud mental en Latam (2024)</a></li>
+      <li><a href="https://www.portafolio.co/tendencias/gloria-helena-rey-biohacking-social-524031">Portafolio, biohacking social en Medellín</a></li>
+      <li><a href="https://www.businesstraveller.com/news/hotels/wake-biohotel-redefines-luxury-in-medellin/">Business Traveller, Wake BioHotel (patrocinado)</a></li>
+      <li><a href="https://latamlist.com/tag/neurogram">LatamList, Neurogram</a></li>
+      <li><a href="https://pubmed.ncbi.nlm.nih.gov/40744234/">J. Nutrition, creatina y cognición (2025)</a></li>
+      <li><a href="https://repository.eafit.edu.co/bitstreams/5c94e57d-4a74-46d0-9294-1a1aacc3071d/download">EAFIT, psicodélicos y regulación (tesis 2025)</a></li>
+      <li><a href="https://www.businesswire.com/news/home/20210426005606/en/Unilever-to-Acquire-Onnit">Business Wire, Unilever compra Onnit (abr 2021)</a></li>
+    </ol>
+  </section>
+</article>
+
+</div>

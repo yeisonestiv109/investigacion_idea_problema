@@ -1,0 +1,287 @@
+<title>Ingeniería Conductual CO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Ingeniería conductual — misma serie de briefs, acento cobre. Layout: dos hojas tamaño carta (8.5×11 in) sobre una mesa gris; hoja 1 = resumen ejecutivo, hoja 2 = tabla de señales + fuentes. En móvil, las hojas se vuelven fluidas. */
+:root{
+  --desk:#e3e6ea; --paper:#ffffff; --ink:#18212b; --muted:#5a6672; --rule:#d5dbe1;
+  --accent:#9a4a12; --accent-soft:#f8ece2; --mark:#ffd84d; --mark-ink:#3b3000;
+  --t-hecho:#1f6f4a; --t-hecho-bg:#e3f3ea; --t-est:#7a5a00; --t-est-bg:#fbf1d2;
+  --t-op:#6a3d8f; --t-op-bg:#f1e9f8; --t-nv:#9a2f2f; --t-nv-bg:#f8e6e6;
+  --f-display:"IBM Plex Sans Condensed","Arial Narrow",Arial,sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  --shadow:0 1px 2px rgba(20,30,40,.08),0 8px 28px rgba(20,30,40,.10);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --desk:#0e1216; --paper:#171c22; --ink:#e4e9ee; --muted:#9aa6b2; --rule:#2c343d;
+  --accent:#f0a46a; --accent-soft:#33241a; --mark:#e9c53a; --mark-ink:#1c1600;
+  --t-hecho:#7fd4a6; --t-hecho-bg:#173126; --t-est:#e8c46a; --t-est-bg:#332a12;
+  --t-op:#c9a6ea; --t-op-bg:#2a2036; --t-nv:#f0a0a0; --t-nv-bg:#3a1f1f;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.35); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --desk:#0e1216; --paper:#171c22; --ink:#e4e9ee; --muted:#9aa6b2; --rule:#2c343d;
+  --accent:#f0a46a; --accent-soft:#33241a; --mark:#e9c53a; --mark-ink:#1c1600;
+  --t-hecho:#7fd4a6; --t-hecho-bg:#173126; --t-est:#e8c46a; --t-est-bg:#332a12;
+  --t-op:#c9a6ea; --t-op-bg:#2a2036; --t-nv:#f0a0a0; --t-nv-bg:#3a1f1f;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.35); color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--desk);color:var(--ink);font-family:var(--f-body);font-size:10.5px;line-height:1.42;
+  padding-inline:16px;padding-block:28px 40px;-webkit-font-smoothing:antialiased}
+.desk{display:flex;flex-direction:column;align-items:center;gap:28px}
+.sheet{background:var(--paper);width:816px;max-width:100%;min-height:1056px;padding:40px 52px;box-shadow:var(--shadow);
+  display:flex;flex-direction:column;gap:14px;position:relative}
+.sheet-label{position:absolute;top:-18px;left:0;font:500 10px/1 var(--f-mono);color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+a{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0}
+p{margin:0}
+ul{margin:0;padding-left:14px;display:flex;flex-direction:column;gap:4px}
+li::marker{color:var(--accent)}
+sup{font:500 8px/0 var(--f-mono);color:var(--accent);margin-left:1px}
+
+/* Encabezado */
+.head{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:18px;align-items:end;border-bottom:2px solid var(--ink);padding-bottom:10px}
+.eyebrow{font:500 9.5px/1.3 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font-size:30px;line-height:1.02;font-weight:700;letter-spacing:-.01em;margin-top:4px}
+.def{color:var(--muted);margin-top:5px;max-width:62ch}
+.verdict{min-width:250px;display:flex;flex-direction:column;gap:6px}
+.verdict-title{font:600 13px/1.15 var(--f-display)}
+.verdict-title mark{background:var(--mark);color:var(--mark-ink);padding:0 3px}
+.gauge{position:relative;height:8px;border-radius:4px;background:linear-gradient(90deg,var(--accent-soft),var(--accent))}
+.gauge i{position:absolute;top:-4px;left:32%;width:3px;height:16px;background:var(--ink);border-radius:2px}
+.gauge-scale{display:flex;justify-content:space-between;font:500 8.5px/1 var(--f-mono);color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+
+/* Columnas */
+.cols{display:grid;grid-template-columns:1.12fr 1fr;gap:22px;flex:1}
+.col{display:flex;flex-direction:column;gap:13px;min-width:0}
+section h2{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--accent);
+  display:flex;gap:6px;align-items:baseline;border-bottom:1px solid var(--rule);padding-bottom:3px;margin-bottom:6px}
+section h2 span{font-family:var(--f-mono);font-weight:500;font-size:10px;color:var(--muted)}
+
+/* Etiquetas de evidencia */
+.tag{display:inline-block;font:500 8px/1 var(--f-mono);letter-spacing:.04em;padding:2px 4px 2px;border-radius:2px;vertical-align:1px;margin-right:3px;white-space:nowrap}
+.H{color:var(--t-hecho);background:var(--t-hecho-bg)}
+.E{color:var(--t-est);background:var(--t-est-bg)}
+.O{color:var(--t-op);background:var(--t-op-bg)}
+.NV{color:var(--t-nv);background:var(--t-nv-bg)}
+
+.players{display:grid;grid-template-columns:auto 1fr;gap:4px 8px}
+.players dt{font:600 9px/1.5 var(--f-mono);text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+.players dd{margin:0}
+.vocab{display:flex;flex-wrap:wrap;gap:4px}
+.vocab span{border:1px solid var(--rule);padding:1px 6px;border-radius:10px;font-size:9.8px;white-space:nowrap}
+.vocab span b{font-weight:600}
+.note{font-size:9.6px;color:var(--muted)}
+.foot{border-top:1px solid var(--rule);padding-top:7px;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;font-size:9.4px;color:var(--muted)}
+.foot strong{color:var(--ink);font-weight:600}
+
+/* Hoja 2: tabla */
+.h2big{font-size:22px;font-weight:700}
+.sub{color:var(--muted);max-width:80ch}
+.tablewrap{overflow-x:auto;min-width:0}
+table{border-collapse:collapse;width:100%;font-size:10px;min-width:640px}
+th{font:600 9px/1.2 var(--f-mono);text-transform:uppercase;letter-spacing:.05em;color:var(--muted);text-align:left;padding:6px 6px;border-bottom:2px solid var(--ink)}
+td{padding:4.5px 6px;border-bottom:1px solid var(--rule);vertical-align:top}
+td:first-child{font-weight:600;width:19%}
+td.read{width:13%}
+td.src{width:7%;font:500 9px/1.4 var(--f-mono);color:var(--muted);white-space:nowrap}
+.stage{display:inline-flex;align-items:center;gap:5px;font:600 9.5px/1.2 var(--f-display);text-transform:uppercase;letter-spacing:.03em}
+.dots{display:inline-flex;gap:2px}
+.dots b{width:7px;height:7px;border-radius:50%;border:1px solid var(--accent)}
+.dots b.on{background:var(--accent)}
+.tally{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.tally div{border:1px solid var(--rule);padding:8px 10px;display:flex;flex-direction:column;gap:2px}
+.tally strong{font:700 20px/1 var(--f-display);font-variant-numeric:tabular-nums}
+.tally span{font-size:9.6px;color:var(--muted)}
+.sources{columns:2;column-gap:22px;font-size:9px;line-height:1.38;color:var(--muted);margin:0;padding-left:18px}
+.sources li{break-inside:avoid;margin-bottom:2px}
+.sources a{word-break:break-word}
+.gaps{background:var(--accent-soft);padding:9px 12px;display:flex;flex-direction:column;gap:4px}
+.gaps h3{font-size:11.5px;text-transform:uppercase;letter-spacing:.04em}
+
+@media (max-width:760px){
+  body{font-size:12.5px}
+  .sheet{min-height:0;padding:26px 18px}
+  .head,.cols{grid-template-columns:1fr}
+  .verdict{min-width:0}
+  h1{font-size:26px}
+  .sources{columns:1}
+  .tally{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+<div class="desk">
+
+<!-- ===================== HOJA 1 ===================== -->
+<article class="sheet" aria-label="Resumen ejecutivo">
+  <span class="sheet-label">Hoja 1 / 2 · Resumen ejecutivo</span>
+
+  <header class="head">
+    <div>
+      <p class="eyebrow">Brief de mercado · Colombia → Latam · corte 12 oct 2026</p>
+      <h1>Ingeniería conductual</h1>
+      <p class="def">Aplicar ciencias del comportamiento para diseñar decisiones y hábitos en políticas públicas, productos y organizaciones: nudges, arquitectura de decisiones, normas sociales, diseño de hábitos y experimentos (RCT). Incluye su versión con IA (mensajes personalizados) y su lado oscuro (patrones oscuros).</p>
+    </div>
+    <div class="verdict" aria-label="Veredicto de madurez">
+      <p class="eyebrow">Veredicto de madurez</p>
+      <p class="verdict-title"><mark>En crecimiento temprano</mark> en sector público y academia; <mark>naciente</mark> como mercado comercial.</p>
+      <div class="gauge" role="img" aria-label="Indicador en 32% entre naciente y saturado"><i></i></div>
+      <div class="gauge-scale"><span>Naciente</span><span>Crecimiento</span><span>Saturado</span></div>
+    </div>
+  </header>
+
+  <div class="cols">
+    <div class="col">
+      <section>
+        <h2><span>1</span>Qué pasa ahora</h2>
+        <ul>
+          <li><span class="tag H">HECHO</span><b>Bogotá es el núcleo.</b> La ciudad cumple 30 años de “cultura ciudadana”, un enfoque que hoy cruza sus políticas. En mayo 2026 presentó la Encuesta Bienal de Culturas 2025, con académicos de ciencias del comportamiento.<sup>1,3</sup></li>
+          <li><span class="tag H">HECHO</span><b>El ecosistema se reúne cada año:</b> la IV edición del Encuentro Internacional de Ciencias del Comportamiento (Uniandes, 10–11 sep 2026) la organizan REDCICO, el BID, Busara y la Alcaldía. En 2025 vino David Halpern, del Behavioural Insights Team (BIT).<sup>1,2</sup></li>
+          <li><span class="tag H">HECHO</span><b>Hay evidencia local con experimentos:</b> la DIAN y el BID probaron al azar correo, carta y visita con 20.818 contribuyentes morosos. BIT suma más de 40 proyectos y 24 RCT en la región y tiene equipo en Colombia.<sup>6,7</sup></li>
+          <li><span class="tag H">HECHO</span><b>La empresa empieza a adoptarla:</b> Bancolombia tiene un líder de Estrategia y Ciencias del Comportamiento. Callbook AI (Colombia), que ajusta tono, canal y frecuencia de la cobranza con agentes de IA, entró a Y Combinator S26.<sup>14,15</sup></li>
+          <li><span class="tag H">HECHO</span><b>Se regula el lado oscuro.</b> Perú prohibió los patrones oscuros como método comercial coercitivo (DL 1729, vigente desde el 13 feb 2026). En Colombia la SIC hizo un foro sobre el tema con la Javeriana (mar 2026), pero no hay norma específica.<sup>19,22</sup></li>
+        </ul>
+      </section>
+
+      <section>
+        <h2><span>2</span>Hacia dónde va (12–24 meses)</h2>
+        <ul>
+          <li><span class="tag O">PROYECCIÓN</span><b>Del nudge masivo al nudge con IA:</b> agentes que eligen el mensaje, el momento y el canal para cada persona, empezando por cobranza, ahorro y seguros, donde el retorno se mide fácil.<sup>15,18</sup></li>
+          <li><span class="tag O">PROYECCIÓN</span><b>Llega la auditoría ética:</b> si Colombia sigue a Perú, las empresas digitales necesitarán revisar sus interfaces (cancelaciones, urgencia falsa). Es una línea de servicio nueva para consultoras.<sup>19,22</sup></li>
+          <li><span class="tag O">PROYECCIÓN</span><b>El sector público sigue en lo local.</b> Bogotá institucionalizó el enfoque, pero no encontré una unidad nacional. El cambio de gobierno (ago 2026) puede abrir o cerrar esa puerta.</li>
+          <li><span class="tag O">RIESGO</span>Desgaste del “nudge”: un reanálisis en PNAS no encontró efecto promedio tras corregir el sesgo de publicación. En Colombia también hay críticas al enfoque individual.<sup>10,24</sup></li>
+        </ul>
+      </section>
+    </div>
+
+    <div class="col">
+      <section>
+        <h2><span>3</span>Qué tan madura está</h2>
+        <p><b>Dos velocidades.</b> En gobierno y academia está en crecimiento: hay tradición propia (cultura ciudadana), un evento anual con aliados internacionales, experimentos publicados y una maestría (EAFIT). Como mercado privado es naciente: no hay cifra de tamaño, no encontré consultoras colombianas especializadas ni oficinas locales confirmadas de ideas42 o Busara, y en la banca solo Bancolombia muestra un equipo. A nivel global el discurso del nudge clásico ya muestra saturación. Detalle en la hoja 2.</p>
+      </section>
+
+      <section>
+        <h2><span>4</span>Players y referentes</h2>
+        <dl class="players">
+          <dt>Global</dt><dd><b>BIT</b> (equipo en Colombia, Perú y CDMX), <b>Grupo de Economía del Comportamiento del BID</b>, Busara, ideas42, Banco Mundial.<sup>6,9,26</sup></dd>
+          <dt>Público</dt><dd>Secretaría de Cultura de Bogotá (Subsecretaría de Cultura Ciudadana), GOLAB, DIAN. Corpovisionarios (Mockus) como origen.<sup>1,4,5,7</sup></dd>
+          <dt>Academia</dt><dd>Uniandes (Encuentro), U. del Rosario (economía experimental, J. C. Cárdenas), Javeriana, EAFIT (Maestría en Estudios del Comportamiento), REDCICO, capítulo ACBS Colombia.<sup>2,10,12,13</sup></dd>
+          <dt>Empresas</dt><dd><b>Bancolombia</b>, <b>Callbook AI</b> (YC S26), Colektia (CL, cobranza con IA, US$9 M), Nubank (nudges estudiados en la academia).<sup>14,15,17,18</sup></dd>
+          <dt>Reglas</dt><dd>SIC (Ley 2439 de 2024 sobre comercio electrónico), Indecopi en Perú.<sup>20,22</sup></dd>
+        </dl>
+      </section>
+
+      <section>
+        <h2><span>5</span>Vocabulario del mercado</h2>
+        <div class="vocab">
+          <span><b>Ciencias del comportamiento</b></span><span>Economía conductual</span><span>Insights conductuales</span><span>Diseño conductual</span><span>Cultura ciudadana</span>
+          <span>Nudge / empujón</span><span>Arquitectura de decisiones</span><span>Opción por defecto</span><span>Fricción</span><span>Sesgos cognitivos</span>
+          <span>Normas sociales</span><span>RCT / ensayo aleatorio</span><span>Prueba A/B</span><span>Promesa de pago</span><span>Gamificación</span><span>Formación de hábitos</span>
+          <span>Hiperpersonalización</span><span>Persuasión algorítmica</span><span>Patrones oscuros</span><span>Sludge</span><span>BeSci</span><span>Análisis del comportamiento</span>
+        </div>
+      </section>
+
+      <p class="note"><b>Ojo con el nombre:</b> “ingeniería conductual” casi no aparece en el mercado; se habla de “ciencias del comportamiento” o “economía conductual”. <b>No verificable:</b> tamaño del mercado, número de consultoras locales, oficinas de ideas42 o Busara en Colombia y existencia de una unidad nacional de gobierno.</p>
+    </div>
+  </div>
+
+  <footer class="foot">
+    <strong>Leyenda:</strong>
+    <span><span class="tag H">HECHO</span>publicado y fechado por una fuente</span>
+    <span><span class="tag E">ESTIM.</span>estimación de terceros</span>
+    <span><span class="tag O">PROYECCIÓN</span>juicio del analista</span>
+    <span><span class="tag NV">NO VERIF.</span>sin evidencia</span>
+    <span>Superíndices = fuentes en la hoja 2.</span>
+  </footer>
+</article>
+
+<!-- ===================== HOJA 2 ===================== -->
+<article class="sheet" aria-label="Señales de madurez">
+  <span class="sheet-label">Hoja 2 / 2 · Anexo</span>
+  <div>
+    <p class="eyebrow">Anexo · Evidencia del veredicto</p>
+    <h2 class="h2big">Señales de madurez</h2>
+    <p class="sub">Cada fila es una señal observable. La lectura ubica la señal en la escala naciente (●○○), crecimiento (●●○) o saturado (●●●). El tipo dice qué tan firme es el dato. Las filas marcadas “global” no describen a Colombia.</p>
+  </div>
+
+  <div class="tally" aria-label="Conteo de señales">
+    <div><strong>7</strong><span>señales de categoría <b>naciente</b> (datos, firmas, empresa, startups, formación, regulación, IA)</span></div>
+    <div><strong>4</strong><span>señales de <b>crecimiento</b> (gobierno local, ecosistema, experimentos, vocabulario)</span></div>
+    <div><strong>1</strong><span>señal de <b>saturación</b> (discurso del nudge clásico, global)</span></div>
+  </div>
+
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>Señal</th><th>Dato observado</th><th>Lectura</th><th>Tipo</th><th>Fuente</th></tr></thead>
+    <tbody>
+      <tr><td>Medición del mercado</td><td>No hay cifra de tamaño para Colombia ni Latam. El gasto se mezcla con consultoría, investigación de mercados e innovación pública.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b></b><b></b></span>Naciente</span></td><td><span class="tag NV">NO VERIF.</span></td><td class="src">—</td></tr>
+      <tr><td>Institucionalidad pública</td><td>Bogotá: 30 años de cultura ciudadana, Subsecretaría propia, Encuesta Bienal de Culturas y laboratorio GOLAB. No encontré una unidad nacional (DNP).</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b></b></span>Crecimiento</span></td><td><span class="tag H">HECHO</span></td><td class="src">1, 3, 4</td></tr>
+      <tr><td>Ecosistema y eventos</td><td>IV Encuentro Internacional (sep 2026) con REDCICO, BID, Busara y la Alcaldía; taller del SELA en Bogotá (2024); capítulo ACBS Colombia.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b></b></span>Crecimiento</span></td><td><span class="tag H">HECHO</span></td><td class="src">2, 11, 13</td></tr>
+      <tr><td>Experimentos aplicados</td><td>RCT de la DIAN con el BID (20.818 contribuyentes), estudios de agua en Bogotá y 24 RCT de BIT en la región.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b></b></span>Crecimiento</span></td><td><span class="tag H">HECHO</span></td><td class="src">6, 7, 9</td></tr>
+      <tr><td>Firmas especializadas</td><td>BIT tiene equipo en Colombia. No confirmé oficinas de ideas42 ni de Busara, ni consultoras colombianas dedicadas al tema.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b></b><b></b></span>Naciente</span></td><td><span class="tag NV">NO VERIF.</span></td><td class="src">6</td></tr>
+      <tr><td>Adopción corporativa</td><td>Bancolombia tiene un líder de Estrategia y Ciencias del Comportamiento. No hallé equipos equivalentes en Davivienda, Nequi u otras grandes empresas.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b></b><b></b></span>Naciente</span></td><td><span class="tag H">HECHO</span></td><td class="src">14</td></tr>
+      <tr><td>Startups y capital</td><td>Callbook AI en Y Combinator S26 (dice manejar más de US$300 M en cartera, cifra propia). Colektia (Chile) levantó US$9 M en ene 2025.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b></b><b></b></span>Naciente</span></td><td><span class="tag H">HECHO</span></td><td class="src">15–17</td></tr>
+      <tr><td>Formación especializada</td><td>Una maestría dedicada (EAFIT, Medellín) y líneas dentro de otros posgrados (Javeriana Cali). No encontré una maestría equivalente en Bogotá.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b></b><b></b></span>Naciente</span></td><td><span class="tag H">HECHO</span></td><td class="src">12</td></tr>
+      <tr><td>Regulación de patrones oscuros</td><td>Perú: prohibición expresa (DL 1729, feb 2026). Colombia: Ley 2439 de 2024 sobre comercio electrónico, foro de la SIC (mar 2026), sin norma específica.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b></b><b></b></span>Naciente</span></td><td><span class="tag H">HECHO</span></td><td class="src">19–22</td></tr>
+      <tr><td>Integración con IA</td><td>Agentes que adaptan tono, canal y frecuencia (Callbook). La academia ya discute la ética de la persuasión algorítmica de Nubank (AIB-LAC 2026).</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b></b><b></b></span>Naciente</span></td><td><span class="tag H">HECHO</span></td><td class="src">15, 18</td></tr>
+      <tr><td>Vocabulario</td><td>“Ciencias del comportamiento”, “economía conductual” y “cultura ciudadana” están asentados en gobierno y academia. “Ingeniería conductual” casi no se usa.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b></b></span>Crecimiento</span></td><td><span class="tag O">OPINIÓN</span></td><td class="src">1, 25</td></tr>
+      <tr><td>Debate de evidencia (global)</td><td>Reanálisis en PNAS (2022): sin evidencia de efecto promedio del nudge tras corregir el sesgo de publicación, con mucha variación entre casos. Críticas locales al enfoque individual.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b class="on"></b></span>Saturado</span></td><td><span class="tag H">HECHO</span></td><td class="src">10, 24</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="gaps">
+    <h3>Límites de este análisis</h3>
+    <p>“Ingeniería conductual” no es una categoría con estadística propia: la armé desde la política pública, la consultoría, la banca y la regulación del consumidor. No pude abrir el sitio de BIT ni confirmar oficinas locales de otras firmas. Las cifras de Callbook son de la empresa. El estado de una unidad conductual nacional bajo el nuevo gobierno no se pudo verificar. Las proyecciones son juicio del analista.</p>
+  </div>
+
+  <section>
+    <h2><span>§</span>Fuentes</h2>
+    <ol class="sources">
+      <li><a href="https://bogota.gov.co/que-hacer/cultura/conoce-el-iii-encuentro-de-ciencias-del-comportamiento-en-bogota">Alcaldía de Bogotá, III Encuentro de Ciencias del Comportamiento (2025)</a></li>
+      <li><a href="https://www.xataka.com.co/eventos/asi-puedes-participar-encuentro-ciencias-comportamiento-que-se-celebrara-bogota">Xataka Colombia, Encuentro de Ciencias del Comportamiento</a></li>
+      <li><a href="https://cambiocolombia.com/contenido-especial/articulo/2026/5/bogota-se-midio-que-revelan-los-nuevos-datos-sobre-convivencia-confianza-y-cultura-ciudadana">Cambio, Encuesta Bienal de Culturas (may 2026)</a></li>
+      <li><a href="https://bogota.gov.co/mi-ciudad/gobierno/bogota-reafirma-su-compromiso-con-el-desarrollo-de-politicas-publicas">Alcaldía de Bogotá, políticas públicas y GOLAB</a></li>
+      <li><a href="https://www.elespectador.com/bogota/cultura-ciudadana-el-otro-frente-de-atencion-en-bogota-article/">El Espectador, cultura ciudadana y Corpovisionarios</a></li>
+      <li><a href="https://bi.team/bit-offices/latin-america-the-caribbean">Behavioural Insights Team, Latinoamérica y el Caribe</a></li>
+      <li><a href="https://gdlab.iadb.org/es/node/56">BID, experimento de campo con la DIAN</a></li>
+      <li><a href="https://behavioral.iadb.org/en/node/273">BID, cómo recordar obligaciones a contribuyentes</a></li>
+      <li><a href="https://blogs.worldbank.org/es/latinamerica/pueden-los-cambios-de-comportamiento-apoyar-la-conservacion-del-agua">Banco Mundial, comportamiento y conservación del agua</a></li>
+      <li><a href="https://urosario.edu.co/noticias/la-universidad-del-rosario-anfitrion-por-primera-vez-del-symposium-economic-experiments">U. del Rosario, simposio de economía experimental</a></li>
+      <li><a href="https://sela.org/media/3231956/ir-taller-politicas-publica-economia-del-comportamiento.pdf">SELA, taller de economía del comportamiento (Bogotá, 2024)</a></li>
+      <li><a href="https://portalqa.omega.eafit.edu.co/en/posgrados/escuela-artes-humanidades/maestria-estudios-comportamiento">EAFIT, Maestría en Estudios del Comportamiento</a></li>
+      <li><a href="https://cienciassociales.uniandes.edu.co/acbs-chapter-colombia-conferencia-regional-latam">Uniandes, capítulo ACBS Colombia</a></li>
+      <li><a href="https://blog.bancolombia.com/negocios/importancia-ciencias-comportamiento-organizaciones/">Bancolombia, ciencias del comportamiento en organizaciones</a></li>
+      <li><a href="https://lanotaeconomica.com.co/movidas-empresarial/callbook-ai-la-startup-colombiana-de-ia-para-cobranzas-que-entra-al-batch-s26-de-y-combinator/">La Nota Económica, Callbook AI en Y Combinator S26</a></li>
+      <li><a href="https://enter.co/startups/esta-startup-colombiana-usa-inteligencia-artificial-para-entender-a-los-deudores">Enter.co, Callbook y la IA para entender deudores</a></li>
+      <li><a href="https://www.descubre.vc/noticia/colektia-recauda-us-9m-para-expandir-en-latinoam-rica-2025-01-08">Descubre, Colektia levanta US$9 M (ene 2025)</a></li>
+      <li><a href="https://hilab.face.ufg.br/e/38752-aib-lac-paper-id-114-nubank-s-behavioral-nudges-ai-financial-inclusion-and-the-ethics-of-algorithmic-persuasion-in-latin-america">AIB-LAC 2026, nudges de Nubank y persuasión algorítmica</a></li>
+      <li><a href="https://sedeelectronica.sic.gov.co/noticias/la-superintendencia-de-industria-y-comercio-liderara-junto-con-la-pontificia-universidad-javeriana-un-debate-internacional-sobre-patrones">SIC, debate internacional sobre patrones oscuros</a></li>
+      <li><a href="https://www.cuatrecasas.com/resources/colombia-esperamos-2026-text-6972453be6fa0033870447.pdf">Cuatrecasas, Colombia 2026 (Ley 2439 de 2024)</a></li>
+      <li><a href="https://repository.urosario.edu.co/bitstreams/2c3f6d93-413c-4744-8924-48dc1adf3bb7/download">U. del Rosario, patrones oscuros y brechas regulatorias</a></li>
+      <li><a href="https://cms.law/en/per/publication/publican-nuevas-disposiciones-sobre-la-atencion-de-reclamos-y-metodos-comerciales-coercitivos-en-el-comercio-digital">CMS, Perú: DL 1729 y métodos coercitivos digitales</a></li>
+      <li><a href="https://gestion.pe/economia/comercio-electronico-bajo-la-lupa-plataformas-deberan-evitar-trucos-digitales-para-atraer-consumidores-noticia/">Gestión, plataformas deberán evitar trucos digitales</a></li>
+      <li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9351501/">Maier et al., PNAS (2022), nudging y sesgo de publicación</a></li>
+      <li><a href="https://compite.com.co/wp-content/uploads/INC-2025_-RESUMEN.pdf">Consejo Privado de Competitividad, Informe 2025–2026</a></li>
+      <li><a href="https://jobs.iadb.org/job/Behavioral-Economics-Consultant/2067-en_US">BID, Grupo de Economía del Comportamiento (convocatoria 2025)</a></li>
+      <li><a href="https://cladista.clad.org//handle/123456789/8246">CLAD, ¿Nudge en América Latina?</a></li>
+    </ol>
+  </section>
+</article>
+
+</div>

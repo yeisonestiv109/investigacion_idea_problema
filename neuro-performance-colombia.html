@@ -1,0 +1,293 @@
+<title>Neuro-Performance CO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Neuro-performance — misma serie de briefs, acento índigo (señal EEG). Layout: dos hojas tamaño carta (8.5×11 in) sobre una mesa gris; hoja 1 = resumen ejecutivo, hoja 2 = tabla de señales + fuentes. En móvil, las hojas se vuelven fluidas. */
+:root{
+  --desk:#e3e6ea; --paper:#ffffff; --ink:#18212b; --muted:#5a6672; --rule:#d5dbe1;
+  --accent:#3a3f9e; --accent-soft:#ebecfa; --mark:#ffd84d; --mark-ink:#3b3000;
+  --t-hecho:#1f6f4a; --t-hecho-bg:#e3f3ea; --t-est:#7a5a00; --t-est-bg:#fbf1d2;
+  --t-op:#6a3d8f; --t-op-bg:#f1e9f8; --t-nv:#9a2f2f; --t-nv-bg:#f8e6e6;
+  --f-display:"IBM Plex Sans Condensed","Arial Narrow",Arial,sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  --shadow:0 1px 2px rgba(20,30,40,.08),0 8px 28px rgba(20,30,40,.10);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --desk:#0e1216; --paper:#171c22; --ink:#e4e9ee; --muted:#9aa6b2; --rule:#2c343d;
+  --accent:#a9adf2; --accent-soft:#1f2140; --mark:#e9c53a; --mark-ink:#1c1600;
+  --t-hecho:#7fd4a6; --t-hecho-bg:#173126; --t-est:#e8c46a; --t-est-bg:#332a12;
+  --t-op:#c9a6ea; --t-op-bg:#2a2036; --t-nv:#f0a0a0; --t-nv-bg:#3a1f1f;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.35); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --desk:#0e1216; --paper:#171c22; --ink:#e4e9ee; --muted:#9aa6b2; --rule:#2c343d;
+  --accent:#a9adf2; --accent-soft:#1f2140; --mark:#e9c53a; --mark-ink:#1c1600;
+  --t-hecho:#7fd4a6; --t-hecho-bg:#173126; --t-est:#e8c46a; --t-est-bg:#332a12;
+  --t-op:#c9a6ea; --t-op-bg:#2a2036; --t-nv:#f0a0a0; --t-nv-bg:#3a1f1f;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.35); color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--desk);color:var(--ink);font-family:var(--f-body);font-size:10.5px;line-height:1.42;
+  padding-inline:16px;padding-block:28px 40px;-webkit-font-smoothing:antialiased}
+.desk{display:flex;flex-direction:column;align-items:center;gap:28px}
+.sheet{background:var(--paper);width:816px;max-width:100%;min-height:1056px;padding:40px 52px;box-shadow:var(--shadow);
+  display:flex;flex-direction:column;gap:14px;position:relative}
+.sheet-label{position:absolute;top:-18px;left:0;font:500 10px/1 var(--f-mono);color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+a{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0}
+p{margin:0}
+ul{margin:0;padding-left:14px;display:flex;flex-direction:column;gap:4px}
+li::marker{color:var(--accent)}
+sup{font:500 8px/0 var(--f-mono);color:var(--accent);margin-left:1px}
+
+/* Encabezado */
+.head{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:18px;align-items:end;border-bottom:2px solid var(--ink);padding-bottom:10px}
+.eyebrow{font:500 9.5px/1.3 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font-size:30px;line-height:1.02;font-weight:700;letter-spacing:-.01em;margin-top:4px}
+.def{color:var(--muted);margin-top:5px;max-width:62ch}
+.verdict{min-width:250px;display:flex;flex-direction:column;gap:6px}
+.verdict-title{font:600 13px/1.15 var(--f-display)}
+.verdict-title mark{background:var(--mark);color:var(--mark-ink);padding:0 3px}
+.gauge{position:relative;height:8px;border-radius:4px;background:linear-gradient(90deg,var(--accent-soft),var(--accent))}
+.gauge i{position:absolute;top:-4px;left:20%;width:3px;height:16px;background:var(--ink);border-radius:2px}
+.gauge-scale{display:flex;justify-content:space-between;font:500 8.5px/1 var(--f-mono);color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+
+/* Columnas */
+.cols{display:grid;grid-template-columns:1.12fr 1fr;gap:22px;flex:1}
+.col{display:flex;flex-direction:column;gap:13px;min-width:0}
+section h2{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--accent);
+  display:flex;gap:6px;align-items:baseline;border-bottom:1px solid var(--rule);padding-bottom:3px;margin-bottom:6px}
+section h2 span{font-family:var(--f-mono);font-weight:500;font-size:10px;color:var(--muted)}
+
+/* Etiquetas de evidencia */
+.tag{display:inline-block;font:500 8px/1 var(--f-mono);letter-spacing:.04em;padding:2px 4px 2px;border-radius:2px;vertical-align:1px;margin-right:3px;white-space:nowrap}
+.H{color:var(--t-hecho);background:var(--t-hecho-bg)}
+.E{color:var(--t-est);background:var(--t-est-bg)}
+.O{color:var(--t-op);background:var(--t-op-bg)}
+.NV{color:var(--t-nv);background:var(--t-nv-bg)}
+
+.players{display:grid;grid-template-columns:auto 1fr;gap:4px 8px}
+.players dt{font:600 9px/1.5 var(--f-mono);text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+.players dd{margin:0}
+.vocab{display:flex;flex-wrap:wrap;gap:4px}
+.vocab span{border:1px solid var(--rule);padding:1px 6px;border-radius:10px;font-size:9.8px;white-space:nowrap}
+.vocab span b{font-weight:600}
+.note{font-size:9.6px;color:var(--muted)}
+.foot{border-top:1px solid var(--rule);padding-top:7px;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;font-size:9.4px;color:var(--muted)}
+.foot strong{color:var(--ink);font-weight:600}
+
+/* Hoja 2: tabla */
+.h2big{font-size:22px;font-weight:700}
+.sub{color:var(--muted);max-width:80ch}
+.tablewrap{overflow-x:auto;min-width:0}
+table{border-collapse:collapse;width:100%;font-size:10px;min-width:640px}
+th{font:600 9px/1.2 var(--f-mono);text-transform:uppercase;letter-spacing:.05em;color:var(--muted);text-align:left;padding:6px 6px;border-bottom:2px solid var(--ink)}
+td{padding:4.5px 6px;border-bottom:1px solid var(--rule);vertical-align:top}
+td:first-child{font-weight:600;width:19%}
+td.read{width:13%}
+td.src{width:7%;font:500 9px/1.4 var(--f-mono);color:var(--muted);white-space:nowrap}
+.stage{display:inline-flex;align-items:center;gap:5px;font:600 9.5px/1.2 var(--f-display);text-transform:uppercase;letter-spacing:.03em}
+.dots{display:inline-flex;gap:2px}
+.dots b{width:7px;height:7px;border-radius:50%;border:1px solid var(--accent)}
+.dots b.on{background:var(--accent)}
+.tally{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.tally div{border:1px solid var(--rule);padding:8px 10px;display:flex;flex-direction:column;gap:2px}
+.tally strong{font:700 20px/1 var(--f-display);font-variant-numeric:tabular-nums}
+.tally span{font-size:9.6px;color:var(--muted)}
+.sources{columns:2;column-gap:22px;font-size:9px;line-height:1.38;color:var(--muted);margin:0;padding-left:18px}
+.sources li{break-inside:avoid;margin-bottom:2px}
+.sources a{word-break:break-word}
+.gaps{background:var(--accent-soft);padding:9px 12px;display:flex;flex-direction:column;gap:4px}
+.gaps h3{font-size:11.5px;text-transform:uppercase;letter-spacing:.04em}
+
+@media (max-width:760px){
+  body{font-size:12.5px}
+  .sheet{min-height:0;padding:26px 18px}
+  .head,.cols{grid-template-columns:1fr}
+  .verdict{min-width:0}
+  h1{font-size:26px}
+  .sources{columns:1}
+  .tally{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+<div class="desk">
+
+<!-- ===================== HOJA 1 ===================== -->
+<article class="sheet" aria-label="Resumen ejecutivo">
+  <span class="sheet-label">Hoja 1 / 2 · Resumen ejecutivo</span>
+
+  <header class="head">
+    <div>
+      <p class="eyebrow">Brief de mercado · Colombia → Latam · corte 12 oct 2026</p>
+      <h1>Neuro-performance</h1>
+      <p class="def">Tecnologías y servicios que miden y entrenan el cerebro para rendir mejor bajo presión: neurofeedback, wearables EEG e interfaces cerebro-computador, entrenamiento perceptivo-cognitivo (3D-MOT), neuromodulación y programas de “neuroliderazgo”. Para atletas, jugadores de eSports y ejecutivos. Sin suplementos (ver brief de optimización cognitiva).</p>
+    </div>
+    <div class="verdict" aria-label="Veredicto de madurez">
+      <p class="eyebrow">Veredicto de madurez</p>
+      <p class="verdict-title"><mark>Naciente</mark> en Colombia; en crecimiento temprano a nivel global.</p>
+      <div class="gauge" role="img" aria-label="Indicador en 20% entre naciente y saturado"><i></i></div>
+      <div class="gauge-scale"><span>Naciente</span><span>Crecimiento</span><span>Saturado</span></div>
+    </div>
+  </header>
+
+  <div class="cols">
+    <div class="col">
+      <section>
+        <h2><span>1</span>Qué pasa ahora</h2>
+        <ul>
+          <li><span class="tag H">HECHO</span><b>Los eSports ya son deporte en Colombia:</b> la Ley 2507 (30 jul 2025) los incluye en el Sistema Nacional del Deporte, con acceso a presupuesto público.<sup>1,2</sup> Claro abrió en Bogotá un centro gamer de ~US$1 M (may 2025) con 90.000 visitas en su primer año.<sup>3,4</sup></li>
+          <li><span class="tag H">HECHO</span><b>El EEG entra a productos de consumo.</b> Neurable y HyperX (HP) mostraron en CES 2026 un headset gamer con sensores EEG que entrena el foco; ganó premios, pero aún no tiene precio ni fecha. Neurable levantó US$35 M (dic 2025) y ahora licencia su tecnología a fabricantes.<sup>6,7,9</sup></li>
+          <li><span class="tag H">HECHO</span><b>La neuromodulación en casa ya tiene aval clínico.</b> La FDA aprobó el casco tDCS Flow FL-100 para depresión (8 dic 2025), y se lanzó en EE. UU. en sep 2026. Es uso médico, pero marca la frontera regulatoria.<sup>12,13</sup></li>
+          <li><span class="tag H">HECHO</span><b>En Colombia la oferta es sobre todo formación y servicios:</b> programas de neuroliderazgo (ICESI y Uniandes en 2025, EAN, Cámara de Comercio de Bogotá), el libro <i>NeuroSport</i> (Javeriana, 2023), revendedores certificados de NeurotrackerX (Sportí) y neurofeedback en consultorios.<sup>15,16,18–21</sup></li>
+          <li><span class="tag E">ESTIM.</span>El mercado global de wearables de neurotecnología se estima en US$2.180 M en 2025 y US$2.610 M en 2026 (+19,4%). En Colombia las ventas de wearables crecieron más de 30% en un año (Statista).<sup>11,22</sup></li>
+        </ul>
+      </section>
+
+      <section>
+        <h2><span>2</span>Hacia dónde va (12–24 meses)</h2>
+        <ul>
+          <li><span class="tag O">PROYECCIÓN</span><b>El sensor se vuelve invisible:</b> EEG dentro de audífonos y headsets de marcas grandes por licencia. A Colombia llegará por la electrónica de consumo, no por startups locales.<sup>9,10</sup></li>
+          <li><span class="tag O">PROYECCIÓN</span><b>eSports como puerta de entrada:</b> con la Ley 2507, las ligas y los clubes tendrán razones para comprar entrenamiento cognitivo y periféricos “neuro” antes que el fútbol o las empresas.<sup>1,7</sup></li>
+          <li><span class="tag O">PROYECCIÓN</span><b>Del curso a la medición:</b> el neuroliderazgo hoy es teoría y bienestar. El siguiente paso es medir (EEG, HRV) en programas para ejecutivos, con la ley de salud mental laboral como argumento de compra.</li>
+          <li><span class="tag O">PROYECCIÓN</span><b>Las reglas de neurodatos definirán qué se puede vender.</b> Chile ya ordenó a Emotiv borrar datos cerebrales (2023). En Colombia está pendiente el PL 395/2025.<sup>27,28</sup></li>
+          <li><span class="tag O">RIESGO</span>Evidencia débil de transferencia al juego real y uso del prefijo “neuro” como marketing.<sup>14,30</sup></li>
+        </ul>
+      </section>
+    </div>
+
+    <div class="col">
+      <section>
+        <h2><span>3</span>Qué tan madura está</h2>
+        <p><b>Naciente.</b> En Colombia no hay fabricantes ni startups con rondas, no existe cifra de mercado, ningún club publica un programa de neuroentrenamiento y la oferta depende de revender tecnología extranjera. Afuera la categoría crece con capital, premios en CES y aprobaciones clínicas, pero el producto estrella de consumo sigue siendo un prototipo. Lo más avanzado en Colombia es el marco: eSports reconocidos por ley y oferta académica amplia. Detalle en la hoja 2.</p>
+      </section>
+
+      <section>
+        <h2><span>4</span>Players y referentes</h2>
+        <dl class="players">
+          <dt>EEG / BCI</dt><dd><b>Neurable</b> (con HyperX y Master &amp; Dynamic), Muse (Interaxon), Emotiv, NextSense (audífonos EEG para sueño).<sup>6,10</sup></dd>
+          <dt>Cognitivo</dt><dd><b>NeuroTracker</b> (CogniSens, Montreal; 3D-MOT), NeuronUP (estimulación cognitiva, 300+ clientes en Brasil).<sup>14,25</sup></dd>
+          <dt>Neuromod.</dt><dd><b>Flow Neuroscience</b> (tDCS, aprobado por la FDA), Brain Performance Institute (Río, 2023).<sup>12,26</sup></dd>
+          <dt>Latam</dt><dd>Neurogram (BR, IA sobre EEG clínico, R$17 M en jul 2025).<sup>24</sup> Chile, referente en neuroderechos.</dd>
+          <dt>Colombia</dt><dd><b>Sportí</b> (NeurotrackerX), Claro Gaming Center, Federación Colombiana de Deportes Electrónicos, ICESI, Uniandes, EAN, Javeriana, USTA (investigación en fútbol sala).<sup>3,16,17</sup></dd>
+          <dt>Reglas</dt><dd>Mindeporte, INVIMA (dispositivos médicos), Congreso (PL 395/2025).</dd>
+        </dl>
+      </section>
+
+      <section>
+        <h2><span>5</span>Vocabulario del mercado</h2>
+        <div class="vocab">
+          <span><b>Neuro-performance</b></span><span>Rendimiento cerebral</span><span>Neuroentrenamiento</span><span>Neurofeedback</span>
+          <span>EEG</span><span>BCI / interfaz cerebro-computador</span><span>Neurotecnología</span><span>Neuromodulación</span><span>tDCS</span>
+          <span>Entrenamiento perceptivo-cognitivo</span><span>3D-MOT</span><span>Toma de decisiones</span><span>Tiempo de reacción</span><span>Atención sostenida</span>
+          <span>Estado de flow</span><span>Carga cognitiva</span><span>Fatiga mental</span><span>HRV</span>
+          <span>Neuroliderazgo</span><span>Neurodatos</span><span>Neuroderechos</span><span>Privacidad mental</span><span>Transferencia (near / far)</span><span>Licencia OEM</span>
+        </div>
+      </section>
+
+      <p class="note"><b>No verificable:</b> tamaño del mercado en Colombia o Latam; uso real de neuroentrenamiento en clubes de fútbol o equipos de eSports colombianos; si el INVIMA clasifica los wearables EEG de bienestar como dispositivo médico; usuarios de Muse.</p>
+    </div>
+  </div>
+
+  <footer class="foot">
+    <strong>Leyenda:</strong>
+    <span><span class="tag H">HECHO</span>publicado y fechado por una fuente</span>
+    <span><span class="tag E">ESTIM.</span>estimación de terceros</span>
+    <span><span class="tag O">PROYECCIÓN</span>juicio del analista</span>
+    <span><span class="tag NV">NO VERIF.</span>sin evidencia</span>
+    <span>Superíndices = fuentes en la hoja 2.</span>
+  </footer>
+</article>
+
+<!-- ===================== HOJA 2 ===================== -->
+<article class="sheet" aria-label="Señales de madurez">
+  <span class="sheet-label">Hoja 2 / 2 · Anexo</span>
+  <div>
+    <p class="eyebrow">Anexo · Evidencia del veredicto</p>
+    <h2 class="h2big">Señales de madurez</h2>
+    <p class="sub">Cada fila es una señal observable. La lectura ubica la señal en la escala naciente (●○○), crecimiento (●●○) o saturado (●●●). El tipo dice qué tan firme es el dato. Las filas marcadas “global” no describen a Colombia.</p>
+  </div>
+
+  <div class="tally" aria-label="Conteo de señales">
+    <div><strong>8</strong><span>señales de categoría <b>naciente</b> (datos, producto, startups, servicios, evidencia, hardware, neurodatos, competencia)</span></div>
+    <div><strong>4</strong><span>señales de <b>crecimiento</b> (capital global, aval clínico, eSports, formación)</span></div>
+    <div><strong>0</strong><span>señales de <b>saturación</b></span></div>
+  </div>
+
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>Señal</th><th>Dato observado</th><th>Lectura</th><th>Tipo</th><th>Fuente</th></tr></thead>
+    <tbody>
+      <tr><td>Medición del mercado</td><td>No hay cifra para Colombia ni Latam. Global: wearables de neurotecnología, ~US$2.180 M en 2025 (una sola consultora).</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b></b><b></b></span>Naciente</span></td><td><span class="tag E">ESTIM.</span></td><td class="src">11</td></tr>
+      <tr><td>Producto masivo de consumo</td><td>El headset Neurable + HyperX es un prototipo premiado, sin precio ni fecha. Las mejoras de ~40 ms de reacción vienen de pruebas preliminares de las propias empresas.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b></b><b></b></span>Naciente</span></td><td><span class="tag H">HECHO</span></td><td class="src">7, 8</td></tr>
+      <tr><td>Capital (global)</td><td>Neurable: Serie A de US$35 M (dic 2025), US$65 M acumulados y modelo de licencias a fabricantes desde abr 2026.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b></b></span>Crecimiento</span></td><td><span class="tag H">HECHO</span></td><td class="src">6, 9</td></tr>
+      <tr><td>Aval clínico (global)</td><td>Flow FL-100, tDCS en casa, con aprobación PMA de la FDA (dic 2025) y lanzamiento en EE. UU. (sep 2026). La neuromodulación pasa del laboratorio al hogar.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b></b></span>Crecimiento</span></td><td><span class="tag H">HECHO</span></td><td class="src">12, 13</td></tr>
+      <tr><td>Startups y capital local</td><td>No encontré startups colombianas de neuro-performance con rondas públicas. En la región lo financiado es clínico: Neurogram (BR), R$17 M.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b></b><b></b></span>Naciente</span></td><td><span class="tag NV">NO VERIF.</span></td><td class="src">24</td></tr>
+      <tr><td>Segmento ancla: eSports</td><td>Ley 2507 de 2025 con acceso a recursos públicos; centro de Claro con 90.000 visitas; el mercado gamer se estimaba en ~US$450 M en 2024 (Newzoo).</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b></b></span>Crecimiento</span></td><td><span class="tag H">HECHO</span></td><td class="src">1–5</td></tr>
+      <tr><td>Oferta de formación</td><td>Al menos 5 programas de neuroliderazgo o neurociencia para ejecutivos (ICESI, Uniandes, EAN, CCB, Polisura). El término ya circula en el mundo corporativo.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b></b></span>Crecimiento</span></td><td><span class="tag H">HECHO</span></td><td class="src">18–21</td></tr>
+      <tr><td>Servicios de neuroentrenamiento</td><td>Revendedores certificados (Sportí), consultorios de neurofeedback y estudios universitarios pequeños. Ningún club colombiano publica un programa propio.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b></b><b></b></span>Naciente</span></td><td><span class="tag NV">NO VERIF.</span></td><td class="src">15–17</td></tr>
+      <tr><td>Evidencia científica</td><td>Revisión sistemática de NeuroTracker (2021): solo 3 estudios midieron transferencia a tareas reales y 2 no hallaron efecto.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b></b><b></b></span>Naciente</span></td><td><span class="tag H">HECHO</span></td><td class="src">14, 30</td></tr>
+      <tr><td>Base de hardware en Colombia</td><td>Las ventas de wearables crecen más de 30% anual, pero la penetración histórica era menor al 2% de hogares y el precio promedio, de ~$879.000 COP.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b></b><b></b></span>Naciente</span></td><td><span class="tag E">ESTIM.</span></td><td class="src">22, 23</td></tr>
+      <tr><td>Marco de neurodatos</td><td>Chile: fallo de la Corte Suprema contra Emotiv (ago 2023). Colombia: PL 395/2025 sin aprobar. UNESCO: recomendación no vinculante (nov 2025).</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b></b><b></b></span>Naciente</span></td><td><span class="tag H">HECHO</span></td><td class="src">27–29</td></tr>
+      <tr><td>Intensidad competitiva</td><td>En Colombia no hay competencia local visible. Afuera, analistas advierten más ruido a medida que grandes plataformas exploran el EEG en el oído.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b></b><b></b></span>Naciente</span></td><td><span class="tag O">OPINIÓN</span></td><td class="src">10</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="gaps">
+    <h3>Límites de este análisis</h3>
+    <p>“Neuro-performance” no es una categoría con estadística propia: la armé a partir de mercados vecinos (neurotecnología de consumo, eSports, formación ejecutiva, neurofeedback). Los datos de rendimiento de Neurable y NeuroTracker vienen en parte de los fabricantes. Las cifras de wearables en Colombia son antiguas o de segunda mano. Las proyecciones son juicio del analista.</p>
+  </div>
+
+  <section>
+    <h2><span>§</span>Fuentes</h2>
+    <ol class="sources">
+      <li><a href="https://sidn.ramajudicial.gov.co/SIDN/NORMATIVA/TEXTOS_COMPLETOS/7_LEYES/LEYES%202025/Ley%202507%20de%202025.pdf">Ley 2507 de 2025 (eSports), texto oficial</a></li>
+      <li><a href="https://www.bluradio.com/nacion/ley-aprobada-en-el-congreso-reconocera-a-los-videojuegos-como-un-deporte-rg10">Blu Radio, videojuegos reconocidos como deporte</a></li>
+      <li><a href="https://www.clarosports.com/colombia/actualidad-co/claro-sube-el-nivel-del-gaming-en-colombia-con-la-apertura-de-un-centro-de-alto-rendimiento/">Claro Sports, centro de alto rendimiento gamer</a></li>
+      <li><a href="https://dplnews.com/colombia-mas-de-90-000-visitantes-consolidan-al-claro-gaming-como-punto-de-encuentro-gamer/">DPL News, 90.000 visitantes en Claro Gaming</a></li>
+      <li><a href="https://www.innovaciondigital360.com/industria-4-0/el-mercado-gamer-en-colombia-podria-alcanzar-los-us-450-millones-de-ganancias-este-ano/">Innovación Digital 360, mercado gamer (Newzoo)</a></li>
+      <li><a href="https://www.businesswire.com/news/home/20251219993709/en/Neurable-Raises-$35-Million-Series-A-to-Accelerate-Deployment-of-Everyday-Brain-Computer-Interface-Technology">Business Wire, Neurable Serie A (dic 2025)</a></li>
+      <li><a href="https://businesswire.com/news/home/20260113905116/en/Neurable-and-HyperXs-Brain-Tracking-Gaming-Headset-Earns-Top-Honors-at-CES-2026">Business Wire, Neurable + HyperX en CES 2026</a></li>
+      <li><a href="https://www.tomsguide.com/gaming/gaming-peripherals/i-tried-hyperxs-brain-reading-headset-at-ces-2026-and-it-actually-cut-my-reaction-time">Tom’s Guide, prueba del headset HyperX</a></li>
+      <li><a href="https://secure.businesswire.com/news/home/20260428101416/en/Neurable-Open-for-Business-Scaling-Neurotechnology-Adoption-Through-Global-OEM-Integration">Business Wire, Neurable abre licencias OEM (abr 2026)</a></li>
+      <li><a href="https://neurotechdigest.substack.com/p/consumer-neurotech-at-ces-2026">Neurotech Digest, neurotecnología de consumo en CES 2026</a></li>
+      <li><a href="https://www.gii.tw/report/tbrc1994814-wearable-neurotech-global-market-report.html">The Business Research Company, wearable neurotech 2026</a></li>
+      <li><a href="https://spectrum.ieee.org/flow-neuroscience-tdcs-depression-fda">IEEE Spectrum, Flow tDCS aprobado por la FDA</a></li>
+      <li><a href="https://hlth.com/insights/news/flow-neuroscience-launches-fda-approved-at-home-depression-treatment-in-the-us">HLTH, lanzamiento de Flow en EE. UU. (sep 2026)</a></li>
+      <li><a href="https://link.springer.com/10.3758/s13423-021-01892-2">Psychonomic Bulletin &amp; Review, revisión crítica de NeuroTracker</a></li>
+      <li><a href="https://www.researchgate.net/publication/375694870_NeuroSport_Neuroentrenamiento_y_toma_de_decisiones_en_deportistas_universitarios">Javeriana, NeuroSport (2023)</a></li>
+      <li><a href="https://sporti.com.co/neuro-entrenamientos/">Sportí, neuroentrenamientos (comercial)</a></li>
+      <li><a href="https://repository.usta.edu.co/items/f74bf8a3-fb68-4eab-b4b9-f2f15167d757/full">USTA Tunja, neuroentrenamiento en porteras de fútbol sala</a></li>
+      <li><a href="https://icesi.edu.co/wp-content/uploads/2025/01/Folleto-Neuroliderazgo-y-equipos-comerciales.pdf">ICESI, neuroliderazgo y equipos comerciales (2025)</a></li>
+      <li><a href="https://online.uniandes.edu.co/wp-content/uploads/2025/09/NEUROCIENCIA-Y-MINDFULNESS.pdf">Uniandes, neurociencia y mindfulness (2025)</a></li>
+      <li><a href="https://www.ccb.org.co/formacion/cursos/neuroliderazgo">Cámara de Comercio de Bogotá, neuroliderazgo</a></li>
+      <li><a href="https://universidadean.edu.co/sites/default/files/oferta-academica/planes-de-estudio/neuroliderazgo-y-management.pdf">EAN, neuroliderazgo y management</a></li>
+      <li><a href="https://www.elcolombiano.com/tecnologia/de-huawei-a-garmin-y-apple-cinco-relojes-inteligentes-para-cada-estilo-de-vida-y-bolsillo-en-colombia-HK30182173">El Colombiano, relojes inteligentes (Statista, oct 2025)</a></li>
+      <li><a href="https://www.enter.co/?p=508551">Enter.co, wearables en Colombia (dato antiguo)</a></li>
+      <li><a href="https://finder.techleap.nl/news/feed/neurogram-raises-r-17m-for-brain-ai">Techleap, Neurogram levanta R$17 M</a></li>
+      <li><a href="https://www.infomoney.com.br/business/startups-empresa-espanhola-de-estimulacao-cognitiva-quer-crescer-no-brasil/">InfoMoney, NeuronUP en Brasil</a></li>
+      <li><a href="https://www.cbinsights.com/company/brain-performance-institute">CB Insights, Brain Performance Institute</a></li>
+      <li><a href="https://www.biobiochile.cl/noticias/nacional/chile/2023/08/11/suprema-prohibe-a-empresa-vender-en-chile-aparato-que-puede-leer-la-mente-a-traves-de-neurodatos.shtml">BioBioChile, Corte Suprema contra Emotiv (ago 2023)</a></li>
+      <li><a href="https://senado.gov.co/index.php/el-senado/noticias/13-senadores/6281-senador-carlos-julio-gonzalez-villa-radica-proyecto-de-ley-para-regular-neurociencias-y-neurotecnologias">Senado, PL de neurociencias y neurotecnologías</a></li>
+      <li><a href="https://www.insideprivacy.com/emerging-technologies/unesco-adopts-first-global-framework-on-neurotechnology-ethics/">Inside Privacy, recomendación UNESCO (nov 2025)</a></li>
+      <li><a href="https://442.perfil.com/2019-10-13-681813-neurociencia-en-el-futbol-pensar-con-los-pies/">442, neurociencia en el fútbol: evidencia y dudas</a></li>
+    </ol>
+  </section>
+</article>
+
+</div>

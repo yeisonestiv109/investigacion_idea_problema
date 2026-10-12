@@ -1,0 +1,290 @@
+<title>Enfoque CO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Enfoque — misma serie de briefs, acento oliva. Layout: dos hojas tamaño carta (8.5×11 in) sobre una mesa gris; hoja 1 = resumen ejecutivo, hoja 2 = tabla de señales + fuentes. En móvil, las hojas se vuelven fluidas. */
+:root{
+  --desk:#e3e6ea; --paper:#ffffff; --ink:#18212b; --muted:#5a6672; --rule:#d5dbe1;
+  --accent:#53661a; --accent-soft:#eef2e0; --mark:#ffd84d; --mark-ink:#3b3000;
+  --t-hecho:#1f6f4a; --t-hecho-bg:#e3f3ea; --t-est:#7a5a00; --t-est-bg:#fbf1d2;
+  --t-op:#6a3d8f; --t-op-bg:#f1e9f8; --t-nv:#9a2f2f; --t-nv-bg:#f8e6e6;
+  --f-display:"IBM Plex Sans Condensed","Arial Narrow",Arial,sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  --shadow:0 1px 2px rgba(20,30,40,.08),0 8px 28px rgba(20,30,40,.10);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --desk:#0e1216; --paper:#171c22; --ink:#e4e9ee; --muted:#9aa6b2; --rule:#2c343d;
+  --accent:#c3d67a; --accent-soft:#252c14; --mark:#e9c53a; --mark-ink:#1c1600;
+  --t-hecho:#7fd4a6; --t-hecho-bg:#173126; --t-est:#e8c46a; --t-est-bg:#332a12;
+  --t-op:#c9a6ea; --t-op-bg:#2a2036; --t-nv:#f0a0a0; --t-nv-bg:#3a1f1f;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.35); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --desk:#0e1216; --paper:#171c22; --ink:#e4e9ee; --muted:#9aa6b2; --rule:#2c343d;
+  --accent:#c3d67a; --accent-soft:#252c14; --mark:#e9c53a; --mark-ink:#1c1600;
+  --t-hecho:#7fd4a6; --t-hecho-bg:#173126; --t-est:#e8c46a; --t-est-bg:#332a12;
+  --t-op:#c9a6ea; --t-op-bg:#2a2036; --t-nv:#f0a0a0; --t-nv-bg:#3a1f1f;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.35); color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--desk);color:var(--ink);font-family:var(--f-body);font-size:10.5px;line-height:1.42;
+  padding-inline:16px;padding-block:28px 40px;-webkit-font-smoothing:antialiased}
+.desk{display:flex;flex-direction:column;align-items:center;gap:28px}
+.sheet{background:var(--paper);width:816px;max-width:100%;min-height:1056px;padding:40px 52px;box-shadow:var(--shadow);
+  display:flex;flex-direction:column;gap:14px;position:relative}
+.sheet-label{position:absolute;top:-18px;left:0;font:500 10px/1 var(--f-mono);color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+a{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0}
+p{margin:0}
+ul{margin:0;padding-left:14px;display:flex;flex-direction:column;gap:4px}
+li::marker{color:var(--accent)}
+sup{font:500 8px/0 var(--f-mono);color:var(--accent);margin-left:1px}
+
+/* Encabezado */
+.head{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:18px;align-items:end;border-bottom:2px solid var(--ink);padding-bottom:10px}
+.eyebrow{font:500 9.5px/1.3 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font-size:30px;line-height:1.02;font-weight:700;letter-spacing:-.01em;margin-top:4px}
+.def{color:var(--muted);margin-top:5px;max-width:62ch}
+.verdict{min-width:250px;display:flex;flex-direction:column;gap:6px}
+.verdict-title{font:600 13px/1.15 var(--f-display)}
+.verdict-title mark{background:var(--mark);color:var(--mark-ink);padding:0 3px}
+.gauge{position:relative;height:8px;border-radius:4px;background:linear-gradient(90deg,var(--accent-soft),var(--accent))}
+.gauge i{position:absolute;top:-4px;left:40%;width:3px;height:16px;background:var(--ink);border-radius:2px}
+.gauge-scale{display:flex;justify-content:space-between;font:500 8.5px/1 var(--f-mono);color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+
+/* Columnas */
+.cols{display:grid;grid-template-columns:1.12fr 1fr;gap:22px;flex:1}
+.col{display:flex;flex-direction:column;gap:13px;min-width:0}
+section h2{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--accent);
+  display:flex;gap:6px;align-items:baseline;border-bottom:1px solid var(--rule);padding-bottom:3px;margin-bottom:6px}
+section h2 span{font-family:var(--f-mono);font-weight:500;font-size:10px;color:var(--muted)}
+
+/* Etiquetas de evidencia */
+.tag{display:inline-block;font:500 8px/1 var(--f-mono);letter-spacing:.04em;padding:2px 4px 2px;border-radius:2px;vertical-align:1px;margin-right:3px;white-space:nowrap}
+.H{color:var(--t-hecho);background:var(--t-hecho-bg)}
+.E{color:var(--t-est);background:var(--t-est-bg)}
+.O{color:var(--t-op);background:var(--t-op-bg)}
+.NV{color:var(--t-nv);background:var(--t-nv-bg)}
+
+.players{display:grid;grid-template-columns:auto 1fr;gap:4px 8px}
+.players dt{font:600 9px/1.5 var(--f-mono);text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+.players dd{margin:0}
+.vocab{display:flex;flex-wrap:wrap;gap:4px}
+.vocab span{border:1px solid var(--rule);padding:1px 6px;border-radius:10px;font-size:9.8px;white-space:nowrap}
+.vocab span b{font-weight:600}
+.note{font-size:9.6px;color:var(--muted)}
+.foot{border-top:1px solid var(--rule);padding-top:7px;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;font-size:9.4px;color:var(--muted)}
+.foot strong{color:var(--ink);font-weight:600}
+
+/* Hoja 2: tabla */
+.h2big{font-size:22px;font-weight:700}
+.sub{color:var(--muted);max-width:80ch}
+.tablewrap{overflow-x:auto;min-width:0}
+table{border-collapse:collapse;width:100%;font-size:10px;min-width:640px}
+th{font:600 9px/1.2 var(--f-mono);text-transform:uppercase;letter-spacing:.05em;color:var(--muted);text-align:left;padding:6px 6px;border-bottom:2px solid var(--ink)}
+td{padding:4.5px 6px;border-bottom:1px solid var(--rule);vertical-align:top}
+td:first-child{font-weight:600;width:19%}
+td.read{width:13%}
+td.src{width:7%;font:500 9px/1.4 var(--f-mono);color:var(--muted);white-space:nowrap}
+.stage{display:inline-flex;align-items:center;gap:5px;font:600 9.5px/1.2 var(--f-display);text-transform:uppercase;letter-spacing:.03em}
+.dots{display:inline-flex;gap:2px}
+.dots b{width:7px;height:7px;border-radius:50%;border:1px solid var(--accent)}
+.dots b.on{background:var(--accent)}
+.tally{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.tally div{border:1px solid var(--rule);padding:8px 10px;display:flex;flex-direction:column;gap:2px}
+.tally strong{font:700 20px/1 var(--f-display);font-variant-numeric:tabular-nums}
+.tally span{font-size:9.6px;color:var(--muted)}
+.sources{columns:2;column-gap:22px;font-size:9px;line-height:1.38;color:var(--muted);margin:0;padding-left:18px}
+.sources li{break-inside:avoid;margin-bottom:2px}
+.sources a{word-break:break-word}
+.gaps{background:var(--accent-soft);padding:9px 12px;display:flex;flex-direction:column;gap:4px}
+.gaps h3{font-size:11.5px;text-transform:uppercase;letter-spacing:.04em}
+
+@media (max-width:760px){
+  body{font-size:12.5px}
+  .sheet{min-height:0;padding:26px 18px}
+  .head,.cols{grid-template-columns:1fr}
+  .verdict{min-width:0}
+  h1{font-size:26px}
+  .sources{columns:1}
+  .tally{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+<div class="desk">
+
+<!-- ===================== HOJA 1 ===================== -->
+<article class="sheet" aria-label="Resumen ejecutivo">
+  <span class="sheet-label">Hoja 1 / 2 · Resumen ejecutivo</span>
+
+  <header class="head">
+    <div>
+      <p class="eyebrow">Brief de mercado · Colombia → Latam · corte 12 oct 2026</p>
+      <h1>Enfoque</h1>
+      <p class="def">Productos, servicios y reglas para proteger y recuperar la atención frente a la distracción digital: bloqueadores de apps, modos foco, teléfonos minimalistas, métodos de trabajo profundo, colegios sin celular, desconexión laboral y diseño de plataformas para menores. Suplementos y neurotecnología quedan en sus propios briefs.</p>
+    </div>
+    <div class="verdict" aria-label="Veredicto de madurez">
+      <p class="eyebrow">Veredicto de madurez</p>
+      <p class="verdict-title"><mark>En crecimiento temprano</mark> en Colombia, empujado por la regulación; las apps de bloqueo ya se saturan a nivel global.</p>
+      <div class="gauge" role="img" aria-label="Indicador en 40% entre naciente y saturado"><i></i></div>
+      <div class="gauge-scale"><span>Naciente</span><span>Crecimiento</span><span>Saturado</span></div>
+    </div>
+  </header>
+
+  <div class="cols">
+    <div class="col">
+      <section>
+        <h2><span>1</span>Qué pasa ahora</h2>
+        <ul>
+          <li><span class="tag H">HECHO</span><b>Bogotá restringió el celular en los colegios.</b> La Resolución 1037 de 2026 (sep 2026) limita su uso en la jornada escolar en colegios públicos y privados, con 6 meses para aplicarla. La Secretaría cita un uso promedio de 9 horas diarias de celular entre estudiantes.<sup>1,2</sup></li>
+          <li><span class="tag H">HECHO</span><b>El Estado le pide diseño a las plataformas.</b> El Decreto 0769 (jul 2026) reglamenta la Ley 2489 de 2025 de entornos digitales sanos: las plataformas deben ajustar el diseño de sus productos y reportar avances a MinTIC cada semestre.<sup>4,5</sup></li>
+          <li><span class="tag H">HECHO</span>En jul 2026 se radicó un proyecto para prohibir redes sociales a menores de 16 años, con multas de hasta 5.000 salarios mínimos. Hay otros proyectos en trámite y ninguno es ley todavía.<sup>6–8</sup></li>
+          <li><span class="tag E">ESTIM.</span><b>La demanda de fondo es alta:</b> Colombia es el 4.º país del mundo en tiempo en redes sociales, con ~3 h 25 min diarios (GWI, 2025).<sup>9</sup></li>
+          <li><span class="tag H">HECHO</span><b>La región se mueve:</b> Chile prohibió el celular en colegios desde mar 2026. En Brasil, el 92% de las escuelas ya aplica la Lei 15.100 y el 95% de los directivos percibe más concentración.<sup>15,16</sup></li>
+          <li><span class="tag H">HECHO</span>En el trabajo, Microsoft mide una interrupción cada 2 minutos (275 al día). En Colombia rige la Ley 2191 de 2022 de desconexión laboral, pero con problemas de aplicación.<sup>11,12,18</sup></li>
+        </ul>
+      </section>
+
+      <section>
+        <h2><span>2</span>Hacia dónde va (12–24 meses)</h2>
+        <ul>
+          <li><span class="tag O">PROYECCIÓN</span><b>De la fuerza de voluntad al entorno:</b> otras ciudades copiarán a Bogotá, y nace un mercado escolar (custodia de celulares, versiones de apps para colegios como la de Opal).<sup>1,21</sup></li>
+          <li><span class="tag O">PROYECCIÓN</span><b>Diseño para el bienestar por obligación:</b> límites de tiempo y opciones nocturnas por defecto para menores, por el Decreto 0769 y si avanza la ley de los 16 años.<sup>4,6</sup></li>
+          <li><span class="tag O">PROYECCIÓN</span><b>El foco como métrica de trabajo:</b> bloques sin reuniones y asistentes de IA que filtran interrupciones, con la ley de desconexión como argumento de compra.<sup>11,18</sup></li>
+          <li><span class="tag O">RIESGO</span>Los modos foco del sistema operativo convierten las apps en commodity, y la evidencia sobre resultados escolares es mixta.<sup>17,22</sup></li>
+        </ul>
+      </section>
+    </div>
+
+    <div class="col">
+      <section>
+        <h2><span>3</span>Qué tan madura está</h2>
+        <p><b>En crecimiento temprano.</b> El problema está bien documentado y la respuesta pública se aceleró en 2026 (resolución en Bogotá, decreto nacional, proyectos de ley). La oferta comercial local es naciente: no encontré apps colombianas de enfoque, no hay cifra de mercado y la desconexión laboral se cumple poco. Afuera, las apps de bloqueo ya compiten con miles de alternativas y con funciones gratuitas de Apple y Google. Detalle en la hoja 2.</p>
+      </section>
+
+      <section>
+        <h2><span>4</span>Players y referentes</h2>
+        <dl class="players">
+          <dt>Apps</dt><dd><b>Opal</b> (10 M de instalaciones, según la empresa), Freedom, one sec, Forest, BlockSite, Reclaim (bloques de calendario).<sup>19,20</sup></dd>
+          <dt>Plataformas</dt><dd><b>Apple</b> (Tiempo en pantalla, modos de concentración), <b>Google</b> (Bienestar digital), Microsoft (Work Trend Index).<sup>18,22</sup></dd>
+          <dt>Hardware</dt><dd>Light Phone III (80.000 unidades, según la marca), Punkt. Disponibilidad en Colombia sin verificar.<sup>24,25</sup></dd>
+          <dt>Público CO</dt><dd>Secretaría de Educación de Bogotá, MinTIC, Congreso, SIC (vigilaría la ley de redes).<sup>1,4,7</sup></dd>
+          <dt>Región</dt><dd>Chile (ley 2025) y Brasil (MEC/Inep) como referentes de colegios sin celular.<sup>15,16</sup></dd>
+          <dt>Adyacente</dt><dd>Bebidas con claim de foco: Pure Focus (Medellín).<sup>27</sup></dd>
+        </dl>
+      </section>
+
+      <section>
+        <h2><span>5</span>Vocabulario del mercado</h2>
+        <div class="vocab">
+          <span><b>Enfoque / foco</b></span><span>Concentración</span><span>Economía de la atención</span><span>Bienestar digital</span><span>Tiempo en pantalla</span>
+          <span>Desintoxicación digital</span><span>Dopamine detox</span><span>Brain rot</span><span>Scroll infinito</span><span>Multitarea</span>
+          <span>Trabajo profundo</span><span>Estado de flow</span><span>Pomodoro</span><span>Time blocking</span><span>Modo foco / No molestar</span>
+          <span>Bloqueador de apps</span><span>Dumbphone</span><span>Colegios sin celular</span><span>Desconexión laboral</span><span>Entornos digitales sanos</span><span>Verificación de edad</span>
+        </div>
+      </section>
+
+      <p class="note"><b>No verificable:</b> tamaño del mercado en Colombia o Latam; descargas locales de apps de enfoque; venta de dumbphones en Colombia; horas diarias en internet según DataReportal 2026 (no pude abrir el informe).</p>
+    </div>
+  </div>
+
+  <footer class="foot">
+    <strong>Leyenda:</strong>
+    <span><span class="tag H">HECHO</span>publicado y fechado por una fuente</span>
+    <span><span class="tag E">ESTIM.</span>estimación de terceros</span>
+    <span><span class="tag O">PROYECCIÓN</span>juicio del analista</span>
+    <span><span class="tag NV">NO VERIF.</span>sin evidencia</span>
+    <span>Superíndices = fuentes en la hoja 2.</span>
+  </footer>
+</article>
+
+<!-- ===================== HOJA 2 ===================== -->
+<article class="sheet" aria-label="Señales de madurez">
+  <span class="sheet-label">Hoja 2 / 2 · Anexo</span>
+  <div>
+    <p class="eyebrow">Anexo · Evidencia del veredicto</p>
+    <h2 class="h2big">Señales de madurez</h2>
+    <p class="sub">Cada fila es una señal observable. La lectura ubica la señal en la escala naciente (●○○), crecimiento (●●○) o saturado (●●●). El tipo dice qué tan firme es el dato. Las filas marcadas “global” no describen a Colombia.</p>
+  </div>
+
+  <div class="tally" aria-label="Conteo de señales">
+    <div><strong>5</strong><span>señales de categoría <b>naciente</b> (plataformas y menores, ley laboral, oferta local, datos, evidencia)</span></div>
+    <div><strong>6</strong><span>señales de <b>crecimiento</b> (demanda, colegios, capital, hardware, lenguaje, trabajo)</span></div>
+    <div><strong>1</strong><span>señal de <b>saturación</b> (apps de bloqueo, global)</span></div>
+  </div>
+
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>Señal</th><th>Dato observado</th><th>Lectura</th><th>Tipo</th><th>Fuente</th></tr></thead>
+    <tbody>
+      <tr><td>Tamaño del problema</td><td>4.º país del mundo en tiempo en redes (~3 h 25 min/día, GWI 2025). 41,7 M de usuarios de internet (77,8%). 9 h/día de celular en estudiantes de Bogotá (encuesta citada por la Secretaría).</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b></b></span>Crecimiento</span></td><td><span class="tag E">ESTIM.</span></td><td class="src">1, 9, 10</td></tr>
+      <tr><td>Regulación escolar</td><td>Resolución 1037 de 2026 en Bogotá (públicos y privados). Chile tiene ley desde dic 2025 y Brasil reporta 92% de cumplimiento.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b></b></span>Crecimiento</span></td><td><span class="tag H">HECHO</span></td><td class="src">1, 15, 16</td></tr>
+      <tr><td>Plataformas y menores</td><td>Decreto 0769 de 2026 (reglamentación parcial) y proyectos de ley de edad mínima (16 años) sin aprobar.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b></b><b></b></span>Naciente</span></td><td><span class="tag H">HECHO</span></td><td class="src">4–8</td></tr>
+      <tr><td>Desconexión laboral</td><td>Ley 2191 de 2022 vigente, con políticas internas en algunas empresas (ManpowerGroup), pero la academia señala fallas de aplicación. No hallé sanciones públicas.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b></b><b></b></span>Naciente</span></td><td><span class="tag H">HECHO</span></td><td class="src">11, 12</td></tr>
+      <tr><td>Interrupciones en el trabajo</td><td>Una interrupción cada 2 minutos y 275 al día, con 57% de reuniones improvisadas (Microsoft, 2025). Argumento de compra para empresas.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b></b></span>Crecimiento</span></td><td><span class="tag H">HECHO</span></td><td class="src">18</td></tr>
+      <tr><td>Oferta local</td><td>No encontré apps, dispositivos ni servicios colombianos de enfoque con tracción visible. Se usan apps globales y funciones del sistema operativo.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b></b><b></b></span>Naciente</span></td><td><span class="tag NV">NO VERIF.</span></td><td class="src">—</td></tr>
+      <tr><td>Medición del mercado</td><td>No hay cifra para Colombia. Global: un agregador estima que Opal y TickTick facturan ~US$450.000 al mes cada una (sin auditar).</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b></b><b></b></span>Naciente</span></td><td><span class="tag E">ESTIM.</span></td><td class="src">28</td></tr>
+      <tr><td>Capital (global)</td><td>Opal: nueva ronda de US$10 M y 10 M de instalaciones según la empresa; producto para colegios en 2026. Las cifras de financiación varían entre fuentes.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b></b></span>Crecimiento</span></td><td><span class="tag E">ESTIM.</span></td><td class="src">19–21</td></tr>
+      <tr><td>Competencia en apps (global)</td><td>Miles de apps de productividad y decenas de alternativas a Opal. Los modos foco de iOS y macOS ya son “suficientes” para muchos usuarios.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b class="on"></b></span>Saturado</span></td><td><span class="tag O">OPINIÓN</span></td><td class="src">20, 22, 23</td></tr>
+      <tr><td>Hardware minimalista (global)</td><td>Ventas de dumbphones +25% en 2025 (Statista, vía prensa). Light Phone III con más de 80.000 unidades, según la marca.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b></b></span>Crecimiento</span></td><td><span class="tag E">ESTIM.</span></td><td class="src">24, 25</td></tr>
+      <tr><td>Lenguaje en la cultura</td><td>“Brain rot” fue la palabra del año de Oxford 2024 (+230% de uso). Las marcas ya usan “Focus” como claim (Pure Focus).</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b class="on"></b><b></b></span>Crecimiento</span></td><td><span class="tag H">HECHO</span></td><td class="src">26, 27</td></tr>
+      <tr><td>Evidencia de resultados</td><td>Brasil: mejoras según la percepción de directivos. Reino Unido: un estudio en The Lancet Regional Health no halló efecto en notas ni en salud mental.</td>
+        <td class="read"><span class="stage"><span class="dots"><b class="on"></b><b></b><b></b></span>Naciente</span></td><td><span class="tag H">HECHO</span></td><td class="src">16, 17</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="gaps">
+    <h3>Límites de este análisis</h3>
+    <p>“Enfoque” no es una categoría con estadística propia: la armé desde la regulación, el consumo digital, las apps y el trabajo. Las cifras de Opal y Light Phone son de las empresas, y las de tiempo en redes vienen de prensa que cita a GWI. No pude abrir DataReportal ni verificar en el texto oficial el detalle de la Resolución 1037 (por ejemplo, el límite de 14 años). La señal de TDAH (más demanda de metilfenidato en 2024<sup>13,14</sup>) es contexto y no prueba de mercado. Las proyecciones son juicio del analista.</p>
+  </div>
+
+  <section>
+    <h2><span>§</span>Fuentes</h2>
+    <ol class="sources">
+      <li><a href="https://forbes.co/2026/09/07/actualidad/bogota-limita-el-uso-de-celulares-en-colegios-asi-funcionara-la-nueva-regla/">Forbes Colombia, Bogotá limita celulares en colegios (sep 2026)</a></li>
+      <li><a href="https://www.publimetro.co/bogota/2026/09/07/abc-de-la-restriccion-de-celulares-en-los-colegios-de-bogota-se-pueden-llevar-y-cuando-podran-usarse/">Publimetro, ABC de la restricción</a></li>
+      <li><a href="https://www.elpais.com.co/colombia/bogota-propone-restringir-el-uso-de-celulares-en-colegios-asi-funcionaria-la-medida-0217.html">El País Cali, propuesta y diagnóstico con 14.000 personas</a></li>
+      <li><a href="https://mintic.gov.co/portal/inicio/Sala-de-prensa/Noticias/439846:Colombia-fortalece-la-proteccion-de-ninas-ninos-y-adolescentes-con-el-Decreto-de-Entornos-Digitales-Sanos-y-Seguros">MinTIC, Decreto de Entornos Digitales Sanos y Seguros</a></li>
+      <li><a href="https://www.enter.co/colombia/colombia-expide-decreto-para-proteger-a-ninos-en-internet-en-que-consiste/">Enter.co, en qué consiste el decreto</a></li>
+      <li><a href="https://www.vanguardia.com/colombia/2026/07/23/congreso-radica-proyecto-para-prohibir-redes-sociales-a-menores-de-16-anos-en-colombia/">Vanguardia, proyecto de redes para menores de 16</a></li>
+      <li><a href="https://www.elpais.com.co/colombia/redes-sociales-para-menores-de-16-anos-en-colombia-proyecto-propone-restricciones-y-multas-2255.html">El País Cali, restricciones y multas</a></li>
+      <li><a href="https://www.asuntoslegales.com.co/consumidor/este-es-el-proyecto-de-ley-que-busca-regular-el-acceso-de-menores-a-las-redes-sociales-4009882">Asuntos Legales, proyecto de acceso de menores a redes</a></li>
+      <li><a href="https://www.larepublica.co/internet-economy/colombia-es-el-cuarto-pais-que-consume-mas-tiempo-contenidos-en-redes-sociales-4080938">La República, Colombia 4.º en tiempo en redes (GWI)</a></li>
+      <li><a href="https://datareportal.com/reports/digital-2026-colombia">DataReportal, Digital 2026: Colombia</a></li>
+      <li><a href="https://www.unidadvictimas.gov.co/wp-content/uploads/Documentos/ley/Ley_2191_2022..pdf">Ley 2191 de 2022, desconexión laboral</a></li>
+      <li><a href="https://repositorio.uniremington.edu.co/bitstreams/09e67279-de75-4673-86bc-9654508e3617/download">Uniremington, retos de la desconexión laboral</a></li>
+      <li><a href="https://www.elespectador.com/salud/el-invima-asegura-que-la-ritalina-no-esta-desabastecida-pero-si-aumento-su-demanda/">El Espectador, Invima: más demanda de Ritalina</a></li>
+      <li><a href="https://www.minsalud.gov.co/sites/rid/Lists/BibliotecaDigital/RIDE/VS/MET/disponibilidad-acceso-medicamentos-tratamientos-salud-mental.pdf">MinSalud, medicamentos de salud mental (2026)</a></li>
+      <li><a href="https://www.eldinamo.cl/pais/2025/12/03/aprueban-prohibicion-de-celulares-en-colegios-cuando-comenzara-a-regir/">El Dínamo, Chile aprueba prohibición (dic 2025)</a></li>
+      <li><a href="https://agenciabrasil.ebc.com.br/educacao/noticia/2026-06/lei-que-restringe-uso-de-celulares-ja-e-adotada-por-92-das-escolas">Agência Brasil, 92% de escuelas aplican la ley</a></li>
+      <li><a href="https://canaltech.com.br/smartphone/celular-proibido-nas-escolas-funcionou-o-que-mudou-apos-1-ano/">Canaltech, un año de prohibición y evidencia contraria</a></li>
+      <li><a href="https://unleash.ai/artificial-intelligence/news/microsoft-employees-are-interrupted-every-2-minutes-how-can-ai-help-us-re-focus-on-the-work-that-matters">UNLEASH, Microsoft Work Trend Index 2025</a></li>
+      <li><a href="https://runtimewire.com/article/opal-raises-10m-unveils-new-opal-attention-os-kenneth-schlenker">Runtimewire, Opal levanta US$10 M</a></li>
+      <li><a href="https://techcrunch.com/2025/12/25/the-best-distraction-blockers-to-jumpstart-your-focus-in-the-new-year">TechCrunch, bloqueadores de distracciones (dic 2025)</a></li>
+      <li><a href="https://simplify.jobs/c/Opal-SO">Simplify, Opal y su lanzamiento para colegios</a></li>
+      <li><a href="https://www.asianefficiency.com/productivity/10-powerful-apps-help-maintain-laser-focus/">Asian Efficiency, apps de foco en 2026</a></li>
+      <li><a href="https://ecosistemastartup.com/?p=78437">Ecosistema Startup, 12.000 apps de productividad</a></li>
+      <li><a href="https://www.cronista.com/infotechnology/gadgets/celulares-minimalistas-la-tendencia-que-triunfa-contra-la-adiccion-digital-y-las-distracciones/">El Cronista, celulares minimalistas</a></li>
+      <li><a href="https://wwwhatsnew.com/2026/04/13/smartphones-sin-ia-proximo-gran-negocio-backlash/">WWWhatsnew, Light Phone III y smartphones sin IA</a></li>
+      <li><a href="https://corp.oup.com/news/brain-rot-named-oxford-word-of-the-year-2024/">Oxford University Press, “brain rot” palabra del año 2024</a></li>
+      <li><a href="https://forbes.co/2025/10/22/emprendedores/la-bebida-colombiana-que-entra-a-competir-en-el-mercado-de-energizantes-saludables">Forbes Colombia, Pure y su referencia Focus</a></li>
+      <li><a href="https://screensdesign.com/categories/time-blocking-apps/">Screensdesign, ingresos de apps de bloques de tiempo</a></li>
+    </ol>
+  </section>
+</article>
+
+</div>

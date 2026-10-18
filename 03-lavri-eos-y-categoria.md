@@ -1,5 +1,7 @@
 # Fase 0.3 · Lavri a fondo, EOS y nuestra categoría
 
+> **⚠️ Corrección (18 oct 2026):** la sección 1 describe mal el modelo de Lavri. Ella **no** usa IA para vender: no hace llamadas, no tiene setters ni closers y no paga anuncios, porque el contenido es el que vende. Ver `04-correccion-lavri-y-diagnostico-embudo.md`.
+
 > Corte: 18 oct 2026 · Corrige supuestos del documento 02.
 > Etiquetas: **[HECHO]** con fuente · **[AUTORREPORTE]** lo dice ella o la empresa · **[TU DATO]** lo que me contaste · **[OPINIÓN]** mi análisis · **[NO VERIF.]** no pude confirmarlo.
 

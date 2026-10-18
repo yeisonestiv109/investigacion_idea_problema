@@ -50,8 +50,10 @@ La pregunta clave con cada uno: **¿cómo ganó su primer dinero serio, antes de
 - **Qué copiar:** **experimentar y documentar en público**, incluso los fracasos. Eso genera confianza a escala. Más adelante, documentar tu nicho y tus casos puede ser tu canal de clientes.
 - **Trampa:** copiar el modelo de audiencia antes de tener algo que mostrar.
 
-### Alex Lavty / Founders.lab — **no pude identificarlo**
-Busqué varias combinaciones y no encontré a nadie con ese nombre ligado a "Founders Lab". **[NO VERIF.]** Pásame su @ de Instagram o YouTube y lo analizo igual que a los demás. No voy a inventarte un perfil.
+### Alex Lavri (@alexlavriyt) / FoundersLav
+- **Lo que hace:** ~254 mil seguidores en Instagram (dato tuyo). Tiene una comunidad en Skool, **FoundersLav**: 336 miembros a US$497 al año, enfocada en marca personal, vender por mensajes y llamadas, y una bolsa de talento para buscar socios o trabajadores. [22] **[HECHO, datos de la página de Skool]** Si todos pagaran el precio completo, serían ~US$167 mil al año. **[ESTIM. mía, no verificada]** Su gancho de Instagram ("envíame 'intensivo'…") es el mismo embudo que usa tu mentor: contenido → DM → llamada.
+- **Qué copiar:** el modelo completo de "marca personal que vende por DM + llamada", y la comunidad de pago como canal de clientes.
+- **Trampa / lectura clave:** **sus alumnos son parte de tu mercado**: marcas personales que venden por DM y llamada. Pero los que todavía buscan llegar a US$10 mil al mes son pequeños para pagar un sistema. Tu cliente ideal es el que **ya factura** y pierde dinero entre el lead y la caja. Su comunidad puede ser un canal para llegar a ellos, no el cliente. Ver el documento 02.
 
 ### Conclusión sobre referentes
 | Referente | Cómo ganó su primer dinero serio | Lo que tomamos | Lo que ignoramos por ahora |
@@ -199,3 +201,6 @@ Y si puedes: el @ de Alex Lavty / Founders.lab para analizarlo.
 19. [Dealism: fuga de leads en clínicas estéticas](https://dealism.ai/es/learn/whatsapp-lead-leakage-prevention) · [Clint](https://www.clint.digital/blog/?p=3160)
 20. [U. Distrital: sistema para propiedad horizontal](https://repository.udistrital.edu.co/items/7f013299-50c3-49ee-90a1-53ffdb772902) · [Metro Cuadrado](https://www.metrocuadrado.com/noticias/actualidad/tecnologia-para-ayudar-administradores-y-habitantes-de-propiedad-horizontal-4272)
 21. [La República: morosidad en América Latina](https://www.larepublica.co/globoeconomia/colombia-se-ubica-como-el-sexto-pais-con-mayor-morosidad-bancaria-en-la-america-latina-4452153)
+22. [FoundersLav™ — Skool](https://www.skool.com/founderslav/about)
+
+> **Actualización 18 oct 2026:** con tu contexto real (setter + sistemas para un infoproductor high-ticket), la sección 5 de este documento queda superada. El nicho y el plan vigentes están en `02-ventaja-injusta-nicho-y-plan.md`.
